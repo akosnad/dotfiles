@@ -16,3 +16,16 @@ zle -N sudo-drop-privileges-or-exit
 
 stty eof undef # Disable built-in Ctrl+D
 bindkey "^D" sudo-drop-privileges-or-exit
+
+sudo-elevate-or-insert() {
+    if [[ -z $BUFFER ]]; then
+        sudo -v
+        zle accept-line
+    else
+        if [[ $BUFFER = 'sudo '* ]]; then return; fi
+        BUFFER="sudo "$BUFFER
+        zle end-of-line
+    fi
+}
+zle -N sudo-elevate-or-insert
+bindkey "^S" sudo-elevate-or-insert
