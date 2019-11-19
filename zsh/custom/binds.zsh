@@ -22,3 +22,9 @@ down-line-or-local-history() {
 zle -N down-line-or-local-history
 
 bindkey "^X" clear-screen
+
+lfcd() {
+    lf
+}
+zle -N lfcd
+bindkey "^L" lfcd

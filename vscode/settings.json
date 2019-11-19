@@ -8,5 +8,6 @@
     "editor.autoClosingBrackets": "beforeWhitespace",
     "terminal.integrated.cursorStyle": "underline",
     "workbench.editor.revealIfOpen": true,
-    "workbench.startupEditor": "newUntitledFile"
+    "workbench.startupEditor": "newUntitledFile",
+    "git.confirmSync": false
 }
