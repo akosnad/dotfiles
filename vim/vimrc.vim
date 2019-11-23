@@ -26,8 +26,9 @@ let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 autocmd vimenter * call NERDTreeStartup()
 function NERDTreeStartup()
-    NERDTree
+    NERDTree %:p:h
     wincmd p
 endfunction
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-source binds.vim
+source $HOME/dotfiles/vim/binds.vim
