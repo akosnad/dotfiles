@@ -9,6 +9,7 @@ Plugin 'AlessandroYorba/Alduin'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'tpope/vim-commentary'
 
 call vundle#end()
 filetype plugin indent on
@@ -19,14 +20,14 @@ set hlsearch
 set mouse=a
 set incsearch
 
-colorscheme alduin
+silent! colorscheme alduin
 
 let NERDTreeShowHidden=1
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '-'
 autocmd vimenter * call NERDTreeStartup()
 function NERDTreeStartup()
-    NERDTree %:p:h
+    silent! NERDTree %:p:h
     wincmd p
 endfunction
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
