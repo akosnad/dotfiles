@@ -16,6 +16,9 @@ exec_always --no-startup-id mons -S 9,10:R
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 # exec --no-startup-id nm-applet
 
+# Systemd user target
+exec --no-startup-id systemctl --user start loggedin.target
+
 # Polybar
 exec_always --no-startup-id $HOME/dotfiles/polybar/start.sh
 
