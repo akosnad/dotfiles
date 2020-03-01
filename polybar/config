@@ -69,7 +69,7 @@ cursor-scroll = ns-resize
 
 [bar/bar1]
 inherit = bar/main
-monitor = ${env:MONITOR:HDMI-1-1}
+monitor = ${env:MONITOR:}
 
 modules-left = i3
 modules-center = xwindow
@@ -80,7 +80,7 @@ tray-padding = 2
 
 [bar/bar2]
 inherit = bar/main
-monitor = ${env:MONITOR:VGA-1-1}
+monitor = ${env:MONITOR:}
 
 modules-left = i3 cpu memory temperature eth filesystem
 ;modules-center = xwindow
@@ -179,7 +179,7 @@ label-urgent-padding = 2
 
 [module/mpris]
 type = custom/script
-exec = ~/dotfiles/polybar/mpris.py -f '{icon} {:artist:t120:{artist}:}{:artist: - :}{:t120:{title}:}  %{A1:~/dotfiles/polybar/mpris.py previous:}  %{A} %{A1:~/dotfiles/polybar/mpris.py play-pause:}  %{A} %{A1:~/dotfiles/polybar/mpris.py next:}  %{A}'
+exec = ~/dotfiles/polybar/mpris.py -f '{icon} {:artist:t80:{artist}:}{:artist: - :}{:t80:{title}:}  %{A1:~/dotfiles/polybar/mpris.py previous:}  %{A} %{A1:~/dotfiles/polybar/mpris.py play-pause:}  %{A} %{A1:~/dotfiles/polybar/mpris.py next:}  %{A}'
 tail = true
 
 [module/mpd]
