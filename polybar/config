@@ -22,7 +22,7 @@ background = #2c2e33
 background-alt = #444
 ;foreground = ${xrdb:color7:#dfdfdf}
 foreground = #dfdfdf
-foreground-alt = #555
+foreground-alt = #888
 ;primary = #ffb52a
 primary = #4285F4
 ;secondary = #e60053
@@ -73,7 +73,7 @@ monitor = ${env:MONITOR:HDMI-1-1}
 
 modules-left = i3
 modules-center = xwindow
-modules-right = mpd xkeyboard filesystem memory cpu wlan eth battery temperature date powermenu
+modules-right = xkeyboard date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -82,8 +82,9 @@ tray-padding = 2
 inherit = bar/main
 monitor = ${env:MONITOR:VGA-1-1}
 
-modules-left = i3
-modules-center = xwindow
+modules-left = i3 cpu memory temperature eth filesystem
+;modules-center = xwindow
+modules-right = mpris
 
 [module/xwindow]
 type = internal/xwindow
@@ -95,21 +96,23 @@ blacklist-0 = num lock
 
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+;format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
+;label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
+;label-indicator-underline = ${colors.secondary}
 
 [module/filesystem]
 type = internal/fs
 interval = 25
 
 mount-0 = /
+mount-1 = /mnt/2tb
+mount-2 = /mnt/backup
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
@@ -174,6 +177,10 @@ label-urgent-padding = 2
 ; Separator in between workspaces
 ; label-separator = |
 
+[module/mpris]
+type = custom/script
+exec = ~/dotfiles/polybar/mpris.py -f '{icon} {:artist:t120:{artist}:}{:artist: - :}{:t120:{title}:}  %{A1:~/dotfiles/polybar/mpris.py previous:}  %{A} %{A1:~/dotfiles/polybar/mpris.py play-pause:}  %{A} %{A1:~/dotfiles/polybar/mpris.py next:}  %{A}'
+tail = true
 
 [module/mpd]
 type = internal/mpd
@@ -215,7 +222,7 @@ type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+;format-underline = #f90000
 label = %percentage:2%%
 
 [module/memory]
@@ -223,7 +230,7 @@ type = internal/memory
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+;format-underline = #4bffdc
 label = %percentage_used%%
 
 [module/wlan]
@@ -253,15 +260,15 @@ type = internal/network
 interface = eno1
 interval = 3.0
 
-format-connected-underline = #55aa55
+;format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
+;format-disconnected =
+format-disconnected = <label-disconnected>
+format-disconnected-underline = ${colors.alert}
+label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
@@ -276,7 +283,7 @@ time-alt = %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+;format-underline = #0a6cf5
 
 label = %date% %time%
 
@@ -374,13 +381,13 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-format-underline = #f50a4d
+;format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
+format-warn-underline = ${colors.alert}
 
 label = %temperature-c%
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+;label-warn-foreground = ${colors.secondary}
 
 ramp-0 = 
 ramp-1 = 
@@ -395,7 +402,7 @@ expand-right = true
 format-spacing = 1
 
 label-open = 
-label-open-foreground = ${colors.secondary}
+label-open-foreground = ${colors.primary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
@@ -405,16 +412,23 @@ menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
 menu-0-1 = power off
 menu-0-1-exec = menu-open-2
+menu-0-2 = suspend
+menu-0-2-exec = menu-open-3
 
 menu-1-0 = cancel
 menu-1-0-exec = menu-open-0
 menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
+menu-1-1-exec = systemctl reboot
 
 menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
+menu-2-0-exec = systemctl poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+
+menu-3-0 = suspend
+menu-3-0-exec = systemctl suspend
+menu-3-1 = cancel
+menu-3-1-exec = menu-open-0
 
 [settings]
 screenchange-reload = true
