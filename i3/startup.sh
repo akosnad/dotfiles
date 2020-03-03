@@ -11,6 +11,7 @@ else
 	xrandr --output HDMI-1 --mode 1920x1080 --rate 72
 fi
 xset dpms 0 0 300
+xset +dpms
 xset r rate 150 50
 xinput set-prop 'USB OPTICAL MOUSE' 'libinput Accel Speed' -0.75
 systemctl --user start loggedin.target

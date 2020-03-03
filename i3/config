@@ -180,7 +180,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-bindsym $mod+l exec $HOME/dotfiles/i3/lock.sh
+bindsym $mod+l exec $HOME/dotfiles/i3/lock.sh --manual
 
 # Cange keyboard layout
 bindsym $mod+space exec $HOME/dotfiles/i3/kbmap.sh
