@@ -22,3 +22,4 @@ $HOME/.fehbg
 
 redshift-gtk &
 powerkit &
+pasystray &
