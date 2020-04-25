@@ -39,7 +39,7 @@ ZSH_THEME="akos"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -68,7 +68,7 @@ ZSH_CUSTOM="$HOME/dotfiles/zsh/custom"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo-bind)
+plugins=(git sudo-bind console-title)
 
 source $ZSH/oh-my-zsh.sh
 
