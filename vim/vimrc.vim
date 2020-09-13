@@ -5,11 +5,12 @@ set rtp+=$HOME/dotfiles/vim/vundle
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'AlessandroYorba/Alduin'
-Plugin 'scrooloose/nerdtree'
+Plugin 'chriskempson/base16-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'tpope/vim-commentary'
+Plugin 'francoiscabrol/ranger.vim'
+Plugin 'rbgrouleff/bclose.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -20,16 +21,17 @@ set hlsearch
 set mouse=a
 set incsearch
 
-silent! colorscheme alduin
+let base16colorspace=256
+set termguicolors
 
-let NERDTreeShowHidden=1
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '-'
-autocmd vimenter * call NERDTreeStartup()
-function NERDTreeStartup()
-    silent! NERDTree %:p:h
-    wincmd p
+function Startup()
+	if @% == ""
+		" Ranger
+	endif
 endfunction
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+au vimenter * call Startup()
+
+let g:ranger_replace_netrw = 1
 
 source $HOME/dotfiles/vim/binds.vim
+silent! so $HOME/.vim/colorscheme.vim

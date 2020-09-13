@@ -1,0 +1,5 @@
+.config/i3:i3
+.config/rofi:rofi
+.config/polybar:polybar
+.config/picom:picom
+.vimrc:vim/vimrc.vim
