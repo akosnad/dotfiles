@@ -31,7 +31,7 @@ function Startup()
 endfunction
 au vimenter * call Startup()
 
-let g:ranger_replace_netrw = 1
+" let g:ranger_replace_netrw = 1
 
 source $HOME/dotfiles/vim/binds.vim
 silent! so $HOME/.vim/colorscheme.vim

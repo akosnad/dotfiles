@@ -2,4 +2,4 @@
 .config/rofi:rofi
 .config/polybar:polybar
 .config/picom:picom
-.vimrc:vim/vimrc.vim
+.config/nvim/init.vim:vim/vimrc.vim

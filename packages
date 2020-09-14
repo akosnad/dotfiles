@@ -3,11 +3,10 @@ mons
 picom
 polybar
 rofi
-vim
+neovim
 visual-studio-code-insiders
 xfce4-notifyd
 feh
-redshift-gtk-git
 powerkit
 pasystray
 scrot

@@ -1,0 +1,1 @@
+alias -g vim='nvim'

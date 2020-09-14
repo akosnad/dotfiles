@@ -23,8 +23,9 @@ zle -N down-line-or-local-history
 
 bindkey "^X" clear-screen
 
-lfcd() {
-    lf
+__ranger_stuff() {
+    BUFFER="vim +Ranger"
+    zle accept-line
 }
-zle -N lfcd
-bindkey "^L" lfcd
+zle -N __ranger_stuff
+bindkey "^F" __ranger_stuff
