@@ -17,3 +17,4 @@ while read line; do
 done <links
 
 nvim +PluginUpdate +qa
+nvim +CocInstall coc-json coc-tsserver

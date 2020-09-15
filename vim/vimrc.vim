@@ -1,4 +1,4 @@
-set nocompatible
+set nocompatible 
 filetype off
 
 set rtp+=$HOME/dotfiles/vim/vundle
@@ -11,11 +11,14 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'francoiscabrol/ranger.vim'
 Plugin 'rbgrouleff/bclose.vim'
+Plugin 'machakann/vim-sandwich'
+Plugin 'neoclide/coc.nvim'
 
 call vundle#end()
 filetype plugin indent on
 
 syntax on
+set number
 set autoindent
 set hlsearch
 set mouse=a
@@ -26,12 +29,13 @@ set termguicolors
 
 function Startup()
 	if @% == ""
-		" Ranger
+		Ranger
 	endif
 endfunction
 au vimenter * call Startup()
 
-" let g:ranger_replace_netrw = 1
+let g:ranger_replace_netrw = 1
 
 source $HOME/dotfiles/vim/binds.vim
+source $HOME/dotfiles/vim/coc.vim
 silent! so $HOME/.vim/colorscheme.vim
