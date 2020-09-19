@@ -17,4 +17,4 @@ while read line; do
 done <links
 
 nvim +PlugUpdate +qa
-nvim +CocInstall coc-json coc-tsserver +qa
+nvim +CocInstall coc-json coc-tsserver coc-python +qa

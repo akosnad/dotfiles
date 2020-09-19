@@ -3,3 +3,4 @@
 .config/polybar:polybar
 .config/picom:picom
 .config/nvim/init.vim:vim/vimrc.vim
+.config/nvim/coc-settings.json:vim/coc-settings.json
