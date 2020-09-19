@@ -1,20 +1,20 @@
 set nocompatible 
 filetype off
 
-set rtp+=$HOME/dotfiles/vim/vundle
-call vundle#begin()
+source $HOME/dotfiles/vim/vim-plug/plug.vim
+call plug#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'chriskempson/base16-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'tpope/vim-commentary'
-Plugin 'francoiscabrol/ranger.vim'
-Plugin 'rbgrouleff/bclose.vim'
-Plugin 'machakann/vim-sandwich'
-Plugin 'neoclide/coc.nvim'
+Plug 'VundleVim/Vundle.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-commentary'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'machakann/vim-sandwich'
+Plug 'neoclide/coc.nvim'
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 
 syntax on

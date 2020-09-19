@@ -16,5 +16,5 @@ while read line; do
  	ln -s "$PWD/$dest" "$HOME/$source" 
 done <links
 
-nvim +PluginUpdate +qa
+nvim +PlugUpdate +qa
 nvim +CocInstall coc-json coc-tsserver +qa
