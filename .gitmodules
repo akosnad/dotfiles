@@ -10,3 +10,6 @@
 [submodule "vim/vim-plug"]
 	path = vim/vim-plug
 	url = https://github.com/junegunn/vim-plug
+[submodule "urxvt/urxvt-perls"]
+	path = urxvt/urxvt-perls
+	url = https://github.com/muennich/urxvt-perls

@@ -1,3 +1,6 @@
+.Xresources:Xresources
+.urxvt/ext:urxvt
+.config/awesome:awesome
 .config/i3:i3
 .config/rofi:rofi
 .config/polybar:polybar
