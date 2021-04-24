@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-yay -Syu $(cat packages | tr '\n' ' ')
+yay -Syu --needed $(cat packages | tr '\n' ' ')
 
 xargs base16-manager install < base16-repos
-base16-manager set embers
+base16-manager set atelier-forest
 
 echo ". $PWD/zsh/zshrc.sh" > $HOME/.zshrc
 mkdir -p $HOME/.config/nvim
