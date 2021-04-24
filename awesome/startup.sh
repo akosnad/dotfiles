@@ -12,9 +12,13 @@ export SSH_AUTH_SOCK
 xset dpms 0 0 300
 xset +dpms
 xset r rate 150 50
+
 xinput set-prop 'USB OPTICAL MOUSE' 'libinput Accel Speed' -0.75
 setxkbmap -layout 'us,hu' -option "grp:caps_toggle"
 xmodmap -e "clear lock"
+
+xdg_menu --format awesome --root-menu /etc/xdg/menus/manjaro-applications.menu > ~/dotfiles/awesome/archmenu.lua
+
 picom -b --config $HOME/dotfiles/picom/picom.conf
 $HOME/.fehbg
 

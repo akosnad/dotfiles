@@ -18,8 +18,9 @@ local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
 local lain          = require("lain")
---local menubar       = require("menubar")
+local menubar       = require("menubar")
 local freedesktop   = require("freedesktop")
+local xdg_menu = require("archmenu")
 local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -114,20 +115,20 @@ awful.layout.layouts = {
     --awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
+    --awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     --awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
+    --awful.layout.suit.magnifier,
     --awful.layout.suit.corner.nw,
     --awful.layout.suit.corner.ne,
     --awful.layout.suit.corner.sw,
     --awful.layout.suit.corner.se,
     --lain.layout.cascade,
     --lain.layout.cascade.tile,
-    --lain.layout.centerwork,
-    --lain.layout.centerwork.horizontal,
-    lain.layout.termfair,
+    lain.layout.centerwork,
+    lain.layout.centerwork.horizontal,
+    --lain.layout.termfair,
     --lain.layout.termfair.center
 }
 
@@ -184,7 +185,7 @@ local myawesomemenu = {
    { "Quit", function() awesome.quit() end },
 }
 
-local mymainmenu = freedesktop.menu.build {
+--[[ local mymainmenu = freedesktop.menu.build {
     before = {
         { "Awesome", myawesomemenu, beautiful.awesome_icon },
         -- other triads can be put here
@@ -194,18 +195,37 @@ local mymainmenu = freedesktop.menu.build {
         -- other triads can be put here
     }
 }
+--]]
+--
+--
+
+local powermenu = {
+	{ "Suspend", "systemctl suspend" },
+	{ "Shut down", "systemctl poweroff" },
+	{ "Restart", "systemctl reboot" }
+}
+
+local mymainmenu = awful.menu({
+	items = {
+		{ "Power", powermenu },
+		{"Awesome", myawesomemenu, beautiful.awesome_icon },
+		{ "All Applications", xdgmenu },
+		{ "Terminal", terminal }
+	}
+})
 
 -- hide menu when mouse leaves it
---mymainmenu.wibox:connect_signal("mouse::leave", function() mymainmenu:hide() end)
+-- mymainmenu.wibox:connect_signal("mouse::leave", function() mymainmenu:hide() end)
 
 -- Set the Menubar terminal for applications that require it
---menubar.utils.terminal = terminal
+menubar.utils.terminal = terminal
 
 -- }}}
 
 -- {{{ Screen
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+--[[
 screen.connect_signal("property::geometry", function(s)
     -- Wallpaper
     if beautiful.wallpaper then
@@ -217,6 +237,8 @@ screen.connect_signal("property::geometry", function(s)
         gears.wallpaper.maximized(wallpaper, s, true)
     end
 end)
+--]]
+gears.wallpaper.set("#000000")
 
 -- No borders when rearranging only 1 non-floating or maximized client
 screen.connect_signal("arrange", function (s)
@@ -505,11 +527,9 @@ globalkeys = mytable.join(
     awful.key({ modkey }, "q", function () awful.spawn(browser) end,
               {description = "run browser", group = "launcher"}),
 
-    -- Default
-    --[[ Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
-    --]]
+    -- menubar
+    awful.key({ altkey }, "space", function() menubar.show() end,
+              {description = "show the menubar", group = "launcher"}),
     --[[ dmenu
     awful.key({ modkey }, "x", function ()
             os.execute(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
