@@ -1,22 +1,51 @@
 #!/bin/bash
 set -e
 
-yay -Sy --needed $(cat packages | tr '\n' ' ')
+# arg 1: include text
+# arg 2: file to check in or to create
+function include_text() {
+    if ! grep -q "$1" "$2" >/dev/null 2>&1; then
+        echo $1 >> $2
+    fi
+}
 
-echo '#include "dotfiles/Xresources"' >> $HOME/.Xresources
+### Packages
+yay -Sy
+yay -Qn > .installed # we put it in a file, so we don't call it every loop :/ kinda slow
+yay -Qm >> .installed
+while read p; do
+    if ! grep -P "^$p\ .*$" .installed >/dev/null 2>&1; then
+        if ! grep -P "^$p\ .*$" .installed >/dev/null 2>&1; then
+            yay -S --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu "$p"
+        fi
+    fi
+done < packages
+rm .installed
 
-xargs base16-manager install < base16-repos
+### Xresources
+include_text '#include "dotfiles/Xresources"' "$HOME/.Xresources"
+xrdb -merge "$HOME/.Xresources"
+
+### Base16
+while read r; do
+    if [ ! -d "$HOME/.base16-manager/$r" ]; then
+        base16-manager install "$r"
+    fi
+done < base16-repos
 base16-manager set embers
 
-echo ". $PWD/zsh/zshrc.sh" > $HOME/.zshrc
+### Zsh
+include_text ". $HOME/dotfiles/zsh/zshrc.sh" "$HOME/.zshrc"
+
+### Neovim
 mkdir -p $HOME/.config/nvim
-echo "so $PWD/vim/vimrc.vim" > $HOME/.config/nvim/init.vim
+include_text "so $PWD/vim/vimrc.vim" "$HOME/.config/nvim/init.vim"
+nvim +"source $HOME/dotfiles/setup.vim"
 
 while read line; do
 	source=$(echo $line | sed "s/\:.*$//")
 	dest=$(echo $line | sed "s/^.*\://")
- 	ln -s "$PWD/$dest" "$HOME/$source" 
+    if [ ! -L "$HOME/$source" ]; then
+ 	    ln -s "$PWD/$dest" "$HOME/$source" 
+    fi
 done <links
-
-nvim +PlugUpdate +qa
-nvim +CocInstall coc-json coc-tsserver coc-python +qa
