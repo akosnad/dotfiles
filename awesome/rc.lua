@@ -24,6 +24,7 @@ local xdgmenu = require("archmenu")
 local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
+local settings      = require("settings")
 
 local globalkeys = require("keys").globalkeys
 local clientkeys = require("keys").clientkeys
@@ -68,6 +69,8 @@ end
 
 -- {{{ Autostart windowless processes
 
+-- Startup script (setup monitors, kbd, etc.)
+awful.spawn.with_shell("~/.config/awesome/startup.sh")
 -- This function will run once every time Awesome is started
 local function run_once(cmd_arr)
     for _, cmd in ipairs(cmd_arr) do
@@ -89,27 +92,7 @@ awful.spawn.with_shell(
 
 -- {{{ Variable definitions
 
-local themes = {
-    "blackburn",       -- 1
-    "copland",         -- 2
-    "dremora",         -- 3
-    "holo",            -- 4
-    "multicolor",      -- 5
-    "powerarrow",      -- 6
-    "powerarrow-dark", -- 7
-    "rainbow",         -- 8
-    "steamburn",       -- 9
-    "vertex"           -- 10
-}
-
-local chosen_theme = themes[7]
-local terminal     = "urxvtc"
-local vi_focus     = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
-local cycle_prev   = true  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
-local editor       = os.getenv("EDITOR") or "nvim"
-local browser      = "librewolf"
-
-awful.util.terminal = terminal
+awful.util.terminal = settings.terminal
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
 awful.layout.layouts = {
     awful.layout.suit.floating,
@@ -174,7 +157,7 @@ awful.util.tasklist_buttons = mytable.join(
      awful.button({ }, 5, function() awful.client.focus.byidx(-1) end)
 )
 
-beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), settings.chosen_theme))
 
 -- }}}
 
@@ -183,8 +166,8 @@ beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv
 -- Create a launcher widget and a main menu
 local myawesomemenu = {
    { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-   { "Manual", string.format("%s -e man awesome", terminal) },
-   { "Edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
+   { "Manual", string.format("%s -e man awesome", settings.terminal) },
+   { "Edit config", string.format("%s -e %s %s", settings.terminal, settings.editor, awesome.conffile) },
    { "Restart", awesome.restart },
    { "Quit", function() awesome.quit() end },
 }
@@ -214,7 +197,7 @@ local mymainmenu = awful.menu({
 		{ "Power", powermenu },
 		{"Awesome", myawesomemenu, beautiful.awesome_icon },
 		{ "All Applications", xdgmenu },
-		{ "Terminal", terminal }
+		{ "Terminal", settings.terminal }
 	}
 })
 
@@ -222,7 +205,7 @@ local mymainmenu = awful.menu({
 -- mymainmenu.wibox:connect_signal("mouse::leave", function() mymainmenu:hide() end)
 
 -- Set the Menubar terminal for applications that require it
-menubar.utils.terminal = terminal
+menubar.utils.terminal = settings.terminal
 
 -- }}}
 
@@ -408,4 +391,3 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- }}
 
-awful.spawn.with_shell("~/.config/awesome/startup.sh")

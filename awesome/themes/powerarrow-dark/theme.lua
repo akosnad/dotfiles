@@ -5,11 +5,13 @@
 
 --]]
 
-local gears = require("gears")
-local lain  = require("lain")
-local awful = require("awful")
-local wibox = require("wibox")
-local dpi   = require("beautiful.xresources").apply_dpi
+local gears     = require("gears")
+local lain      = require("lain")
+local awful     = require("awful")
+local naughty   = require("naughty")
+local beautiful = require("beautiful")
+local wibox     = require("wibox")
+local dpi       = require("beautiful.xresources").apply_dpi
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -104,7 +106,7 @@ local clock = awful.widget.watch(
 )
 
 -- Calendar
-theme.cal = lain.widget.cal({
+--[[ theme.cal = lain.widget.cal({
     attach_to = { clock },
     notification_preset = {
         font = "Terminus 10",
@@ -112,6 +114,86 @@ theme.cal = lain.widget.cal({
         bg   = theme.bg_normal
     }
 })
+--]]
+
+-- Notification list
+--[[
+local notif_wb = awful.wibar {
+    position = 'top',
+    height = 48,
+    visible = #naughty.activate > 0,
+}
+
+notif_wb:setup {
+    nil,
+    {
+        base_layout = wibox.widget {
+            spacing_widget = wibox.widget {
+                orientation = 'vertical',
+                span_ratio  = 0.5,
+                widget      = wibox.widget.separator,
+            },
+            forced_height = 30,
+            spacing       = 3,
+            layout        = wibox.layout.flex.horizontal
+        },
+        widget_template = {
+            {
+                naughty.widget.icon,
+                {
+                    naughty.widget.title,
+                    naughty.widget.message,
+                    {
+                        layout = wibox.widget {
+                            -- Adding the wibox.widget allows to share a
+                            -- single instance for all spacers.
+                            spacing_widget = wibox.widget {
+                                orientation = 'vertical',
+                                span_ratio  = 0.9,
+                                widget      = wibox.widget.separator,
+                            },
+                            spacing = 3,
+                            layout  = wibox.layout.flex.horizontal
+                        },
+                        widget = naughty.list.widgets,
+                    },
+                    layout = wibox.layout.align.vertical
+                },
+                spacing = 10,
+                fill_space = true,
+                layout  = wibox.layout.fixed.horizontal
+            },
+            margins = 5,
+            widget  = wibox.container.margin
+        },
+        widget = naughty.list.notifications,
+    },
+    -- Add a button to dismiss all notifications, because why not.
+    {
+        {
+            text   = 'Dismiss all',
+            align  = 'center',
+            valign = 'center',
+            widget = wibox.widget.textbox
+        },
+        buttons = gears.table.join(
+            awful.button({ }, 1, function() naughty.destroy_all_notifications() end)
+        ),
+        forced_width       = 75,
+        shape              = gears.shape.rounded_bar,
+        shape_border_width = 1,
+        shape_border_color = beautiful.bg_highlight,
+        widget = wibox.container.background
+    },
+    layout = wibox.layout.align.horizontal
+}
+
+--]]
+
+-- We don't want to have that bar all the time, only when there is content.
+--naughty.connect_signal('property::active', function()
+--    notif_wb.visible = #naughty.active > 0
+--end)
 
 -- Mail IMAP check
 -- local mailicon = wibox.widget.imagebox(theme.widget_mail)
