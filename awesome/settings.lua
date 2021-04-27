@@ -16,6 +16,7 @@ local settings = {
     cycle_prev   = true,  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
     editor       = os.getenv("EDITOR") or "nvim",
     browser      = "chromium",
+    scrlocker    = "light-locker-command -l",
 }
 settings.chosen_theme = settings.themes[7]
 

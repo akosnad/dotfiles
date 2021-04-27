@@ -11,6 +11,7 @@ local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
+local settings      = require("settings")
 
 local keys = {}
 keys.modkey       = "Mod4"
@@ -20,11 +21,11 @@ keys.altkey       = "Mod1"
 keys.globalkeys = mytable.join(
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
-    awful.key({ keys.altkey }, "p", function() os.execute("screenshot") end,
+    awful.key({ keys.altkey }, "p", function() os.execute("flameshot gui") end,
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker
-    awful.key({ keys.altkey, "Control" }, "l", function () os.execute(scrlocker) end,
+    awful.key({ keys.modkey,           }, "l", function () os.execute(settings.scrlocker) end,
               {description = "lock screen", group = "hotkeys"}),
 
     -- Show help
@@ -32,20 +33,15 @@ keys.globalkeys = mytable.join(
               {description="show help", group="awesome"}),
 
     -- Tag browsing
-    awful.key({ keys.modkey,           }, "Left",   awful.tag.viewprev,
+    awful.key({ keys.modkey, "Control" }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
-    awful.key({ keys.modkey,           }, "Right",  awful.tag.viewnext,
+    awful.key({ keys.modkey, "Control" }, "Right",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
     awful.key({ keys.modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
-    -- Non-empty tag browsing
-    awful.key({ keys.altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
-              {description = "view  previous nonempty", group = "tag"}),
-    awful.key({ keys.altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
-              {description = "view  previous nonempty", group = "tag"}),
-
     -- Default client focus
+    --[[
     awful.key({ keys.altkey,           }, "j",
         function ()
             awful.client.focus.byidx( 1)
@@ -58,27 +54,28 @@ keys.globalkeys = mytable.join(
         end,
         {description = "focus previous by index", group = "client"}
     ),
+    --]]
 
     -- By-direction client focus
-    awful.key({ keys.modkey }, "j",
+    awful.key({ keys.modkey }, "Down",
         function()
             awful.client.focus.global_bydirection("down")
             if client.focus then client.focus:raise() end
         end,
         {description = "focus down", group = "client"}),
-    awful.key({ keys.modkey }, "k",
+    awful.key({ keys.modkey }, "Up",
         function()
             awful.client.focus.global_bydirection("up")
             if client.focus then client.focus:raise() end
         end,
         {description = "focus up", group = "client"}),
-    awful.key({ keys.modkey }, "h",
+    awful.key({ keys.modkey }, "Left",
         function()
             awful.client.focus.global_bydirection("left")
             if client.focus then client.focus:raise() end
         end,
         {description = "focus left", group = "client"}),
-    awful.key({ keys.modkey }, "l",
+    awful.key({ keys.modkey }, "Right",
         function()
             awful.client.focus.global_bydirection("right")
             if client.focus then client.focus:raise() end
@@ -90,17 +87,17 @@ keys.globalkeys = mytable.join(
               {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
-    awful.key({ keys.modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
+    awful.key({ keys.altkey, "Shift"   }, "Right", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
-    awful.key({ keys.modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end,
+    awful.key({ keys.altkey, "Shift"   }, "Left", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
-    awful.key({ keys.modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
+    awful.key({ keys.altkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
-    awful.key({ keys.modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
+    awful.key({ keys.altkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ keys.modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ keys.modkey,           }, "Tab",
+    awful.key({ keys.altkey,           }, "Tab",
         function ()
             if cycle_prev then
                 awful.client.focus.history.previous()
@@ -143,7 +140,7 @@ keys.globalkeys = mytable.join(
               {description = "delete tag", group = "tag"}),
 
     -- Standard program
-    awful.key({ keys.modkey,           }, "Return", function () awful.spawn(terminal) end,
+    awful.key({ keys.modkey,           }, "Return", function () awful.spawn(settings.terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ keys.modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -176,22 +173,26 @@ keys.globalkeys = mytable.join(
     end, {description = "restore minimized", group = "client"}),
 
     -- Dropdown application
-    awful.key({ keys.modkey, }, "z", function () awful.screen.focused().quake:toggle() end,
-              {description = "dropdown application", group = "launcher"}),
+    -- awful.key({ keys.modkey, }, "z", function () awful.screen.focused().quake:toggle() end,
+    --           {description = "dropdown application", group = "launcher"}),
 
     -- Widgets popups
+    --[[
     awful.key({ keys.altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
               {description = "show calendar", group = "widgets"}),
     awful.key({ keys.altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
               {description = "show filesystem", group = "widgets"}),
     awful.key({ keys.altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
               {description = "show weather", group = "widgets"}),
+    --]]
 
     -- Screen brightness
+    --[[
     awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
               {description = "+10%", group = "hotkeys"}),
     awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 10") end,
               {description = "-10%", group = "hotkeys"}),
+    --]]
 
     -- ALSA volume control
     awful.key({ keys.altkey }, "Up",
@@ -272,7 +273,7 @@ keys.globalkeys = mytable.join(
               {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
-    awful.key({ keys.modkey }, "q", function () awful.spawn(browser) end,
+    awful.key({ keys.modkey }, "q", function () awful.spawn(settings.browser) end,
               {description = "run browser", group = "launcher"}),
 
     -- menubar
@@ -392,8 +393,9 @@ for i = 1, 9 do
                           end
                      end
                   end,
-                  {description = "move focused client to tag #"..i, group = "tag"}),
+                  {description = "move focused client to tag #"..i, group = "tag"})
         -- Toggle tag on focused client.
+        --[[
         awful.key({ keys.modkey, "Control", "Shift" }, "#" .. i + 9,
                   function ()
                       if client.focus then
@@ -404,6 +406,7 @@ for i = 1, 9 do
                       end
                   end,
                   {description = "toggle focused client on tag #" .. i, group = "tag"})
+        -]]
     )
 end
 
