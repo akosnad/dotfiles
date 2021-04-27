@@ -10,7 +10,7 @@ function include_text() {
 }
 
 ### Packages
-yay -Sy
+yay -Syu
 yay -Qn > .installed # we put it in a file, so we don't call it every loop :/ kinda slow
 yay -Qm >> .installed
 while read p; do
@@ -32,7 +32,6 @@ while read r; do
         base16-manager install "$r"
     fi
 done < base16-repos
-base16-manager set embers
 
 ### Zsh
 include_text ". $HOME/dotfiles/zsh/zshrc.sh" "$HOME/.zshrc"
