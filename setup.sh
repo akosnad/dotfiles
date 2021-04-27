@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-yay -Syu --needed $(cat packages | tr '\n' ' ')
+yay -Sy --needed $(cat packages | tr '\n' ' ')
 
 echo '#include "dotfiles/Xresources"' >> $HOME/.Xresources
 
