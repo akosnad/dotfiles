@@ -2,6 +2,7 @@
 
      Powerarrow Dark Awesome WM theme
      github.com/lcpz
+     modified to follow Xresources colors
 
 --]]
 
@@ -11,7 +12,9 @@ local awful     = require("awful")
 local naughty   = require("naughty")
 local beautiful = require("beautiful")
 local wibox     = require("wibox")
-local dpi       = require("beautiful.xresources").apply_dpi
+local xresources= require("beautiful.xresources")
+local dpi       = xresources.apply_dpi
+local xrdb      = xresources.get_current_theme()
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -21,20 +24,33 @@ theme.dir                                       = os.getenv("HOME") .. "/.config
 -- theme.wallpaper                                 = theme.dir .. "/wall.png"
 theme.wallpaper           			= "#000000"
 theme.font                                      = "Terminus 9"
-theme.fg_normal                                 = "#DDDDFF"
-theme.fg_focus                                  = "#EA6F81"
-theme.fg_urgent                                 = "#CC9393"
-theme.bg_normal                                 = "#1A1A1A"
-theme.bg_focus                                  = "#313131"
-theme.bg_urgent                                 = "#1A1A1A"
+theme.bg_normal     = xrdb.background
+theme.bg_focus      = xrdb.color10
+theme.bg_urgent     = xrdb.color9
+theme.bg_minimize   = xrdb.color11
+theme.bg_systray    = theme.bg_normal
+
+theme.fg_normal     = xrdb.foreground
+theme.fg_focus      = xrdb.color13
+theme.fg_urgent     = xrdb.color15
+theme.fg_minimize   = theme.fg_normal
+
+theme.useless_gap   = dpi(3)
+theme.border_width  = dpi(2)
+theme.border_normal = xrdb.color0
+theme.border_focus  = theme.bg_focus
+theme.border_marked = xrdb.color10
+
 theme.border_width                              = dpi(1)
-theme.border_normal                             = "#3F3F3F"
-theme.border_focus                              = "#7F7F7F"
-theme.border_marked                             = "#CC9393"
+theme.border_normal                             = xrdb.color0
+theme.border_focus                              = theme.bg_focus
+theme.border_marked                             = xrdb.color10
 theme.tasklist_bg_focus                         = "#1A1A1A"
 theme.titlebar_bg_focus                         = theme.bg_focus
 theme.titlebar_bg_normal                        = theme.bg_normal
 theme.titlebar_fg_focus                         = theme.fg_focus
+theme.tooltip_fg                                = theme.fg_normal
+theme.tooltip_bg                                = theme.bg_normal
 theme.menu_height                               = dpi(16)
 theme.menu_width                                = dpi(140)
 theme.menu_submenu_icon                         = theme.dir .. "/icons/submenu.png"
@@ -429,6 +445,7 @@ function theme.at_screen_connect(s)
             wibox.container.background(neticon, theme.bg_focus),
             wibox.container.background(net.widget, theme.bg_focus),
             arrl_dl,
+            clockicon,
             clock,
             spr,
             arrl_ld,
