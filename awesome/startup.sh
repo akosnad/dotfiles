@@ -3,11 +3,6 @@ set -e
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-mons -S 0,6:R
-mons --primary HDMI-0
-xrandr --output DVI-I-0 --mode 1440x900 --rate 75
-xrandr --output HDMI-0 --mode 1920x1080 --rate 74
-
 eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK
 
