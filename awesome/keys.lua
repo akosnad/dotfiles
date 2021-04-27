@@ -21,7 +21,7 @@ keys.altkey       = "Mod1"
 keys.globalkeys = mytable.join(
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
-    awful.key({ keys.altkey }, "p", function() os.execute("flameshot gui") end,
+    awful.key({ }, "Print", function() os.execute(settings.screenshot) end,
               {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker

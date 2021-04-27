@@ -17,6 +17,7 @@ local settings = {
     editor       = os.getenv("EDITOR") or "nvim",
     browser      = "chromium",
     scrlocker    = "light-locker-command -l",
+    screenshot   = "flameshot gui",
 }
 settings.chosen_theme = settings.themes[7]
 
