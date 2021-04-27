@@ -4,7 +4,6 @@ filetype off
 source $HOME/dotfiles/vim/vim-plug/plug.vim
 call plug#begin()
 
-Plug 'VundleVim/Vundle.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'editorconfig/editorconfig-vim'
@@ -25,7 +24,8 @@ set mouse=a
 set incsearch
 
 let base16colorspace=256
-set termguicolors
+set notermguicolors
+set t_Co=256
 
 function Startup()
 	if @% == ""

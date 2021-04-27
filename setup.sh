@@ -3,8 +3,10 @@ set -e
 
 yay -Syu --needed $(cat packages | tr '\n' ' ')
 
+echo '#include "dotfiles/Xresources"' >> $HOME/.Xresources
+
 xargs base16-manager install < base16-repos
-base16-manager set atelier-forest
+base16-manager set embers
 
 echo ". $PWD/zsh/zshrc.sh" > $HOME/.zshrc
 mkdir -p $HOME/.config/nvim

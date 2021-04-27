@@ -12,6 +12,7 @@ export SSH_AUTH_SOCK
 xset dpms 0 0 300
 xset +dpms
 xset r rate 150 50
+xset +fp ~/dotfiles/fonts/
 
 xinput set-prop 'USB OPTICAL MOUSE' 'libinput Accel Speed' -0.75
 setxkbmap -layout 'us,hu' -option "grp:caps_toggle"

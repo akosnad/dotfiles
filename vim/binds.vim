@@ -13,8 +13,10 @@ nnoremap <leader>Q :q!<CR>
 inoremap <leader>x <ESC>:x<CR>
 nnoremap <leader>x :x<CR>
 
-nnoremap <leader>t :tabnew<CR>:Ex<CR>
+nnoremap <leader>t :tabnew<CR>:FZF<CR>
 nnoremap <leader>n :tabN<CR>
+
+nnoremap <leader>F :FZF<CR>
 
 nnoremap <leader>v :vsplit<CR>:w<CR>:Ex<CR>
 nnoremap <leader>s :split<CR>:w<CR>:Ex<CR>

@@ -13,3 +13,6 @@
 [submodule "urxvt/urxvt-perls"]
 	path = urxvt/urxvt-perls
 	url = https://github.com/muennich/urxvt-perls
+[submodule "fonts"]
+	path = fonts
+	url = https://github.com/addy-dclxvi/bitmap-font-collections.git

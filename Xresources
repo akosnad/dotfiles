@@ -1,23 +1,21 @@
 !! URxvt Appearance
-!URxvt.font: -*-rissole-*
-!URxvt.boldFont: -*-rissole-*
-!URxvt.italicFont: -*-rissole-*
-!URxvt.boldItalicfont: -*-rissole-*
+URxvt.font: -*-rissole-*
+URxvt.boldFont: -*-rissole-*
+URxvt.italicFont: -*-rissole-*
+URxvt.boldItalicfont: -*-rissole-*
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 92x24
 URxvt.internalBorder: 24
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: false
-URxvt.saveline: 2048
+URxvt.saveline: 8192
 URxvt.scrollBar: false
 URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
 URxvt.depth: 24
 URxvt.iso14755: false
 URxvt.iso14755_52: false
-
-
 
 !! Common Keybinds for Navigations
 URxvt.keysym.Shift-Up: command:\033]720;1\007
