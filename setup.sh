@@ -16,7 +16,7 @@ yay -Qm >> .installed
 while read p; do
     if ! grep -P "^$p\ .*$" .installed >/dev/null 2>&1; then
         if ! grep -P "^$p\ .*$" .installed >/dev/null 2>&1; then
-            yay -S --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu "$p"
+            yay -S --noconfirm --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu "$p"
         fi
     fi
 done < packages
