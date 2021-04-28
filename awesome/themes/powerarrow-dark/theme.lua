@@ -18,6 +18,7 @@ local xrdb      = xresources.get_current_theme()
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
+local primary_screen = screen[1]
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-dark"
@@ -401,6 +402,7 @@ function theme.at_screen_connect(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal })
 
+    if s == primary_screen then
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
@@ -452,6 +454,26 @@ function theme.at_screen_connect(s)
             wibox.container.background(s.mylayoutbox, theme.bg_focus),
         },
     }
+    else -- Screens other than primary
+    -- Add widgets to the wibox
+    s.mywibox:setup {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+            --spr,
+            s.mytaglist,
+            s.mypromptbox,
+            spr,
+        },
+        s.mytasklist, -- Middle widget
+        { -- Right widgets
+            layout = wibox.layout.fixed.horizontal,
+            spr,
+            arrl_ld,
+            wibox.container.background(s.mylayoutbox, theme.bg_focus),
+        },
+    }
+    end
 end
 
 return theme
