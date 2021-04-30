@@ -1,0 +1,35 @@
+shell = "bash -c '{}'"
+
+[[item]]
+file = "~/.Xresources.d/colors"
+template = "xresources"
+rewrite = true
+hook = "bash ~/dotfiles/flavours/reload-awesome.sh"
+
+[[item]]
+file = "~/.base16_theme"
+template = "shell"
+rewrite = true
+
+[[item]]
+file = "~/.fzf.colors"
+template = "fzf"
+rewrite = true
+
+[[item]]
+file = "~/.vim/colorscheme.vim"
+template = "vim"
+rewrite = true
+
+[[item]]
+file = "~/.themes/FlatColor/colors2"
+template = "gtk-flatcolor"
+subtemplate = "gtk-2"
+rewrite = true
+
+[[item]]
+file = "~/.themes/FlatColor/colors3"
+template = "gtk-flatcolor"
+subtemplate = "gtk-3"
+rewrite = true
+hook = "bash ~/dotfiles/xsettings/reload.sh"

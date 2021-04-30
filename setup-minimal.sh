@@ -1,18 +1,11 @@
 #!/bin/bash
-#set -e
+set -e
 dotfiles="$(dirname $(realpath $BASH_SOURCE))"
 source "$dotfiles/setup-helpers.sh"
 
 ### Packages
 yay -Syu
 verify_packages "$dotfiles/packages-minimal"
-
-### Base16
-while read r; do
-    if [ ! -d "$HOME/.base16-manager/$r" ]; then
-        base16-manager install "$r"
-    fi
-done < base16-repos
 
 ### Zsh
 include_text ". $dotfiles/zsh/zshrc.sh" "$HOME/.zshrc"
@@ -24,3 +17,8 @@ nvim +"source $dotfiles/setup.vim"
 
 ### Config file symlinks
 setup_symlinks "$dotfiles/links-minimal"
+
+### Flavours
+if [ ! -d "$HOME/.local/share/flavours" ]; then
+    flavours update all
+fi

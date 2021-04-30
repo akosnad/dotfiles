@@ -28,25 +28,25 @@ theme.font                                      = "Terminus 9"
 theme.bg_normal     = xrdb.background
 theme.bg_focus      = xrdb.color10
 theme.bg_urgent     = xrdb.color9
-theme.bg_minimize   = xrdb.color11
+theme.bg_minimize   = theme.bg_normal
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = xrdb.foreground
 theme.fg_focus      = xrdb.color13
 theme.fg_urgent     = xrdb.color15
-theme.fg_minimize   = theme.fg_normal
+theme.fg_minimize   = xrdb.color12
 
 theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
 theme.border_normal = xrdb.color0
 theme.border_focus  = theme.bg_focus
-theme.border_marked = xrdb.color10
+theme.border_marked = theme.bg_focus
 
 theme.border_width                              = dpi(1)
 theme.border_normal                             = xrdb.color0
 theme.border_focus                              = theme.bg_focus
-theme.border_marked                             = xrdb.color10
-theme.tasklist_bg_focus                         = "#1A1A1A"
+theme.border_marked                             = theme.border_marked
+theme.tasklist_bg_focus                         = theme.bg_focus
 theme.titlebar_bg_focus                         = theme.bg_focus
 theme.titlebar_bg_normal                        = theme.bg_normal
 theme.titlebar_fg_focus                         = theme.fg_focus
@@ -233,41 +233,48 @@ theme.mail = lain.widget.imap({
 })
 --]]
 
--- MPD
-local musicplr = awful.util.terminal .. " -title Music -g 130x34-320+16 -e ncmpcpp"
-local mpdicon = wibox.widget.imagebox(theme.widget_music)
-mpdicon:buttons(my_table.join(
-    awful.button({ modkey }, 1, function () awful.spawn.with_shell(musicplr) end),
-    awful.button({ }, 1, function ()
-        os.execute("mpc prev")
-        theme.mpd.update()
-    end),
-    awful.button({ }, 2, function ()
-        os.execute("mpc toggle")
-        theme.mpd.update()
-    end),
-    awful.button({ }, 3, function ()
-        os.execute("mpc next")
-        theme.mpd.update()
-    end)))
-theme.mpd = lain.widget.mpd({
-    settings = function()
-        if mpd_now.state == "play" then
-            artist = " " .. mpd_now.artist .. " "
-            title  = mpd_now.title  .. " "
-            mpdicon:set_image(theme.widget_music_on)
-        elseif mpd_now.state == "pause" then
-            artist = " mpd "
-            title  = "paused "
-        else
-            artist = ""
-            title  = ""
-            mpdicon:set_image(theme.widget_music)
-        end
+-- MPRIS
+local music_icon = wibox.widget.imagebox(theme.widget_music)
+theme.mpris, theme.mpris_timer = awful.widget.watch(
+    { awful.util.shell, "-c", 
+    "playerctl status && playerctl metadata --format '{{artist}}' && playerctl metadata --format '{{title}}'" },
+    2,
+    function(widget, stdout)
+         local escape_f  = require("awful.util").escape
+         local lines = {}
+         for s in stdout:gmatch("[^\r\n]+") do
+             table.insert(lines, s)
+         end
+         local mpris_now = {
+             state        = "N/A",
+             artist       = "N/A",
+             title        = "N/A",
+             art_url      = "N/A",
+             album        = "N/A",
+             album_artist = "N/A"
+         }
 
-        widget:set_markup(markup.font(theme.font, markup("#EA6F81", artist) .. title))
+         mpris_now.state = string.match(stdout, "Playing") or
+                           string.match(stdout, "Paused")  or "N/A"
+
+         mpris_now.artist = lines[2]
+         mpris_now.title = lines[3]
+
+        --[[
+         for k, v in string.gmatch(stdout, "'[^:]+:([^']+)':[%s]<%[?'([^']+)'%]?>")
+         do
+             if     k == "artUrl"      then mpris_now.art_url      = v
+             elseif k == "artist"      then mpris_now.artist       = escape_f(v)
+             elseif k == "title"       then mpris_now.title        = escape_f(v)
+             elseif k == "album"       then mpris_now.album        = escape_f(v)
+             elseif k == "albumArtist" then mpris_now.album_artist = escape_f(v)
+             end
+         end
+         --]]
+--        widget:set_text(mpris_now.artist .. " - " .. mpris_now.title)
+        widget:set_markup(markup.font(theme.font, " " .. mpris_now.artist .. " - " .. mpris_now.title .. " "))
     end
-})
+)
 
 -- MEM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
@@ -400,7 +407,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_systray, fg = theme.fg_normal })
 
     if s == primary_screen then
     -- Add widgets to the wibox
@@ -420,23 +427,20 @@ function theme.at_screen_connect(s)
             keyboardlayout,
             spr,
             arrl_ld,
-            wibox.container.background(mpdicon, theme.bg_focus),
-            wibox.container.background(theme.mpd.widget, theme.bg_focus),
+            wibox.container.background(volicon, theme.bg_focus),
+            wibox.container.background(theme.volume.widget, theme.bg_focus),
             arrl_dl,
-            volicon,
-            theme.volume.widget,
-            arrl_ld,
             --wibox.container.background(mailicon, theme.bg_focus),
             --wibox.container.background(theme.mail.widget, theme.bg_focus),
             --arrl_dl,
-            wibox.container.background(memicon, theme.bg_focus),
-            wibox.container.background(mem.widget, theme.bg_focus),
-            arrl_dl,
-            cpuicon,
-            cpu.widget,
+            memicon,
+            mem.widget,
             arrl_ld,
-            wibox.container.background(tempicon, theme.bg_focus),
-            wibox.container.background(temp.widget, theme.bg_focus),
+            wibox.container.background(cpuicon, theme.bg_focus),
+            wibox.container.background(cpu.widget, theme.bg_focus),
+            --arrl_ld,
+            --wibox.container.background(tempicon, theme.bg_focus),
+            --wibox.container.background(temp.widget, theme.bg_focus),
             arrl_dl,
             fsicon,
             theme.fs.widget,
@@ -468,6 +472,13 @@ function theme.at_screen_connect(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            spr,
+            arrl_ld,
+            wibox.container.background(music_icon, theme.bg_focus),
+            wibox.container.background(theme.mpris, theme.bg_focus),
+            arrl_dl,
+            clockicon,
+            clock,
             spr,
             arrl_ld,
             wibox.container.background(s.mylayoutbox, theme.bg_focus),

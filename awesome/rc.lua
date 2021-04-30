@@ -10,6 +10,8 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
+require('table-serialization')
+require('table-indexof')
 
 local gears         = require("gears")
 local awful         = require("awful")
@@ -160,6 +162,7 @@ awful.util.tasklist_buttons = mytable.join(
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), settings.chosen_theme))
 
 -- }}}
+
 
 -- {{{ Menu
 
@@ -389,5 +392,10 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
+awesome.connect_signal("reload", function()
+    awesome.restart()
+end)
+
 -- }}
 
+awful.util.spawn_with_shell("light-locker --lock-after-screensaver=30")

@@ -195,75 +195,56 @@ keys.globalkeys = mytable.join(
     --]]
 
     -- ALSA volume control
-    awful.key({ keys.altkey }, "Up",
+    awful.key({ keys.modkey }, "#+80",
         function ()
             os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
             beautiful.volume.update()
         end,
-        {description = "volume up", group = "hotkeys"}),
-    awful.key({ keys.altkey }, "Down",
+        {description = "volume up", group = "audio"}),
+    awful.key({ keys.modkey }, "#+88",
         function ()
             os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
             beautiful.volume.update()
         end,
-        {description = "volume down", group = "hotkeys"}),
-    awful.key({ keys.altkey }, "m",
+        {description = "volume down", group = "audio"}),
+    awful.key({ keys.modkey, keys.altkey }, "#+84",
         function ()
             os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
             beautiful.volume.update()
         end,
-        {description = "toggle mute", group = "hotkeys"}),
-    awful.key({ keys.altkey, "Control" }, "m",
+        {description = "toggle mute", group = "audio"}),
+    awful.key({ keys.modkey, keys.altkey }, "#+80",
         function ()
             os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
             beautiful.volume.update()
         end,
-        {description = "volume 100%", group = "hotkeys"}),
-    awful.key({ keys.altkey, "Control" }, "0",
+        {description = "volume 100%", group = "audio"}),
+    awful.key({ keys.modkey, keys.altkey }, "#+88",
         function ()
             os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
             beautiful.volume.update()
         end,
-        {description = "volume 0%", group = "hotkeys"}),
+        {description = "volume 0%", group = "audio"}),
 
-    -- MPD control
-    awful.key({ keys.altkey, "Control" }, "Up",
+    -- MPRIS
+    awful.key({ keys.modkey,        }, "#+84",
         function ()
-            os.execute("mpc toggle")
-            beautiful.mpd.update()
+            os.execute("playerctl play-pause")
         end,
-        {description = "mpc toggle", group = "widgets"}),
-    awful.key({ keys.altkey, "Control" }, "Down",
+        {description = "play/pause", group = "audio"}
+    ),
+    awful.key({ keys.modkey,        }, "#+83",
         function ()
-            os.execute("mpc stop")
-            beautiful.mpd.update()
+            os.execute("playerctl previous")
         end,
-        {description = "mpc stop", group = "widgets"}),
-    awful.key({ keys.altkey, "Control" }, "Left",
+        {description = "previous", group = "audio"}
+    ),
+    awful.key({ keys.modkey,        }, "#+85",
         function ()
-            os.execute("mpc prev")
-            beautiful.mpd.update()
+            os.execute("playerctl next")
         end,
-        {description = "mpc prev", group = "widgets"}),
-    awful.key({ keys.altkey, "Control" }, "Right",
-        function ()
-            os.execute("mpc next")
-            beautiful.mpd.update()
-        end,
-        {description = "mpc next", group = "widgets"}),
-    awful.key({ keys.altkey }, "0",
-        function ()
-            local common = { text = "MPD widget ", position = "top_middle", timeout = 2 }
-            if beautiful.mpd.timer.started then
-                beautiful.mpd.timer:stop()
-                common.text = common.text .. lain.util.markup.bold("OFF")
-            else
-                beautiful.mpd.timer:start()
-                common.text = common.text .. lain.util.markup.bold("ON")
-            end
-            naughty.notify(common)
-        end,
-        {description = "mpc on/off", group = "widgets"}),
+        {description = "next", group = "audio"}
+    ),
 
     -- Copy primary to clipboard (terminals to gtk)
     awful.key({ keys.modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
