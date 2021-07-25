@@ -1,4 +1,8 @@
 neovim
+ccls
 ranger
 fzf
 flavours
+inetutils
+nodejs-lts-fermium
+npm

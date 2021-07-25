@@ -17,7 +17,7 @@ template = "fzf"
 rewrite = true
 
 [[item]]
-file = "~/.vim/colorscheme.vim"
+file = "~/.config/nvim/colorscheme.vim"
 template = "vim"
 rewrite = true
 

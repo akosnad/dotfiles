@@ -8,11 +8,13 @@ $dotfiles/setup-minimal.sh
 ### Packages
 verify_packages "$dotfiles/packages"
 
-### Xresources
-include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
-mkdir -p "$HOME/.Xresources.d"
-include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
-xrdb -merge "$HOME/.Xresources"
+### X server related
+if ! [ -f /usr/bin/Xorg ]; then
+    echo "No X server found, please install one if using full setup"
+    echo "Otherwise run setup-minimal if you plan on running console-only."
+    exit 1
+fi
+sudo systemctl enable lightdm
 
 ### GTK
 if [ ! -d "$HOME/.themes/FlatColor" ]; then
@@ -27,3 +29,9 @@ fi
 
 ### Config file symlinks
 setup_symlinks "$dotfiles/links"
+
+### Xresources
+include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
+mkdir -p "$HOME/.Xresources.d"
+include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
+xrdb -merge "$HOME/.Xresources"

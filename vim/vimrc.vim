@@ -12,6 +12,7 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'neoclide/coc.nvim'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 call plug#end()
 filetype plugin indent on
@@ -26,9 +27,9 @@ set hlsearch
 set mouse=a
 set incsearch
 
-let base16colorspace=256
+let base16colorspace=16
 set notermguicolors
-set t_Co=256
+set t_Co=16
 
 function Startup()
 	if @% == ""

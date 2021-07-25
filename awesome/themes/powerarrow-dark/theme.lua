@@ -108,6 +108,8 @@ theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximized_focus_inactive.png"
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
+theme.hotkeys_modifiers_fg = xrdb.color8
+
 local markup = lain.util.markup
 local separators = lain.util.separators
 
@@ -133,84 +135,6 @@ local clock = awful.widget.watch(
 })
 --]]
 
--- Notification list
---[[
-local notif_wb = awful.wibar {
-    position = 'top',
-    height = 48,
-    visible = #naughty.activate > 0,
-}
-
-notif_wb:setup {
-    nil,
-    {
-        base_layout = wibox.widget {
-            spacing_widget = wibox.widget {
-                orientation = 'vertical',
-                span_ratio  = 0.5,
-                widget      = wibox.widget.separator,
-            },
-            forced_height = 30,
-            spacing       = 3,
-            layout        = wibox.layout.flex.horizontal
-        },
-        widget_template = {
-            {
-                naughty.widget.icon,
-                {
-                    naughty.widget.title,
-                    naughty.widget.message,
-                    {
-                        layout = wibox.widget {
-                            -- Adding the wibox.widget allows to share a
-                            -- single instance for all spacers.
-                            spacing_widget = wibox.widget {
-                                orientation = 'vertical',
-                                span_ratio  = 0.9,
-                                widget      = wibox.widget.separator,
-                            },
-                            spacing = 3,
-                            layout  = wibox.layout.flex.horizontal
-                        },
-                        widget = naughty.list.widgets,
-                    },
-                    layout = wibox.layout.align.vertical
-                },
-                spacing = 10,
-                fill_space = true,
-                layout  = wibox.layout.fixed.horizontal
-            },
-            margins = 5,
-            widget  = wibox.container.margin
-        },
-        widget = naughty.list.notifications,
-    },
-    -- Add a button to dismiss all notifications, because why not.
-    {
-        {
-            text   = 'Dismiss all',
-            align  = 'center',
-            valign = 'center',
-            widget = wibox.widget.textbox
-        },
-        buttons = gears.table.join(
-            awful.button({ }, 1, function() naughty.destroy_all_notifications() end)
-        ),
-        forced_width       = 75,
-        shape              = gears.shape.rounded_bar,
-        shape_border_width = 1,
-        shape_border_color = beautiful.bg_highlight,
-        widget = wibox.container.background
-    },
-    layout = wibox.layout.align.horizontal
-}
-
---]]
-
--- We don't want to have that bar all the time, only when there is content.
---naughty.connect_signal('property::active', function()
---    notif_wb.visible = #naughty.active > 0
---end)
 
 -- Mail IMAP check
 -- local mailicon = wibox.widget.imagebox(theme.widget_mail)
@@ -409,6 +333,9 @@ function theme.at_screen_connect(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_systray, fg = theme.fg_normal })
 
+    -- Notification bar
+    s.notif_wb = awful.wibar({ position = "bottom", screen = s, height = dpi(48), bg = theme.bg_systray, fg = theme.fg_normal, visible = false })
+
     if s == primary_screen then
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -458,6 +385,77 @@ function theme.at_screen_connect(s)
             wibox.container.background(s.mylayoutbox, theme.bg_focus),
         },
     }
+    -- Notification bar setup
+    --[[
+    s.notif_wb:setup {
+        nil,
+        {
+            base_layout = wibox.widget {
+                spacing_widget = wibox.widget {
+                    orientation = 'vertical',
+                    span_ratio  = 0.5,
+                    widget      = wibox.widget.separator,
+                },
+                forced_height = 30,
+                spacing       = 3,
+                layout        = wibox.layout.flex.horizontal
+            },
+            widget_template = {
+                {
+                    naughty.widget.icon,
+                    {
+                        naughty.widget.title,
+                        naughty.widget.message,
+                        {
+                            layout = wibox.widget {
+                                -- Adding the wibox.widget allows to share a
+                                -- single instance for all spacers.
+                                spacing_widget = wibox.widget {
+                                    orientation = 'vertical',
+                                    span_ratio  = 0.9,
+                                    widget      = wibox.widget.separator,
+                                },
+                                spacing = 3,
+                                layout  = wibox.layout.flex.horizontal
+                            },
+                            widget = naughty.list.widgets,
+                        },
+                        layout = wibox.layout.align.vertical
+                    },
+                    spacing = 10,
+                    fill_space = true,
+                    layout  = wibox.layout.fixed.horizontal
+                },
+                margins = 5,
+                widget  = wibox.container.margin
+            },
+            widget = naughty.list.notifications,
+        },
+        -- Add a button to dismiss all notifications, because why not.
+        {
+            {
+                text   = 'Dismiss all',
+                align  = 'center',
+                valign = 'center',
+                widget = wibox.widget.textbox
+            },
+            buttons = gears.table.join(
+                awful.button({ }, 1, function() naughty.destroy_all_notifications() end)
+            ),
+            forced_width       = 75,
+            shape              = gears.shape.rounded_bar,
+            shape_border_width = 1,
+            shape_border_color = beautiful.bg_highlight,
+            widget = wibox.container.background
+        },
+        layout = wibox.layout.align.horizontal
+    }
+    -- We don't want to have that bar all the time, only when there is content.
+    naughty.connect_signal('property::active', function()
+        s.notif_wb.visible = #naughty.active > 0
+    --    notif_wb.visible = true
+    end)
+    --]]
     else -- Screens other than primary
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -473,10 +471,10 @@ function theme.at_screen_connect(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spr,
-            arrl_ld,
-            wibox.container.background(music_icon, theme.bg_focus),
-            wibox.container.background(theme.mpris, theme.bg_focus),
-            arrl_dl,
+            --arrl_ld,
+            --wibox.container.background(music_icon, theme.bg_focus),
+            --wibox.container.background(theme.mpris, theme.bg_focus),
+            --arrl_dl,
             clockicon,
             clock,
             spr,

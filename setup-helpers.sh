@@ -17,10 +17,14 @@ function verify_packages() {
     while read p; do
         if ! grep -P "^$p\ .*$" .installed >/dev/null 2>&1; then
             if ! grep -P "^$p\ .*$" .installed >/dev/null 2>&1; then
-                yay -S --noconfirm --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu "$p"
+                echo "$p" >> .to-install
             fi
         fi
     done < $1
+    if [ -f .to-install ]; then
+        yay -S --noconfirm --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu $(awk '$1=$1' ORS=' ' .to-install)
+        rm .to-install
+    fi
     rm .installed
 }
 
@@ -38,6 +42,7 @@ function setup_symlinks() {
                     continue
                 fi
             fi
+            mkdir -p "$(dirname "$source")"
      	    ln -s "$dest" "$source" 
         fi
     done 3<$1

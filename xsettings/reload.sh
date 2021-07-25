@@ -5,3 +5,4 @@ killall xsettingsd
 xsettingsd -c $HOME/dotfiles/xsettings/xsettingsd &
 sleep 0.2
 
+killall -HUP {urxvt,urxvtd}

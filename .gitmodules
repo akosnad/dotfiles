@@ -13,3 +13,6 @@
 [submodule "fonts"]
 	path = fonts
 	url = https://github.com/addy-dclxvi/bitmap-font-collections.git
+[submodule "urxvt/config-reload"]
+	path = urxvt/config-reload
+	url = https://github.com/regnarg/urxvt-config-reload

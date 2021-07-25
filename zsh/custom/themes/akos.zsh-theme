@@ -30,7 +30,7 @@ set_prompt() {
             NCOLOR="yellow"
         fi
     fi
-    PROMPT='%{$fg[$NCOLOR]%}%5~ » %{$reset_color%}'
+    PROMPT='%{$fg[$NCOLOR]%}%5~ > %{$reset_color%}'
     RPROMPT="${git_status} ${exit_status}"
 }
 
