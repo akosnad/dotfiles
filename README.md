@@ -2,5 +2,11 @@
 Personal dotfiles
 
 # Install
-- Clone this repo recursively to `~/dotfiles`
-- Run `vim +PluginUpdate +qa` to download Vundle plugins
+- Make sure the repo is cloned under your home directory
+- Run `setup.sh` or `setup-minimal.sh` if running console-only
+
+```
+git clone https://github.com/akosnad/dotfiles $HOME/dotfiles
+cd $HOME/dotfiles
+./setup.sh
+```
