@@ -18,6 +18,10 @@ verify_packages "$dotfiles/packages"
 
 ### X server related
 sudo systemctl enable lightdm
+if ! export | grep -q "XDG_SESSION"; then
+    echo "\n\nNot running in an X environment, please reboot and run from a terminal"
+    exit 1
+fi
 
 ### GTK
 if [ ! -d "$HOME/.themes/FlatColor" ]; then
