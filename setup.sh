@@ -18,7 +18,7 @@ verify_packages "$dotfiles/packages"
 
 ### X server related
 sudo systemctl enable lightdm
-if ! export | grep -q "XDG_SESSION"; then
+if ! export | grep -q "XDG_SESSION_TYPE=x11"; then
     echo "\n\nNot running in an X environment, please reboot and run from a terminal"
     exit 1
 fi
