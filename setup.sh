@@ -31,8 +31,9 @@ fi
 setup_symlinks "$dotfiles/links"
 
 ### Flavours
-rm $dotfiles/flavours/config.toml
-ln -s $dotfiles/flavours/config-full.toml $dotfiles/flavours/config.toml
+flavour_conf="$dotfiles/flavours/config.toml"
+if [-f "$flavour_conf"]; then rm "$flavour_conf"; fi
+ln -s $dotfiles/flavours/config-full.toml $flavour_conf
 
 ### Xresources
 include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
