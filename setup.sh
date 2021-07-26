@@ -16,6 +16,9 @@ fi
 ### Packages
 verify_packages "$dotfiles/packages"
 
+### Cpan packages
+sudo bash -c "echo "y" | cpan -T $(awk '$1=$1' ORS=' ' packages-cpan)"
+
 ### GTK
 if [ ! -d "$HOME/.themes/FlatColor" ]; then
     git clone "https://github.com/jasperro/FlatColor" "$HOME/.themes/FlatColor"
@@ -28,12 +31,16 @@ fi
 
 
 ### Config file symlinks
+mkdir -p "$HOME/.Xresources.d"
 setup_symlinks "$dotfiles/links"
 
 ### Flavours
 flavour_conf="$dotfiles/flavours/config.toml"
 if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
 ln -s $dotfiles/flavours/config-full.toml $flavour_conf
+if ! flavours current >/dev/null; then
+    flavours apply material-darker
+fi
 
 ### X server related
 sudo systemctl enable lightdm
@@ -44,9 +51,5 @@ fi
 
 ### Xresources
 include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
-mkdir -p "$HOME/.Xresources.d"
 include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
 xrdb -merge "$HOME/.Xresources"
-
-### Cpan packages
-sudo cpan $(awk '$1=$1' ORS=' ' packages-cpan)

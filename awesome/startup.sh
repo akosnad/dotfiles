@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
