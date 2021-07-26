@@ -16,13 +16,6 @@ fi
 ### Packages
 verify_packages "$dotfiles/packages"
 
-### X server related
-sudo systemctl enable lightdm
-if ! export | grep -q "XDG_SESSION_TYPE=x11"; then
-    echo "\n\nNot running in an X environment, please reboot and run from a terminal"
-    exit 1
-fi
-
 ### GTK
 if [ ! -d "$HOME/.themes/FlatColor" ]; then
     git clone "https://github.com/jasperro/FlatColor" "$HOME/.themes/FlatColor"
@@ -41,6 +34,13 @@ setup_symlinks "$dotfiles/links"
 flavour_conf="$dotfiles/flavours/config.toml"
 if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
 ln -s $dotfiles/flavours/config-full.toml $flavour_conf
+
+### X server related
+sudo systemctl enable lightdm
+if ! (set | egrep -q "^DISPLAY"); then
+    echo "\n\nNot running in an X environment, please reboot and run from a terminal"
+    exit 1
+fi
 
 ### Xresources
 include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
