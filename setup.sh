@@ -5,15 +5,18 @@ source "$dotfiles/setup-helpers.sh"
 
 $dotfiles/setup-minimal.sh
 
+if ! [ -f /usr/bin/Xorg ]; then
+    yay -Ss xf86-video
+    echo "\n\nNo X server found, please install xorg-server, and a video driver if using full setup"
+    echo "Otherwise run setup-minimal if you plan on running console-only."
+    echo "\nAvailable video driver packages are listed above"
+    exit 1
+fi
+
 ### Packages
 verify_packages "$dotfiles/packages"
 
 ### X server related
-if ! [ -f /usr/bin/Xorg ]; then
-    echo "No X server found, please install one if using full setup"
-    echo "Otherwise run setup-minimal if you plan on running console-only."
-    exit 1
-fi
 sudo systemctl enable lightdm
 
 ### GTK
@@ -32,7 +35,7 @@ setup_symlinks "$dotfiles/links"
 
 ### Flavours
 flavour_conf="$dotfiles/flavours/config.toml"
-if [-f "$flavour_conf"]; then rm "$flavour_conf"; fi
+if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
 ln -s $dotfiles/flavours/config-full.toml $flavour_conf
 
 ### Xresources
