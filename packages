@@ -17,7 +17,6 @@ xorg-xrdb
 xorg-xinput
 xorg-xmodmap
 gnome-keyring
-archlinux-xdg-menu
 feh
 unclutter
 qt5ct

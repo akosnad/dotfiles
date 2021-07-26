@@ -20,8 +20,6 @@ done
 setxkbmap -layout 'us,hu' -option "grp:caps_toggle"
 xmodmap -e "clear lock"
 
-xdg_menu --format awesome --root-menu /etc/xdg/menus/arch-applications.menu > ~/dotfiles/awesome/archmenu.lua
-
 picom -b --config $HOME/dotfiles/picom/picom.conf
 $HOME/.fehbg
 

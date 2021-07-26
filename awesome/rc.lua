@@ -22,7 +22,6 @@ local naughty       = require("naughty")
 local lain          = require("lain")
 local menubar       = require("menubar")
 -- local freedesktop   = require("freedesktop")
-local archmenu = require("archmenu")
 local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -199,7 +198,6 @@ local mymainmenu = awful.menu({
 	items = {
 		{ "Power", powermenu },
 		{"Awesome", myawesomemenu, beautiful.awesome_icon },
-		{ "All Applications", archmenu },
 		{ "Terminal", settings.terminal }
 	}
 })

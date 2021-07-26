@@ -3,6 +3,8 @@ set -e
 dotfiles="$(dirname $(realpath $BASH_SOURCE))"
 source "$dotfiles/setup-helpers.sh"
 
+git submodule update --init
+
 ### Packages
 if ! command -v yay >/dev/null; then
     read -p "Yay is not installed, continue? (y/n) " reply
