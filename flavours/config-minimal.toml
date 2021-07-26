@@ -1,0 +1,16 @@
+shell = "bash -c '{}'"
+
+[[item]]
+file = "~/.base16_theme"
+template = "shell"
+rewrite = true
+
+[[item]]
+file = "~/.fzf.colors"
+template = "fzf"
+rewrite = true
+
+[[item]]
+file = "~/.config/nvim/colorscheme.vim"
+template = "vim"
+rewrite = true

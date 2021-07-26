@@ -1,1 +1,2 @@
 .config/nvim/coc-settings.json:vim/coc-settings.json
+.config/flavours:flavours

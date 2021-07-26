@@ -1,2 +1,4 @@
 .installed
+.to-install
 awesome/archmenu.lua
+flavours/config.toml

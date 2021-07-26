@@ -30,6 +30,10 @@ fi
 ### Config file symlinks
 setup_symlinks "$dotfiles/links"
 
+### Flavours
+rm $dotfiles/flavours/config.toml
+ln -s $dotfiles/flavours/config-full.toml $dotfiles/flavours/config.toml
+
 ### Xresources
 include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
 mkdir -p "$HOME/.Xresources.d"
