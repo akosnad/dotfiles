@@ -35,3 +35,6 @@ include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
 mkdir -p "$HOME/.Xresources.d"
 include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
 xrdb -merge "$HOME/.Xresources"
+
+### Cpan packages
+sudo cpan $(awk '$1=$1' ORS=' ' packages-cpan)

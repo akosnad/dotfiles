@@ -22,7 +22,7 @@ local naughty       = require("naughty")
 local lain          = require("lain")
 local menubar       = require("menubar")
 -- local freedesktop   = require("freedesktop")
-local xdgmenu = require("archmenu")
+local archmenu = require("archmenu")
 local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -199,7 +199,7 @@ local mymainmenu = awful.menu({
 	items = {
 		{ "Power", powermenu },
 		{"Awesome", myawesomemenu, beautiful.awesome_icon },
-		{ "All Applications", xdgmenu },
+		{ "All Applications", archmenu },
 		{ "Terminal", settings.terminal }
 	}
 })
@@ -215,7 +215,6 @@ menubar.utils.terminal = settings.terminal
 -- {{{ Screen
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
---[[
 screen.connect_signal("property::geometry", function(s)
     -- Wallpaper
     if beautiful.wallpaper then
@@ -227,8 +226,7 @@ screen.connect_signal("property::geometry", function(s)
         gears.wallpaper.maximized(wallpaper, s, true)
     end
 end)
---]]
-gears.wallpaper.set("#000000")
+--gears.wallpaper.set("#000000")
 
 -- No borders when rearranging only 1 non-floating or maximized client
 screen.connect_signal("arrange", function (s)

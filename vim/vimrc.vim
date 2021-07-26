@@ -13,6 +13,8 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'neoclide/coc.nvim'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-reload'
 
 call plug#end()
 filetype plugin indent on
