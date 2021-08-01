@@ -15,6 +15,7 @@ Plug 'neoclide/coc.nvim'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-reload'
+Plug 'jreybert/vimagit'
 
 call plug#end()
 filetype plugin indent on
@@ -28,10 +29,10 @@ set expandtab
 set hlsearch
 set mouse=a
 set incsearch
-
 let base16colorspace=16
 set notermguicolors
 set t_Co=16
+set noshowmode
 
 function Startup()
 	if @% == ""
@@ -41,6 +42,10 @@ endfunction
 au vimenter * call Startup()
 
 let g:ranger_replace_netrw = 1
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline_powerline_fonts = 1
 
 source $HOME/dotfiles/vim/binds.vim
 source $HOME/dotfiles/vim/coc.vim

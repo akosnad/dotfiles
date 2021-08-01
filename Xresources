@@ -1,8 +1,12 @@
 !! URxvt Appearance
-URxvt.font: -*-rissole-*
-URxvt.boldFont: -*-rissole-*
-URxvt.italicFont: -*-rissole-*
-URxvt.boldItalicfont: -*-rissole-*
+URxvt.font: xft:Terminus:style=Regular:pixelsize=9
+URxvt.boldFont: xft:Terminus:style=Regular:pixelsize=9
+URxvt.italicFont: xft:Terminus:style=Regular:pixelsize=9
+URxvt.boldItalicfont: xft:Terminus:style=Regular:pixelsize=9
+!URxvt.font: xft:Fira Code Retina:style=Retina:pixelsize=11
+!URxvt.boldFont: xft:Fira Code:style=SemiBold:pixelsize=11
+!URxvt.italicFont: xft:Fira Code:style=Regular:pixelsize=11
+!URxvt.boldItalicfont: xft:Fira Code:style=Bold:pixelsize=11
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 92x24

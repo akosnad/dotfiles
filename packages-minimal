@@ -7,3 +7,6 @@ flavours
 inetutils
 nodejs-lts-fermium
 npm
+powerline
+powerline-fonts-git
+vim-airline-git
