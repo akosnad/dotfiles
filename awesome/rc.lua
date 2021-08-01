@@ -394,4 +394,4 @@ end)
 
 -- }}
 
-awful.util.spawn_with_shell("light-locker --lock-after-screensaver=30")
+awful.util.spawn_with_shell("light-locker --lock-after-screensaver=0")
