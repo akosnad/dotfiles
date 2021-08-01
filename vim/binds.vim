@@ -13,9 +13,12 @@ nnoremap <leader>Q :q!<CR>
 inoremap <leader>x <ESC>:x<CR>
 nnoremap <leader>x :x<CR>
 
+" Tabs
 nnoremap <leader>t :tabnew<CR>:FZF<CR>
-nnoremap <leader>n :tabN<CR>
+nnoremap <Tab> gt<CR>
+nnoremap <S-Tab> gT<CR>
 
+" Plugins
 nnoremap <leader>F :FZF<CR>
 nnoremap <leader>m :Magit<CR>
 
