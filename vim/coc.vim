@@ -1,6 +1,7 @@
 set nobackup nowritebackup hidden
 set updatetime=300
 set shortmess+=c
+set pyxversion=3
 
 if has("patch-8.1.1564")
 	set signcolumn=number

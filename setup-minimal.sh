@@ -31,11 +31,14 @@ fi
 include_text ". $dotfiles/zsh/zshrc.sh" "$HOME/.zshrc"
 include_text "source $dotfiles/.profile" "$HOME/.profile"
 
+
 ### Neovim
 mkdir -p $HOME/.config/nvim
 include_text "so $dotfiles/vim/vimrc.vim" "$HOME/.config/nvim/init.vim"
 include_text "silent! so $HOME/.config/nvim/colorscheme.vim" "$HOME/.config/nvim/init.vim"
 nvim +"source $dotfiles/setup.vim"
+sudo npm i -g neovim
+sudo pip install neovim
 
 ### Config file symlinks
 setup_symlinks "$dotfiles/links-minimal"
