@@ -12,6 +12,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
 local settings      = require("settings")
+local cycle_prev = settings.cycle_prev
 
 local keys = {}
 keys.modkey       = "Mod4"
