@@ -1,4 +1,4 @@
-set nocompatible 
+set nocompatible
 filetype off
 
 source $HOME/dotfiles/vim/vim-plug/plug.vim
@@ -16,6 +16,7 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-reload'
 Plug 'jreybert/vimagit'
+Plug 'cespare/vim-toml'
 
 call plug#end()
 filetype plugin indent on
@@ -33,6 +34,7 @@ let base16colorspace=16
 set notermguicolors
 set t_Co=16
 set noshowmode
+set listchars=tab:→\ ,nbsp:+,space:·
 
 function Startup()
 	if @% == ""
