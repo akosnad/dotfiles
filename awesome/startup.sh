@@ -20,6 +20,6 @@ done
 setxkbmap -layout 'us,hu' -option "grp:caps_toggle"
 xmodmap -e "clear lock"
 
-picom -b --config $HOME/dotfiles/picom/picom.conf
+picom -b --experimental-backend --config $HOME/dotfiles/picom/picom.conf
 $HOME/.fehbg
 
