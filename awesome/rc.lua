@@ -79,7 +79,7 @@ local function run_once(cmd_arr)
     end
 end
 
-run_once({ "urxvtd", "unclutter -root" }) -- comma-separated entries
+run_once({ "urxvtd", "unclutter -root --hide-on-touch" }) -- comma-separated entries
 
 -- This function implements the XDG autostart specification
 awful.spawn.with_shell(
