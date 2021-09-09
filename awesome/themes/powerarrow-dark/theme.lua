@@ -22,8 +22,7 @@ local primary_screen = screen[1]
 
 local theme                                     = {}
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow-dark"
--- theme.wallpaper                                 = theme.dir .. "/wall.png"
-theme.wallpaper           			= "#000000"
+theme.wallpaper                                 = theme.dir .. "/../black.png"
 theme.font                                      = "Terminus 9"
 theme.bg_normal     = xrdb.background
 theme.bg_focus      = xrdb.color10
@@ -160,7 +159,7 @@ theme.mail = lain.widget.imap({
 -- MPRIS
 local music_icon = wibox.widget.imagebox(theme.widget_music)
 theme.mpris, theme.mpris_timer = awful.widget.watch(
-    { awful.util.shell, "-c", 
+    { awful.util.shell, "-c",
     "playerctl status && playerctl metadata --format '{{artist}}' && playerctl metadata --format '{{title}}'" },
     2,
     function(widget, stdout)
@@ -255,31 +254,34 @@ local bat = lain.widget.bat({
     end
 })
 
--- ALSA volume
+-- Pulse volume
 local volicon = wibox.widget.imagebox(theme.widget_vol)
-theme.volume = lain.widget.alsa({
+theme.volume = lain.widget.pulse({
     settings = function()
-        if volume_now.status == "off" then
+        if volume_now.muted == "yes" then
             volicon:set_image(theme.widget_vol_mute)
-        elseif tonumber(volume_now.level) == 0 then
+        elseif tonumber(volume_now.left) == 0 then
             volicon:set_image(theme.widget_vol_no)
-        elseif tonumber(volume_now.level) <= 50 then
+        elseif tonumber(volume_now.left) <= 50 then
             volicon:set_image(theme.widget_vol_low)
         else
             volicon:set_image(theme.widget_vol)
         end
 
-        widget:set_markup(markup.font(theme.font, " " .. volume_now.level .. "% "))
+        widget:set_markup(markup.font(theme.font, " " .. volume_now.left .. "% "))
     end
 })
 theme.volume.widget:buttons(awful.util.table.join(
                                awful.button({}, 4, function ()
-                                     awful.util.spawn("amixer set Master 1%+")
+                                     awful.util.spawn("pactl set-sink-volume 0 -1%")
                                      theme.volume.update()
                                end),
                                awful.button({}, 5, function ()
-                                     awful.util.spawn("amixer set Master 1%-")
+                                     awful.util.spawn("pactl set-sink-volume 0 +1%")
                                      theme.volume.update()
+                               end),
+                               awful.button({}, 1, function ()
+                                     awful.util.spawn("pavucontrol")
                                end)
 ))
 
@@ -298,6 +300,51 @@ local net = lain.widget.net({
 local spr     = wibox.widget.textbox(' ')
 local arrl_dl = separators.arrow_left(theme.bg_focus, "alpha")
 local arrl_ld = separators.arrow_left("alpha", theme.bg_focus)
+
+-- Helper for adding widgets to a taskbar
+function add_widgets(widgets, layout)
+    local setup = {
+        layout = layout
+    }
+    local odd = true
+    for i, widget_group in pairs(widgets) do
+        if odd then
+            table.insert(setup, arrl_ld)
+        else
+            table.insert(setup, arrl_dl)
+        end
+        for j, w in pairs(widget_group) do
+            if odd then
+                table.insert(setup,
+                    wibox.container.background(w, theme.bg_focus)
+                )
+            else
+                table.insert(setup, w)
+            end
+        end
+        odd = not odd
+    end
+    return setup
+end
+
+
+-- Primary screen widgets
+local primary_widgets = {
+    { spr, volicon, theme.volume.widget },
+            --wibox.container.background(mailicon, theme.bg_focus),
+            --wibox.container.background(theme.mail.widget, theme.bg_focus),
+    { memicon, mem.widget },
+    { cpuicon, cpu.widget },
+            --wibox.container.background(tempicon, theme.bg_focus),
+            --wibox.container.background(temp.widget, theme.bg_focus),
+    { fsicon, theme.fs.widget },
+    { baticon, bat.widget },
+    { neticon, net.widget },
+    { clockicon, clock, spr },
+}
+
+-- Secondary screen widgets
+local secondary_widgets = {}
 
 function theme.at_screen_connect(s)
     -- Quake application
@@ -353,35 +400,7 @@ function theme.at_screen_connect(s)
             wibox.widget.systray(),
             keyboardlayout,
             spr,
-            arrl_ld,
-            wibox.container.background(volicon, theme.bg_focus),
-            wibox.container.background(theme.volume.widget, theme.bg_focus),
-            arrl_dl,
-            --wibox.container.background(mailicon, theme.bg_focus),
-            --wibox.container.background(theme.mail.widget, theme.bg_focus),
-            --arrl_dl,
-            memicon,
-            mem.widget,
-            arrl_ld,
-            wibox.container.background(cpuicon, theme.bg_focus),
-            wibox.container.background(cpu.widget, theme.bg_focus),
-            --arrl_ld,
-            --wibox.container.background(tempicon, theme.bg_focus),
-            --wibox.container.background(temp.widget, theme.bg_focus),
-            arrl_dl,
-            fsicon,
-            theme.fs.widget,
-            --arrl_dl,
-            --baticon,
-            --bat.widget,
-            arrl_ld,
-            wibox.container.background(neticon, theme.bg_focus),
-            wibox.container.background(net.widget, theme.bg_focus),
-            arrl_dl,
-            clockicon,
-            clock,
-            spr,
-            arrl_ld,
+            add_widgets(primary_widgets, wibox.layout.fixed.horizontal),
             wibox.container.background(s.mylayoutbox, theme.bg_focus),
         },
     }

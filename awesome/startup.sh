@@ -23,3 +23,4 @@ xmodmap -e "clear lock"
 picom -b --experimental-backend --config $HOME/dotfiles/picom/picom.conf
 $HOME/.fehbg
 
+systemctl --user start libinput-gestures

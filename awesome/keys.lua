@@ -188,42 +188,30 @@ keys.globalkeys = mytable.join(
     --]]
 
     -- Screen brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("busctl call org.clightd.clightd /org/clightd/clightd/Backlight org.clightd.clightd.Backlight RaiseAll \"d(bdu)s\" 0.05 0 0 0 \"\"") end,
+    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -time 1 -steps 1 -inc 5 ") end,
               {description = "Brightness +10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("busctl call org.clightd.clightd /org/clightd/clightd/Backlight org.clightd.clightd.Backlight LowerAll \"d(bdu)s\" 0.05 0 0 0 \"\"") end,
+    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -time 1 -steps 1 -dec 5") end,
               {description = "Brightness -10%", group = "hotkeys"}),
 
     -- ALSA volume control
-    awful.key({ keys.modkey }, "#+80",
+    awful.key({ }, "XF86AudioRaiseVolume",
         function ()
             os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description = "volume up", group = "audio"}),
-    awful.key({ keys.modkey }, "#+88",
+    awful.key({ }, "XF86AudioLowerVolume",
         function ()
             os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description = "volume down", group = "audio"}),
-    awful.key({ keys.modkey, keys.altkey }, "#+84",
+    awful.key({ }, "XF86AudioMute",
         function ()
             os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description = "toggle mute", group = "audio"}),
-    awful.key({ keys.modkey, keys.altkey }, "#+80",
-        function ()
-            os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "volume 100%", group = "audio"}),
-    awful.key({ keys.modkey, keys.altkey }, "#+88",
-        function ()
-            os.execute(string.format("amixer -q set %s 0%%", beautiful.volume.channel))
-            beautiful.volume.update()
-        end,
-        {description = "volume 0%", group = "audio"}),
 
     -- MPRIS
     awful.key({ keys.modkey,        }, "#+84",
