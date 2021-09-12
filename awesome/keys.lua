@@ -196,19 +196,19 @@ keys.globalkeys = mytable.join(
     -- ALSA volume control
     awful.key({ }, "XF86AudioRaiseVolume",
         function ()
-            os.execute(string.format("amixer -q set %s 1%%+", beautiful.volume.channel))
+            os.execute(string.format("pactl set-sink-volume $(pactl list sinks short | egrep -o \"^[0-9]?\") +1%%", beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description = "volume up", group = "audio"}),
     awful.key({ }, "XF86AudioLowerVolume",
         function ()
-            os.execute(string.format("amixer -q set %s 1%%-", beautiful.volume.channel))
+            os.execute(string.format("pactl set-sink-volume $(pactl list sinks short | egrep -o \"^[0-9]?\") -1%%", beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description = "volume down", group = "audio"}),
     awful.key({ }, "XF86AudioMute",
         function ()
-            os.execute(string.format("amixer -q set %s toggle", beautiful.volume.togglechannel or beautiful.volume.channel))
+            os.execute(string.format("pactl set-sink-mute $(pactl list sinks short | egrep -o \"^[0-9]?\") toggle", beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description = "toggle mute", group = "audio"}),
