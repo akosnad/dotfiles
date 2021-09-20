@@ -323,7 +323,35 @@ keys.clientkeys = mytable.join(
             c.maximized_horizontal = not c.maximized_horizontal
             c:raise()
         end ,
-        {description = "(un)maximize horizontally", group = "client"})
+        {description = "(un)maximize horizontally", group = "client"}),
+    awful.key({ keys.modkey, "Shift", "Control" }, "Right",
+        function ()
+            if client.focus then
+                local count = 0
+                for _ in pairs(client.focus.screen.tags) do count = count + 1 end
+                local curr = client.focus.first_tag
+                if curr then
+                    local tag = client.focus.screen.tags[(curr.name % count) + 1]
+                    client.focus:move_to_tag(tag)
+                    awful.tag.viewnext()
+                end
+            end
+        end,
+        {description = "move client to next tag", group = "client"}),
+    awful.key({ keys.modkey, "Shift", "Control" }, "Left",
+        function ()
+            if client.focus then
+                local count = 0
+                for _ in pairs(client.focus.screen.tags) do count = count + 1 end
+                local curr = client.focus.first_tag
+                if curr then
+                    local tag = client.focus.screen.tags[(curr.name - 2) % count + 1]
+                    client.focus:move_to_tag(tag)
+                    awful.tag.viewprev()
+                end
+            end
+        end,
+        {description = "move client to previous tag", group = "client"})
 )
 
 -- Bind all key numbers to tags.
