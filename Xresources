@@ -30,7 +30,7 @@ URxvt.keysym.Control-Right: \033[1;5C
 URxvt.keysym.Control-Left: \033[1;5D
 
 !! Copy Paste & Other Extensions
-URxvt.perl-ext-common: default,keyboard-select,config-reload
+URxvt.perl-ext-common: default,keyboard-select,config-reload,dynamic-font-size
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 URxvt.keysym.M-u: perl:url-select:select_next
@@ -41,3 +41,6 @@ URxvt.urlButton: 1
 ! Restore Ctrl+Shift+(c|v)
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+! Dynamic font resizing
+URxvt.dymamic-font-size.step: 4

@@ -53,3 +53,7 @@ fi
 include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
 include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
 xrdb -merge "$HOME/.Xresources"
+
+### Startup apps
+dex -c /usr/bin/redshift-gtk -t $XDG_CONFIG_HOME/autostart
+dex -c /usr/bin/fusuma -t $XDG_CONFIG_HOME/autostart

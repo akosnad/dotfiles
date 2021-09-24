@@ -13,3 +13,15 @@ swipe:
       command: 'xdotool key ctrl+shift+super+Left'
     right:
       command: 'xdotool key ctrl+shift+super+Right'
+pinch:
+  in:
+    command: 'xdotool keydown ctrl key plus keyup ctrl'
+  out:
+    command: 'xdotool keydown ctrl key minus keyup ctrl'
+
+threshold:
+  swipe: 0.5
+  pinch: 0.25
+
+interval:
+  pinch: 0.5

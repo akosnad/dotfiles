@@ -5,6 +5,8 @@ source "$dotfiles/setup-helpers.sh"
 
 git submodule update --init
 
+source .profile
+
 ### Packages
 if ! command -v yay >/dev/null; then
     read -p "Yay is not installed, continue? (y/n) " reply

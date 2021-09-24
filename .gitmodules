@@ -16,3 +16,6 @@
 [submodule "urxvt/config-reload"]
 	path = urxvt/config-reload
 	url = https://github.com/regnarg/urxvt-config-reload
+[submodule "urxvt/font-size"]
+	path = urxvt/font-size
+	url = https://github.com/majutsushi/urxvt-font-size
