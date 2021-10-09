@@ -12,7 +12,7 @@ URxvt.lineSpace: 0
 URxvt.geometry: 92x24
 URxvt.internalBorder: 24
 URxvt.cursorBlink: true
-URxvt.cursorUnderline: false
+URxvt.cursorUnderline: true
 URxvt.saveline: 8192
 URxvt.scrollBar: false
 URxvt.scrollBar_right: false

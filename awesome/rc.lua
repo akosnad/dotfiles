@@ -189,17 +189,17 @@ local myawesomemenu = {
 --
 
 local powermenu = {
-	{ "Suspend", "systemctl suspend" },
-	{ "Shut down", "systemctl poweroff" },
-	{ "Restart", "systemctl reboot" }
+    { "Suspend", "systemctl suspend" },
+    { "Shut down", "systemctl poweroff" },
+    { "Restart", "systemctl reboot" }
 }
 
 local mymainmenu = awful.menu({
-	items = {
-		{ "Power", powermenu },
-		{"Awesome", myawesomemenu, beautiful.awesome_icon },
-		{ "Terminal", settings.terminal }
-	}
+    items = {
+        { "Power", powermenu },
+        {"Awesome", myawesomemenu, beautiful.awesome_icon },
+        { "Terminal", settings.terminal }
+    }
 })
 
 -- hide menu when mouse leaves it
