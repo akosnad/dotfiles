@@ -11,12 +11,13 @@ Plug 'tpope/vim-commentary'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'machakann/vim-sandwich'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-reload'
 Plug 'jreybert/vimagit'
 Plug 'cespare/vim-toml'
+Plug 'chrisbra/csv.vim'
 
 call plug#end()
 filetype plugin indent on

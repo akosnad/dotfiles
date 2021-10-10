@@ -26,5 +26,10 @@
                 }
             }
         }
-    }
+    },
+    "rpc.enabled": false,
+    "rpc.showProblems": false,
+    "rpc.lowerDetailsEditing": "Working on {file_name}",
+    "rpc.detailsViewing": "{workspace_folder}",
+    "rpc.largeImage": "Editing a {lang} file"
 }
