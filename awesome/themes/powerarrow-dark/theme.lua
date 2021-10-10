@@ -378,7 +378,7 @@ function theme.at_screen_connect(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(18), bg = theme.bg_systray, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(20), bg = theme.bg_systray, fg = theme.fg_normal })
 
     -- Notification bar
     s.notif_wb = awful.wibar({ position = "bottom", screen = s, height = dpi(48), bg = theme.bg_systray, fg = theme.fg_normal, visible = false })

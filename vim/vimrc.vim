@@ -37,9 +37,9 @@ set noshowmode
 set listchars=tab:→\ ,nbsp:+,space:·
 
 function Startup()
-	if @% == ""
-		Ranger
-	endif
+    if @% == ""
+        Ranger
+    endif
 endfunction
 au vimenter * call Startup()
 
@@ -54,6 +54,7 @@ augroup RestoreCursorShapeOnExit
     autocmd VimLeave * set guicursor=a:hor20
 augroup END
 
+set guicursor=n-v-sm:block,i-c-ci-ve:ver25,i-c-ci-ve:blinkon5,r-cr-o:hor20
+
 source $HOME/dotfiles/vim/binds.vim
 source $HOME/dotfiles/vim/coc.vim
-silent! so $HOME/.vim/colorscheme.vim

@@ -42,6 +42,9 @@ if ! flavours current >/dev/null; then
     flavours apply material-darker
 fi
 
+### Neovim
+include_text "hi Normal guibg=NONE ctermbg=NONE" "$HOME/.config/nvim/init.vim"
+
 ### X server related
 sudo systemctl enable lightdm
 if ! (set | egrep -q "^DISPLAY"); then
@@ -50,8 +53,8 @@ if ! (set | egrep -q "^DISPLAY"); then
 fi
 
 ### Xresources
-include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
 include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
+include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
 xrdb -merge "$HOME/.Xresources"
 
 ### Startup apps
