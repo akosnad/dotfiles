@@ -19,8 +19,7 @@ nnoremap <leader>x :x<CR>
 
 " Tabs
 nnoremap <leader>t :tabnew<CR>:FZF<CR>
-nnoremap <Tab> gt<CR>
-nnoremap <S-Tab> gT<CR>
+nnoremap <C-Space> gt<CR>
 
 " Plugins
 nnoremap <leader>F :FZF<CR>
