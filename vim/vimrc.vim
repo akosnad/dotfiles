@@ -18,6 +18,9 @@ Plug 'xolox/vim-reload'
 Plug 'jreybert/vimagit'
 Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim'
+Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
+Plug 'junegunn/fzf.vim' " needed for previews
+Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 
 call plug#end()
 filetype plugin indent on

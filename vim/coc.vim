@@ -44,3 +44,5 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <leader>a :CocAction<CR>
+nmap <silent> <leader>l :CocFzfList<CR>
+nmap <silent> <leader><space> :CocFzfList symbols<CR>
