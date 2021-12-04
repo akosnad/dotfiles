@@ -25,8 +25,8 @@ nnoremap <leader><Space> gt<CR>
 nnoremap <leader>F :FZF<CR>
 nnoremap <leader>m :Magit<CR>
 
-nnoremap <leader>v :vsplit<CR>:w<CR>:Ex<CR>
-nnoremap <leader>s :split<CR>:w<CR>:Ex<CR>
+nnoremap <leader>v :vsplit<CR>
+nnoremap <leader>s :split<CR>
 
 " X Clipboard
 nnoremap <leader>y "*y
