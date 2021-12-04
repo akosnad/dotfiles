@@ -12,6 +12,7 @@ function include_text() {
 
 # arg 1: name of file which is a list of packages to install
 function verify_packages() {
+    rm .installed .to-install
     yay -Qn > .installed # we put it in a file, so we don't call it every loop, very slow otherwise :/
     yay -Qm >> .installed
     while read p; do
@@ -31,8 +32,8 @@ function verify_packages() {
 # arg 1: name of file which is a table of links and targets
 function setup_symlinks() {
     while read -u 3 line; do
-    	source="$HOME/$(echo $line | sed "s/\:.*$//")"
-    	dest="$dotfiles/$(echo $line | sed "s/^.*\://")"
+        source="$HOME/$(echo $line | sed "s/\:.*$//")"
+        dest="$dotfiles/$(echo $line | sed "s/^.*\://")"
         if [ ! -L "$source" ]; then
             if [ -f "$source" ]; then
                 read -p "$source exists, and is not a symlink, replace it? (y/n) " reply
@@ -43,7 +44,7 @@ function setup_symlinks() {
                 fi
             fi
             mkdir -p "$(dirname "$source")"
-     	    ln -s "$dest" "$source" 
+            ln -s "$dest" "$source"
         fi
     done 3<$1
 }
