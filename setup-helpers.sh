@@ -12,7 +12,7 @@ function include_text() {
 
 # arg 1: name of file which is a list of packages to install
 function verify_packages() {
-    rm .installed .to-install
+    rm -f .installed .to-install
     yay -Qn > .installed # we put it in a file, so we don't call it every loop, very slow otherwise :/
     yay -Qm >> .installed
     while read p; do

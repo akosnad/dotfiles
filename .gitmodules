@@ -19,3 +19,6 @@
 [submodule "urxvt/font-size"]
 	path = urxvt/font-size
 	url = https://github.com/majutsushi/urxvt-font-size
+[submodule "flavours/templates/powerline"]
+	path = flavours/templates/powerline
+	url = https://github.com/lgranie/base16-powerline

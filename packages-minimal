@@ -10,6 +10,7 @@ npm
 powerline
 powerline-fonts-git
 vim-airline-git
+vim-airline-themes
 python3
 python-pip
 bat

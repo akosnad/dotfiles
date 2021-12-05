@@ -1,0 +1,13 @@
+{
+	"name": "base16",
+	"groups": {
+		"mode": { "fg": "base16:base07", "bg": "base16:base0B", "attrs": ["bold"] }
+	},
+	"mode_translations": {
+		"vicmd": {
+			"groups": {
+				"mode": { "fg": "base16:base07", "bg": "base16:base0D", "attrs": ["bold"] }
+			}
+		}
+	}
+}

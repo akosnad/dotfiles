@@ -1,3 +1,4 @@
 .config/nvim/coc-settings.json:vim/coc-settings.json
 .config/flavours:flavours
 .config/bat:bat
+.config/powerline:powerline

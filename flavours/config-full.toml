@@ -33,3 +33,8 @@ template = "gtk-flatcolor"
 subtemplate = "gtk-3"
 rewrite = true
 hook = "bash ~/dotfiles/xsettings/reload.sh"
+
+[[item]]
+file = "~/.config/powerline/colors.json"
+template = "powerline"
+rewrite = true

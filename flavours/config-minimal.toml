@@ -14,3 +14,8 @@ rewrite = true
 file = "~/.config/nvim/colorscheme.vim"
 template = "vim"
 rewrite = true
+
+[[item]]
+file = "~/.config/powerline/colors.json"
+template = "powerline"
+rewrite = true
