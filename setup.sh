@@ -60,3 +60,9 @@ xrdb -merge "$HOME/.Xresources"
 ### Startup apps
 dex -c /usr/bin/redshift-gtk -t $XDG_CONFIG_HOME/autostart
 dex -c /usr/bin/fusuma -t $XDG_CONFIG_HOME/autostart
+
+### Discord
+python3 -m pip install -U https://github.com/leovoel/BeautifulDiscord/archive/master.zip
+mkdir -p "$HOME/.config/beautifuldiscord"
+/usr/bin/discord </dev/null &>/dev/null &
+$HOME/.local/bin/beautifuldiscord --css "$HOME/.config/beautifuldiscord/style.css"

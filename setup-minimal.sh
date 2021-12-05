@@ -47,9 +47,9 @@ setup_symlinks "$dotfiles/links-minimal"
 
 ### Flavours
 flavour_conf="$dotfiles/flavours/config.toml"
-pushd "$dotfiles/flavours"
+pushd "$dotfiles/flavours" >/dev/null
 ./link_templates.sh
-popd
+popd >/dev/null
 if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
 ln -s $dotfiles/flavours/config-minimal.toml $flavour_conf
 if [ ! -d "$HOME/.local/share/flavours" ]; then

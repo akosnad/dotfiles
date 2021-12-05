@@ -38,3 +38,8 @@ hook = "bash ~/dotfiles/xsettings/reload.sh"
 file = "~/.config/powerline/colors.json"
 template = "powerline"
 rewrite = true
+
+[[item]]
+file = "~/.config/beautifuldiscord/style.css"
+template = "beautifuldiscord"
+rewrite = true
