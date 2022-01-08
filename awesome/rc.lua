@@ -189,7 +189,8 @@ local myawesomemenu = {
 --
 
 local powermenu = {
-    { "Suspend", "systemctl suspend" },
+    { "Suspend", "systemctl suspend-then-hibernate" },
+    { "Hibernate", "systemctl hibernate" },
     { "Shut down", "systemctl poweroff" },
     { "Restart", "systemctl reboot" }
 }
