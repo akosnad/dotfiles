@@ -55,3 +55,6 @@ ln -s $dotfiles/flavours/config-minimal.toml $flavour_conf
 if [ ! -d "$HOME/.local/share/flavours" ]; then
     flavours update all
 fi
+
+###
+printf "\n\nSetup complete\n"

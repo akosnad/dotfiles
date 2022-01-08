@@ -62,7 +62,15 @@ dex -c /usr/bin/redshift-gtk -t $XDG_CONFIG_HOME/autostart
 dex -c /usr/bin/fusuma -t $XDG_CONFIG_HOME/autostart
 
 ### Discord
+running_before=$(if (pidof Discord &>/dev/null); then echo 1; fi)
+if [[ $(betterdiscordctl status | grep "injected: no") ]]; then
+    betterdiscordctl install
+fi
+/usr/bin/discord </dev/null &>/dev/null &
 python3 -m pip install -U https://github.com/leovoel/BeautifulDiscord/archive/master.zip
 mkdir -p "$HOME/.config/beautifuldiscord"
-/usr/bin/discord </dev/null &>/dev/null &
 $HOME/.local/bin/beautifuldiscord --css "$HOME/.config/beautifuldiscord/style.css"
+if [[ ! $running_before == "1" ]]; then killall -INT Discord &>/dev/null; fi
+
+###
+printf "\n\nSetup complete\n"
