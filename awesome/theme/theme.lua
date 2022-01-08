@@ -174,7 +174,11 @@ local bat = lain.widget.bat({
 local volicon = wibox.widget.imagebox(theme.widget_vol)
 theme.volume = lain.widget.pulse({
     settings = function()
-        if volume_now.muted == "yes" then
+        if volume_now == nil then
+            volicon:set_image(theme.widget_vol)
+            widget:set_markup(markup.font(theme.font, "N/A "))
+            return
+        elseif volume_now.muted == "yes" then
             volicon:set_image(theme.widget_vol_mute)
         elseif tonumber(volume_now.left) == 0 then
             volicon:set_image(theme.widget_vol_no)
