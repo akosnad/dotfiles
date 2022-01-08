@@ -94,7 +94,8 @@ theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 
 theme.hotkeys_modifiers_fg = theme.fg_normal
-theme.hotkeys_fg = xrdb.color8
+--theme.hotkeys_fg = xrdb.color8
+theme.hotkeys_fg = theme.fg_normal
 
 
 local settings = {
