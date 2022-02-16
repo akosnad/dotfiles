@@ -1,8 +1,8 @@
 !! URxvt Appearance
-URxvt.font: xft:Terminus:style=Regular:pixelsize=10
-URxvt.boldFont: xft:Terminus:style=Regular:pixelsize=10
-URxvt.italicFont: xft:Terminus:style=Regular:pixelsize=10
-URxvt.boldItalicfont: xft:Terminus:style=Regular:pixelsize=10
+URxvt.font: xft:Terminus:style=Regular:pixelsize=14
+URxvt.boldFont: xft:Terminus:style=Regular:pixelsize=14
+URxvt.italicFont: xft:Terminus:style=Regular:pixelsize=14
+URxvt.boldItalicfont: xft:Terminus:style=Regular:pixelsize=14
 !URxvt.font: xft:Fira Code Retina:style=Retina:pixelsize=11
 !URxvt.boldFont: xft:Fira Code:style=SemiBold:pixelsize=11
 !URxvt.italicFont: xft:Fira Code:style=Regular:pixelsize=11
