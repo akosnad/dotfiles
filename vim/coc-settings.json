@@ -15,7 +15,15 @@
 			],
             "disableCompletion": true,
             "disableDiagnostics": true,
-            "disableDynamicRegister": true
+            "disableDynamicRegister": true,
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                },
+                "highlight": {
+                    "lsRanges": true
+                }
+            }
         }
     },
     "rpc.enabled": false,
