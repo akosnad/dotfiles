@@ -13,9 +13,9 @@
 				"compile_commands.json",
 				"Makefile"
 			],
-            "disableCompletion": true,
-            "disableDiagnostics": true,
-            "disableDynamicRegister": true,
+            "disableCompletion": false,
+            "disableDiagnostics": false,
+            "disableDynamicRegister": false,
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"
