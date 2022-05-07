@@ -36,8 +36,12 @@ setup_symlinks "$dotfiles/links"
 
 ### Flavours
 flavour_conf="$dotfiles/flavours/config.toml"
+flavour_conf_last="$(realpath $flavour_conf)"
 if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
 ln -s $dotfiles/flavours/config-full.toml $flavour_conf
+if [[ "$flavour_conf_last" == "$(realpath $dotfiles/flavours/config-minimal.toml)" ]]; then
+    flavours apply equilibrium-dark
+fi
 if ! flavours current &>/dev/null; then
     flavours apply equilibrium-dark
 fi
