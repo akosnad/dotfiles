@@ -12,10 +12,6 @@ $dotfiles/setup-system.sh
 
 ### Packages
 if ! command -v yay >/dev/null; then
-    read -p "Yay is not installed, continue? (y/n) " reply
-    if ! [ "$reply" == "y" ]; then
-        exit 1
-    fi
     sudo pacman -S --needed --noconfirm base-devel
     source="$(mktemp -d)"
     pushd "$source"
@@ -41,9 +37,9 @@ include_text "source $dotfiles/.profile" "$HOME/.profile"
 mkdir -p $HOME/.config/nvim
 include_text "so $dotfiles/vim/vimrc.vim" "$HOME/.config/nvim/init.vim"
 include_text "silent! so $HOME/.config/nvim/colorscheme.vim" "$HOME/.config/nvim/init.vim"
-nvim +"source $dotfiles/setup.vim"
 sudo npm i -g neovim
 sudo pip install neovim
+nvim +"source $dotfiles/setup.vim"
 
 ### Config file symlinks
 setup_symlinks "$dotfiles/links-minimal"

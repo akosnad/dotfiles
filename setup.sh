@@ -7,9 +7,9 @@ $dotfiles/setup-minimal.sh
 
 if ! [ -f /usr/bin/Xorg ]; then
     yay -Ss xf86-video
-    echo "\n\nNo X server found, please install xorg-server, and a video driver if using full setup"
-    echo "Otherwise run setup-minimal if you plan on running console-only."
-    echo "\nAvailable video driver packages are listed above"
+    printf "\n\nNo X server found, please install xorg-server, and a video driver if using full setup\n"
+    printf "Otherwise run setup-minimal if you plan on running console-only.\n"
+    printf "\nAvailable video driver packages are listed above"
     exit 1
 fi
 
@@ -48,7 +48,7 @@ include_text "hi Normal guibg=NONE ctermbg=NONE" "$HOME/.config/nvim/init.vim"
 ### X server related
 sudo systemctl enable lightdm
 if ! (set | egrep -q "^DISPLAY"); then
-    echo "\n\nNot running in an X environment, please reboot and run from a terminal"
+    printf "\n\nNot running in an X environment, please reboot and run from a terminal"
     exit 1
 fi
 
