@@ -21,6 +21,8 @@ Plug 'chrisbra/csv.vim'
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim' " needed for previews
 Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+Plug 'mhinz/vim-crates'
+Plug 'embear/vim-localvimrc'
 
 call plug#end()
 filetype plugin indent on
@@ -61,5 +63,13 @@ augroup END
 
 set guicursor=n-v-sm:block,i-c-ci-ve:ver25,i-c-ci-ve:blinkon5,r-cr-o:hor20
 
+if has('nvim')
+  autocmd BufRead Cargo.toml call crates#toggle()
+endif
+
+let g:localvimrc_sandbox = 0
+let g:localvimrc_persistent = 1
+
+" source $HOME/dotfiles/vim/neomake.vim
 source $HOME/dotfiles/vim/binds.vim
 source $HOME/dotfiles/vim/coc.vim
