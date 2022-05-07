@@ -51,6 +51,7 @@ if ! (set | egrep -q "^DISPLAY"); then
     printf "\n\nNot running in an X environment\nPlease reboot and rerun this script from a terminal under the graphical environment\n"
     exit 1
 fi
+systemctl --user enable pulseaudio
 
 ### Xresources
 include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
