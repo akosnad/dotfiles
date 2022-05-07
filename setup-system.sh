@@ -10,7 +10,7 @@ fi
 
 
 if ! [ -f /etc/locale.conf ]; then
-    touch /etc/locale.conf
+    sudo touch /etc/locale.conf
 fi
 if ! grep -q -P '^LANG=en_US' /etc/locale.conf; then
     sudo sh -c 'echo "LANG=en_US.UTF-8" >> /etc/locale.conf'

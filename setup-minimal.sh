@@ -49,15 +49,15 @@ sudo pip install neovim
 setup_symlinks "$dotfiles/links-minimal"
 
 ### Flavours
+if [ ! -d "$HOME/.local/share/flavours" ]; then
+    flavours update all
+fi
 flavour_conf="$dotfiles/flavours/config.toml"
 pushd "$dotfiles/flavours" >/dev/null
 ./link_templates.sh
 popd >/dev/null
 if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
 ln -s $dotfiles/flavours/config-minimal.toml $flavour_conf
-if [ ! -d "$HOME/.local/share/flavours" ]; then
-    flavours update all
-fi
 
 ###
 printf "\n\nSetup complete\n"
