@@ -48,7 +48,7 @@ include_text "hi Normal guibg=NONE ctermbg=NONE" "$HOME/.config/nvim/init.vim"
 ### X server related
 sudo systemctl enable lightdm
 if ! (set | egrep -q "^DISPLAY"); then
-    printf "\n\nNot running in an X environment, please reboot and run from a terminal"
+    printf "\n\nNot running in an X environment\nPlease reboot and rerun this script from a terminal under the graphical environment\n"
     exit 1
 fi
 
