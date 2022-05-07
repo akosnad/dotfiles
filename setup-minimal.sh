@@ -5,7 +5,7 @@ source "$dotfiles/setup-helpers.sh"
 
 git submodule update --init
 
-source .profile
+#source .profile
 
 ### Needed system configs
 $dotfiles/setup-system.sh

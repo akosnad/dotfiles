@@ -22,5 +22,5 @@ if ! grep -q -P '^LC_(?:.*)=en_US' /etc/locale.conf; then
 fi
 
 if [ $need_locale_gen -eq 1 ]; then
-    locale-gen
+    sudo locale-gen
 fi
