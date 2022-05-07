@@ -48,5 +48,9 @@ popd >/dev/null
 if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
 ln -s $dotfiles/flavours/config-minimal.toml $flavour_conf
 
+if ! flavours current &>/dev/null; then
+    flavours apply equilibrium-dark
+fi
+
 ###
 printf "\n\nSetup complete\n"

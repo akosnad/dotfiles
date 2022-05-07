@@ -38,8 +38,8 @@ setup_symlinks "$dotfiles/links"
 flavour_conf="$dotfiles/flavours/config.toml"
 if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
 ln -s $dotfiles/flavours/config-full.toml $flavour_conf
-if ! flavours current >/dev/null; then
-    flavours apply material-darker
+if ! flavours current &>/dev/null; then
+    flavours apply equilibrium-dark
 fi
 
 ### Neovim
@@ -59,6 +59,7 @@ include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
 xrdb -merge "$HOME/.Xresources"
 
 ### Startup apps
+mkdir -p $HOME/.config/autostart
 dex -c /usr/bin/redshift-gtk -t $XDG_CONFIG_HOME/autostart
 dex -c /usr/bin/fusuma -t $XDG_CONFIG_HOME/autostart
 
