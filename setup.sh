@@ -47,11 +47,17 @@ include_text "hi Normal guibg=NONE ctermbg=NONE" "$HOME/.config/nvim/init.vim"
 
 ### X server related
 sudo systemctl enable lightdm
+systemctl --user enable pulseaudio
+if ! grep -q -E '^theme-name' /etc/lightdm/lightdm-gtk-greeter.conf; then
+    sudo sh -c 'echo "theme-name=FlatColor" >> /etc/lightdm/lightdm-gtk-greeter.conf'
+fi
+if ! grep -q -E '^icon-theme-name' /etc/lightdm/lightdm-gtk-greeter.conf; then
+    sudo sh -c 'echo "icon-theme-name=Papirus-Dark" >> /etc/lightdm/lightdm-gtk-greeter.conf'
+fi
 if ! (set | egrep -q "^DISPLAY"); then
     printf "\n\nNot running in an X environment\nPlease reboot and rerun this script from a terminal under the graphical environment\n"
     exit 1
 fi
-systemctl --user enable pulseaudio
 
 ### Xresources
 include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
