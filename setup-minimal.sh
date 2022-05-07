@@ -12,7 +12,7 @@ $dotfiles/setup-system.sh
 
 ### Packages
 if ! command -v yay >/dev/null; then
-    sudo pacman -Sy --needed --noconfirm yay
+    sudo pacman -Sy --needed --noconfirm yay base-devel
 fi
 yay -Syu
 verify_packages "$dotfiles/packages-minimal"

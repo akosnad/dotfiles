@@ -13,8 +13,10 @@ function include_text() {
 # arg 1: name of file which is a list of packages to install
 function verify_packages() {
     rm -f .installed .to-install
+    set +e
     yay -Qn > .installed # we put it in a file, so we don't call it every loop, very slow otherwise :/
     yay -Qm >> .installed
+    set -e
     while read p; do
         if ! grep -P "^$p\ .*$" .installed >/dev/null 2>&1; then
             if ! grep -P "^$p\ .*$" .installed >/dev/null 2>&1; then
