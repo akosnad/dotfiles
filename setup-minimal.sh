@@ -7,6 +7,9 @@ git submodule update --init
 
 source .profile
 
+### Needed system configs
+$dotfiles/setup-system.sh
+
 ### Packages
 if ! command -v yay >/dev/null; then
     read -p "Yay is not installed, continue? (y/n) " reply
