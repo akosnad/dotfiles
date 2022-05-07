@@ -12,14 +12,7 @@ $dotfiles/setup-system.sh
 
 ### Packages
 if ! command -v yay >/dev/null; then
-    sudo pacman -S --needed --noconfirm base-devel
-    source="$(mktemp -d)"
-    pushd "$source"
-    git clone https://aur.archlinux.org/yay.git
-    pushd yay
-    makepkg -si --noconfirm
-    popd; popd
-    rm -rf "$source"
+    sudo pacman -Sy --needed --noconfirm yay
 fi
 yay -Syu
 verify_packages "$dotfiles/packages-minimal"
