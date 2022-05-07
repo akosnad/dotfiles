@@ -9,7 +9,7 @@ if ! [ -f /usr/bin/Xorg ]; then
     yay -Ss xf86-video
     printf "\n\nNo X server found, please install xorg-server, and a video driver if using full setup\n"
     printf "Otherwise run setup-minimal if you plan on running console-only.\n"
-    printf "\nAvailable video driver packages are listed above"
+    printf "\nAvailable video driver packages are listed above\n"
     exit 1
 fi
 
