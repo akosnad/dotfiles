@@ -14,7 +14,7 @@ xset +fp ~/dotfiles/fonts/
 setxkbmap -layout 'us,hu' -option "grp:caps_toggle"
 xmodmap -e "clear lock"
 
-if [ ! -f ./.no-compositor ]; then
+if [ ! -f $HOME/dotfiles/awesome/.no-compositor ]; then
     picom -b --experimental-backend --config $HOME/dotfiles/picom/picom.conf
 fi
 
