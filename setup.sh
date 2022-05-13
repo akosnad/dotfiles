@@ -63,6 +63,9 @@ if ! (set | egrep -q "^DISPLAY"); then
     exit 1
 fi
 
+### X11 config
+sudo cp $dotfiles/xorg/* /etc/X11/xorg.conf.d/.
+
 ### Xresources
 include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
 include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
