@@ -64,7 +64,13 @@ if ! (set | egrep -q "^DISPLAY"); then
 fi
 
 ### X11 config
-sudo cp $dotfiles/xorg/* /etc/X11/xorg.conf.d/.
+pushd $dotfiles/xorg &>/dev/null
+for f in $(find . -maxdepth 1 -type f); do
+    if [ ! -f /etc/X11/xorg.conf.d/$f ]; then
+        sudo cp $f /etc/X11/xorg.conf.d/.
+    fi
+done
+popd &>/dev/null
 
 ### Xresources
 include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
