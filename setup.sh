@@ -63,6 +63,15 @@ if ! (set | egrep -q "^DISPLAY"); then
     exit 1
 fi
 
+### Udev rules
+pushd $dotfiles/udev &>/dev/null
+for f in $(find . -maxdepth 1 -type f); do
+    if [ ! -f /etc/udev/rules.d/$f ]; then
+        sudo cp $f /etc/udev/rules.d/.
+    fi
+done
+popd &>/dev/null
+
 ### X11 config
 pushd $dotfiles/xorg &>/dev/null
 for f in $(find . -maxdepth 1 -type f); do
