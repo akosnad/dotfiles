@@ -33,7 +33,7 @@ end
 -- Textclock
 local clockicon = wibox.widget.imagebox(theme.widget_clock)
 local clock = awful.widget.watch(
-    "date +'%a %d %b %R'", 60,
+    "date +'%b %d. %a %T'", 1,
     function(widget, stdout)
         widget:set_markup(" " .. markup.font(theme.font, stdout))
     end
