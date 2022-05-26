@@ -23,8 +23,8 @@ template = "vim"
 rewrite = true
 
 [[item]]
-file = "~/.config/nvim/colorscheme.vim"
-template = "vim"
+file = "~/.config/nvim/airline-colors.vim"
+template = "vim-airline-themes"
 rewrite = true
 
 [[item]]

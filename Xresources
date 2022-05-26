@@ -20,7 +20,7 @@ URxvt.urgentOnBell: true
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 URxvt.depth: 32
-URxvt.background: [90]base00
+!URxvt.background: [90]base00
 
 !! Common Keybinds for Navigations
 URxvt.keysym.Shift-Up: command:\033]720;1\007
