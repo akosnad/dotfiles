@@ -33,7 +33,7 @@ mkdir -p $HOME/.config/nvim
 include_text "so $dotfiles/vim/vimrc.vim" "$HOME/.config/nvim/init.vim"
 include_text "silent! so $HOME/.config/nvim/colorscheme.vim" "$HOME/.config/nvim/init.vim"
 include_text "silent! so $HOME/.config/nvim/airline-colors.vim" "$HOME/.config/nvim/init.vim"
-sudo npm i -g neovim
+sudo yarn global add neovim
 sudo pip install neovim
 nvim +"source $dotfiles/setup.vim"
 
