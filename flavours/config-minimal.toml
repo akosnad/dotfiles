@@ -4,6 +4,7 @@ shell = "bash -c '{}'"
 file = "~/.base16_theme"
 template = "shell"
 rewrite = true
+hook = "bash ~/dotfiles/flavours/reload-shell.sh"
 
 [[item]]
 file = "~/.fzf.colors"

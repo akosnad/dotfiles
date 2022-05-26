@@ -10,10 +10,16 @@ hook = "bash ~/dotfiles/flavours/reload-awesome.sh"
 file = "~/.base16_theme"
 template = "shell"
 rewrite = true
+hook = "bash ~/dotfiles/flavours/reload-shell.sh"
 
 [[item]]
 file = "~/.fzf.colors"
 template = "fzf"
+rewrite = true
+
+[[item]]
+file = "~/.config/nvim/colorscheme.vim"
+template = "vim"
 rewrite = true
 
 [[item]]

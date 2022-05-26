@@ -103,3 +103,10 @@ source $ZSH_CUSTOM/exports.zsh
 
 powerline-daemon -q
 source /usr/share/powerline/bindings/zsh/powerline.zsh
+
+TRAPHUP() {
+    . ~/.zshrc
+}
+
+
+alias reload_zsh="killall -HUP zsh"
