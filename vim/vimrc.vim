@@ -36,9 +36,9 @@ set expandtab
 set hlsearch
 set mouse=a
 set incsearch
-let base16colorspace=16
-set notermguicolors
-set t_Co=16
+set t_Co=256
+let base16colorspace=256
+" set notermguicolors
 set noshowmode
 set listchars=tab:→\ ,nbsp:+,space:·
 

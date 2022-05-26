@@ -16,6 +16,11 @@ template = "vim"
 rewrite = true
 
 [[item]]
+file = "~/.config/nvim/airline-colors.vim"
+template = "vim-airline-themes"
+rewrite = true
+
+[[item]]
 file = "~/.config/powerline/colors.json"
 template = "powerline"
 rewrite = true
