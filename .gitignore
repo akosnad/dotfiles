@@ -5,3 +5,4 @@ awesome/.no-compositor
 flavours/config.toml
 powerline/colors.json
 vim/vim-plug/plug.vim.old
+**/__pycache__/
