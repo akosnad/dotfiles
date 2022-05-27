@@ -37,10 +37,10 @@ function setup_symlinks() {
         source="$HOME/$(echo $line | sed "s/\:.*$//")"
         dest="$dotfiles/$(echo $line | sed "s/^.*\://")"
         if [ ! -L "$source" ]; then
-            if [ -f "$source" ]; then
+            if [ -f "$source" ] || [ -d "$source" ]; then
                 read -p "$source exists, and is not a symlink, replace it? (y/n) " reply
                 if [ "$reply" == "y" ]; then
-                    rm "$source"
+                    rm -r "$source"
                 else
                     continue
                 fi
