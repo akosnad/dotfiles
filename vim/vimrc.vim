@@ -20,8 +20,8 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-reload'
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-reload'
 Plug 'jreybert/vimagit'
 Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim'
@@ -58,7 +58,7 @@ set mouse=a
 set incsearch
 set t_Co=256
 let base16colorspace=256
-" set notermguicolors
+set termguicolors
 set noshowmode
 set listchars=tab:→\ ,nbsp:+,space:·
 
@@ -89,6 +89,16 @@ endif
 
 let g:localvimrc_sandbox = 0
 let g:localvimrc_persistent = 1
+
+
+if !exists('*TrapSignal')
+    function TrapSignal()
+        colorscheme default
+        source ~/.config/nvim/init.vim
+        AirlineRefresh
+    endfunction
+endif
+autocmd Signal SIGUSR1 call TrapSignal()
 
 " source $HOME/dotfiles/vim/neomake.vim
 source $HOME/dotfiles/vim/binds.vim
