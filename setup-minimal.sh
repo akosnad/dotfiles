@@ -3,7 +3,7 @@ set -e
 dotfiles="$(dirname $(realpath $BASH_SOURCE))"
 source "$dotfiles/setup-helpers.sh"
 
-git submodule update --init
+git submodule update --init --remote
 
 #source .profile
 
