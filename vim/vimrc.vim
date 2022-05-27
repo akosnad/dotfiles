@@ -30,7 +30,9 @@ Plug 'junegunn/fzf.vim' " needed for previews
 Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'mhinz/vim-crates'
 Plug 'embear/vim-localvimrc'
+Plug 'honza/vim-snippets'
 
+Plug 'neoclide/coc-snippets', {'do': function('UpdateCocPlug')}
 Plug 'neoclide/coc-json', {'do': function('UpdateCocPlug')}
 Plug 'josa42/coc-lua', {'do': function('UpdateCocPlug')}
 Plug 'neoclide/coc-rls', {'do': function('UpdateCocPlug')}
