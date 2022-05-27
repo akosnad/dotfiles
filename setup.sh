@@ -100,4 +100,4 @@ $HOME/.local/bin/beautifuldiscord --css "$HOME/.config/beautifuldiscord/style.cs
 if [[ ! $running_before == "1" ]]; then killall -INT Discord &>/dev/null; fi
 
 ###
-printf "\n\nSetup complete\n"
+printf "\n\nFull setup complete\n"

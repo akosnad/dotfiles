@@ -57,4 +57,4 @@ if ! flavours current &>/dev/null; then
 fi
 
 ###
-printf "\n\nSetup complete\n"
+printf "\n\nMinimal setup complete\n"

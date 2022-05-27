@@ -163,13 +163,18 @@ beautiful.init(string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HO
 -- }}}
 
 
+local function update_dotfiles_gui()
+    awful.spawn.with_shell(string.format("%s -t Updating dotfiles... -e zsh -i -c \"source ~/.zshrc; cd ~/dotfiles; ./setup.sh; printf \'Press enter to exit\n\'; read\"", settings.terminal))
+end
+
+
 -- {{{ Menu
 
 -- Create a launcher widget and a main menu
 local myawesomemenu = {
    { "Hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "Manual", string.format("%s -e man awesome", settings.terminal) },
-   { "Edit config", string.format("%s -e %s %s", settings.terminal, settings.editor, awesome.conffile) },
+   { "Edit config", string.format("%s -e zsh -c 'source ~/.zshrc; %s %s'", settings.terminal, settings.editor, awesome.conffile) },
    { "Restart", awesome.restart },
    { "Quit", function() awesome.quit() end },
 }
@@ -199,7 +204,8 @@ local mymainmenu = awful.menu({
     items = {
         { "Power", powermenu },
         {"Awesome", myawesomemenu, beautiful.awesome_icon },
-        { "Terminal", settings.terminal }
+        { "Terminal", settings.terminal },
+        { "Update dotfiles", function() update_dotfiles_gui() end }
     }
 })
 
@@ -247,6 +253,7 @@ awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) 
 -- {{{ Mouse bindings
 
 root.buttons(mytable.join(
+    awful.button({ }, 1, function () mymainmenu:hide() end),
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
