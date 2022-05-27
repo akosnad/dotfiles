@@ -10,6 +10,7 @@ if ! [ -f /usr/bin/Xorg ]; then
     printf "\n\nNo X server found, please install xorg-server, and a video driver if using full setup\n"
     printf "Otherwise run setup-minimal if you plan on running console-only.\n"
     printf "\nAvailable video driver packages are listed above\n"
+    touch $dotfiles/awesome/.first-run
     exit 1
 fi
 
@@ -36,11 +37,13 @@ setup_symlinks "$dotfiles/links"
 
 ### Flavours
 flavour_conf="$dotfiles/flavours/config.toml"
-flavour_conf_last="$(realpath $flavour_conf)"
 if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
 ln -s $dotfiles/flavours/config-full.toml $flavour_conf
 if ! flavours current &>/dev/null; then
     flavours apply equilibrium-dark
+fi
+if [ -f $dotfiles/awesome/.first-run ]; then
+    flavours apply $(flavours current)
 fi
 
 ### Neovim

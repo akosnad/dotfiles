@@ -2,6 +2,7 @@
 .to-install
 awesome/archmenu.lua
 awesome/.no-compositor
+awesome/.first-run
 flavours/config.toml
 powerline/colors.json
 vim/vim-plug/plug.vim.old

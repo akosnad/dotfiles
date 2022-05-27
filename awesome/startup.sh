@@ -21,3 +21,7 @@ fi
 if [ -f $HOME/.fehbg ]; then
     $HOME/.fehbg
 fi
+
+if [ -f "$HOME/dotfiles/awesome/.first-run" ]; then
+    urxvt -e zsh -i -c "cd ~/dotfiles; ./setup.sh && rm $HOME/dotfiles/awesome/.first-run" &
+fi
