@@ -43,6 +43,7 @@ if ! flavours current &>/dev/null; then
     flavours apply equilibrium-dark
 fi
 if [ -f $dotfiles/awesome/.first-run ]; then
+    rm $dotfiles/awesome/.first-run
     flavours apply $(flavours current)
 fi
 
