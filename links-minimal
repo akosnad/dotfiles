@@ -2,3 +2,4 @@
 .config/flavours:flavours
 .config/bat:bat
 .config/powerline:powerline
+.config/ranger:ranger
