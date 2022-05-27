@@ -1,11 +1,9 @@
 {
-	"common": {
-		"term_truecolor": true,
-		"colorscheme": "base16"
-	},
+    "common": {
+        "term_truecolor": true,
+        "colorscheme": "base16"
+    },
     "ext": {
-        "shell": {
-            
-        }
+        "shell": {}
     }
 }
