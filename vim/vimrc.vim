@@ -2,6 +2,13 @@ set nocompatible
 filetype off
 
 source $HOME/dotfiles/vim/vim-plug/plug.vim
+
+function UpdateCocPlug(info)
+    if a:info.status != "unchanged"
+        !yarn install --frozen-lockfile
+    endif
+endfunction
+
 call plug#begin()
 
 Plug 'chriskempson/base16-vim'
@@ -23,6 +30,17 @@ Plug 'junegunn/fzf.vim' " needed for previews
 Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'mhinz/vim-crates'
 Plug 'embear/vim-localvimrc'
+
+Plug 'neoclide/coc-json', {'do': function('UpdateCocPlug')}
+Plug 'josa42/coc-lua', {'do': function('UpdateCocPlug')}
+Plug 'neoclide/coc-rls', {'do': function('UpdateCocPlug')}
+Plug 'josa42/coc-sh', {'do': function('UpdateCocPlug')}
+Plug 'neoclide/coc-tsserver', {'do': function('UpdateCocPlug')}
+Plug 'kkiyama117/coc-toml', {'do': function('UpdateCocPlug')}
+Plug 'neoclide/coc-stylelint', {'do': function('UpdateCocPlug')}
+Plug 'voldikss/coc-cmake', {'do': function('UpdateCocPlug')}
+Plug 'weirongxu/coc-webview', {'do': function('UpdateCocPlug')}
+Plug 'weirongxu/coc-markdown-preview-enhanced', {'do': function('UpdateCocPlug')}
 
 call plug#end()
 filetype plugin indent on
