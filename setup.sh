@@ -17,9 +17,6 @@ fi
 ### Packages
 verify_packages "$dotfiles/packages"
 
-### Cpan packages
-sudo bash -c "echo "y" | cpan -T $(awk '$1=$1' ORS=' ' packages-cpan)"
-
 ### GTK
 if [ ! -d "$HOME/.themes/FlatColor" ]; then
     git clone "https://github.com/jasperro/FlatColor" "$HOME/.themes/FlatColor"
