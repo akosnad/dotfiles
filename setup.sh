@@ -58,7 +58,7 @@ fi
 if ! grep -q -E '^icon-theme-name' /etc/lightdm/lightdm-gtk-greeter.conf; then
     sudo sh -c 'echo "icon-theme-name=Papirus-Dark" >> /etc/lightdm/lightdm-gtk-greeter.conf'
 fi
-if ! (xrdb -query | grep -E "^awesome.started:\s*true$"); then
+if ! (xrdb -query | grep -qE "^awesome.started:\s*true$"); then
     printf "\n\nNot running in the graphical environment\nPlease reboot and rerun this script from a terminal under the graphical environment\n"
     printf "Also, please check if all X configuration is correct in /etc/X11/xorg.conf.d/ before running for the first time\n"
     exit 1
