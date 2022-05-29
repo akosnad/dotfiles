@@ -19,6 +19,7 @@
 - You then have two choices
   - `setup.sh` - includes everything, full GUI experience
   - `setup-minimal.sh` - console-only components, suitable for remote and server usage
+  - `setup-extra.sh` - everything, plus more graphical apps with customized look/behaviour
 - The scripts are repeatable, meaning you can run them again to update things.
 So, to update when the full version, simply: `cd ~/dotfiles; git pull; ./setup.sh`
 

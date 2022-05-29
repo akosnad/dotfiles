@@ -58,9 +58,9 @@ fi
 if ! grep -q -E '^icon-theme-name' /etc/lightdm/lightdm-gtk-greeter.conf; then
     sudo sh -c 'echo "icon-theme-name=Papirus-Dark" >> /etc/lightdm/lightdm-gtk-greeter.conf'
 fi
-if ! (set | egrep -q "^DISPLAY"); then
-    printf "\n\nNot running in an X environment\nPlease reboot and rerun this script from a terminal under the graphical environment\n"
-    printf "Also, please check if all X configuration is correct in /etc/X11/xorg.conf.d/\n"
+if ! (xrdb -query | grep -E "^awesome.started:\s*true$"); then
+    printf "\n\nNot running in the graphical environment\nPlease reboot and rerun this script from a terminal under the graphical environment\n"
+    printf "Also, please check if all X configuration is correct in /etc/X11/xorg.conf.d/ before running for the first time\n"
     exit 1
 fi
 
@@ -89,17 +89,6 @@ fi
 mkdir -p $HOME/.config/autostart
 dex -c /usr/bin/redshift-gtk -t $XDG_CONFIG_HOME/autostart
 dex -c /usr/bin/fusuma -t $XDG_CONFIG_HOME/autostart
-
-### Discord
-running_before=$(if (pidof Discord &>/dev/null); then echo 1; fi)
-if [[ $(betterdiscordctl status | grep "injected: no") ]]; then
-    betterdiscordctl install
-fi
-/usr/bin/discord </dev/null &>/dev/null &
-python3 -m pip install -U https://github.com/leovoel/BeautifulDiscord/archive/master.zip
-mkdir -p "$HOME/.config/beautifuldiscord"
-$HOME/.local/bin/beautifuldiscord --css "$HOME/.config/beautifuldiscord/style.css"
-if [[ ! $running_before == "1" ]]; then killall -INT Discord &>/dev/null; fi
 
 ###
 printf "\n\nFull setup complete\n"
