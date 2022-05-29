@@ -64,18 +64,6 @@ if ! (set | egrep -q "^DISPLAY"); then
     exit 1
 fi
 
-### Flavours
-flavour_conf="$dotfiles/flavours/config.toml"
-if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
-ln -s $dotfiles/flavours/config-full.toml $flavour_conf
-if ! flavours current &>/dev/null; then
-    flavours apply equilibrium-dark
-fi
-if [ -f $dotfiles/awesome/.first-run ]; then
-    rm $dotfiles/awesome/.first-run
-    flavours apply $(flavours current)
-fi
-
 ### Neovim
 include_text "hi Normal guibg=NONE ctermbg=NONE" "$HOME/.config/nvim/init.vim"
 
@@ -83,6 +71,19 @@ include_text "hi Normal guibg=NONE ctermbg=NONE" "$HOME/.config/nvim/init.vim"
 include_text "#include \".Xresources.d/colors\"" "$HOME/.Xresources"
 include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
 xrdb -merge "$HOME/.Xresources"
+
+### Flavours
+flavour_conf="$dotfiles/flavours/config.toml"
+rm -f "$flavour_conf"
+ln -s $dotfiles/flavours/config-full.toml $flavour_conf
+if [ -f $dotfiles/awesome/.first-run ]; then
+    rm $dotfiles/awesome/.first-run
+    if ! flavours current &>/dev/null; then
+        flavours apply equilibrium-dark
+    else
+        flavours apply $(flavours current)
+    fi
+fi
 
 ### Startup apps
 mkdir -p $HOME/.config/autostart
