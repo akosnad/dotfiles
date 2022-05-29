@@ -46,5 +46,6 @@ fi
 ### Own aur build server
 if ! grep -q -E "^\[aurto\]" /etc/pacman.conf; then
     sudo sh -c 'echo "[aurto]" >> /etc/pacman.conf'
+    sudo sh -c 'echo "SigLevel = Never" >> /etc/pacman.conf'
     sudo sh -c 'echo "Server = https://repo.xfzt.gq/arch" >> /etc/pacman.conf'
 fi
