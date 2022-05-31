@@ -11,10 +11,6 @@ git submodule update --init --recursive
 $dotfiles/setup-system.sh
 
 ### Packages
-if ! command -v yay >/dev/null; then
-    sudo pacman -Sy --needed --noconfirm yay base-devel
-fi
-yay -Syu
 verify_packages "$dotfiles/packages-minimal"
 
 ### Zsh
@@ -34,8 +30,8 @@ mkdir -p $HOME/.config/nvim
 include_text "so $dotfiles/vim/vimrc.vim" "$HOME/.config/nvim/init.vim"
 include_text "silent! so $HOME/.config/nvim/colorscheme.vim" "$HOME/.config/nvim/init.vim"
 include_text "silent! so $HOME/.config/nvim/airline-colors.vim" "$HOME/.config/nvim/init.vim"
-sudo yarn global add neovim
-sudo pip install neovim
+sudo yarn -s global add neovim
+sudo pip -q install neovim
 nvim +"source $dotfiles/setup.vim"
 
 ### Config file symlinks

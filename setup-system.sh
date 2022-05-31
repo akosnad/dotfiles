@@ -28,6 +28,13 @@ if [ $need_locale_gen -eq 1 ]; then
     sudo locale-gen
 fi
 
+### Yay aur helper
+if ! command -v yay >/dev/null; then
+    sudo pacman -Sy --needed --noconfirm yay base-devel
+fi
+
+### Update system
+yay -Syu
 
 ### Chaotic aur
 if ! sudo pacman-key -l FBA220DFC880C036 &>/dev/null; then
