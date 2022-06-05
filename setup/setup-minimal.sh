@@ -4,6 +4,9 @@ source "helpers.sh"
 
 git submodule update --init --recursive
 
+### System
+$setup_dir/system.sh
+
 ### Packages
 verify_packages "$setup_dir/packages-minimal"
 
