@@ -164,7 +164,7 @@ beautiful.init(string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HO
 
 
 local function update_dotfiles_gui()
-    awful.spawn.with_shell(string.format("%s -t Updating dotfiles... -e zsh -i -c \"source ~/.zshrc; cd ~/dotfiles; ./setup.sh; printf \'Press enter to exit\n\'; read\"", settings.terminal))
+    awful.spawn.with_shell(string.format("%s -t Updating dotfiles... -e zsh -i -c \"~/dotfiles/awesome/update.sh\"", settings.terminal))
 end
 
 
