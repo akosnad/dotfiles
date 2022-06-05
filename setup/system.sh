@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
-dotfiles="$(dirname $(realpath $BASH_SOURCE))"
-source "$dotfiles/setup-helpers.sh"
+source "helpers.sh"
 
 ## Locale
 need_locale_gen=0

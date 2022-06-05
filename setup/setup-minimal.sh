@@ -1,17 +1,11 @@
 #!/bin/bash
 set -e
-dotfiles="$(dirname $(realpath $BASH_SOURCE))"
-source "$dotfiles/setup-helpers.sh"
+source "helpers.sh"
 
 git submodule update --init --recursive
 
-#source .profile
-
-### Needed system configs
-$dotfiles/setup-system.sh
-
 ### Packages
-verify_packages "$dotfiles/packages-minimal"
+verify_packages "$setup_dir/packages-minimal"
 
 ### Zsh
 if ! egrep -q "^$USER\:.*zsh\$" /etc/passwd; then
@@ -32,10 +26,10 @@ include_text "silent! so $HOME/.config/nvim/colorscheme.vim" "$HOME/.config/nvim
 include_text "silent! so $HOME/.config/nvim/airline-colors.vim" "$HOME/.config/nvim/init.vim"
 sudo yarn -s global add neovim
 sudo pip -q install neovim
-nvim +"source $dotfiles/setup.vim"
+nvim +"source $setup_dir/setup.vim"
 
 ### Config file symlinks
-setup_symlinks "$dotfiles/links-minimal"
+setup_symlinks "$setup_dir/links-minimal"
 
 ### Flavours
 if [ ! -d "$HOME/.local/share/flavours" ]; then
@@ -52,5 +46,4 @@ if ! flavours current &>/dev/null; then
     flavours apply equilibrium-dark
 fi
 
-###
-printf "\n\nMinimal setup complete\n"
+setup_done minimal

@@ -1,5 +1,4 @@
-.installed
-.to-install
+.last-config
 awesome/archmenu.lua
 awesome/.no-compositor
 awesome/.first-run
