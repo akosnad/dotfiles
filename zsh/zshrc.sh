@@ -101,7 +101,7 @@ source $ZSH/oh-my-zsh.sh
 source $ZSH_CUSTOM/aliases.zsh
 source $ZSH_CUSTOM/exports.zsh
 
-powerline-daemon -q
+# powerline-daemon -q
 source /usr/share/powerline/bindings/zsh/powerline.zsh
 
 TRAPHUP() {
