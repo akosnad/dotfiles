@@ -49,6 +49,7 @@ source "helpers.sh"     # required
 - if you want to modify some configuration file in the system, then you should symlink it to our dotfiles folder somewhere like so:
     - create `links-xxx` with the corresponding config name
     - specify where your configuration file is (or folder) in the system, separate it with a colon, and the target config inside the dotfiles folder: `{link}:{target}`
+- if your config depends on other configs, then refer to the `setup_dependency` function
 
 #### Script helper functions
 see examples in present script files
@@ -61,6 +62,14 @@ include_text {text_to_include} {target_file}
 Makes sure that a line of text is present in a file, if not, it appends it.
 This is useful if you don't want to overwrite the file completely, thus not symlinking it,
 only a part of it is important.
+
+---
+
+```j
+setup_dependency {setup_config_name}
+```
+With this present in your setup script, you ensure that the dependent config is set up before yours. Currently only one of these are supported per setup script.
+You are free to call any other script file, but not existing config scripts. In that case use this helper.
 
 ---
 
