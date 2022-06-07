@@ -13,9 +13,6 @@ if ! [ -f /usr/bin/Xorg ]; then
     exit 1
 fi
 
-### Packages
-verify_packages "$setup_dir/packages-full"
-
 ### GTK
 if [ ! -d "$HOME/.themes/FlatColor" ]; then
     git clone "https://github.com/jasperro/FlatColor" "$HOME/.themes/FlatColor"
@@ -25,10 +22,6 @@ if ! egrep -q "^include \"../colors2\"$" "$HOME/.themes/FlatColor/gtk-2.0/gtkrc"
     git apply "$dotfiles/gtk/flatcolor.patch"
     popd >/dev/null
 fi
-
-### Config file symlinks
-mkdir -p "$HOME/.Xresources.d"
-setup_symlinks "$setup_dir/links"
 
 ### Udev rules
 pushd $dotfiles/udev &>/dev/null
@@ -88,5 +81,3 @@ fi
 mkdir -p $HOME/.config/autostart
 dex -c /usr/bin/redshift-gtk -t $XDG_CONFIG_HOME/autostart
 dex -c /usr/bin/fusuma -t $XDG_CONFIG_HOME/autostart
-
-setup_done full

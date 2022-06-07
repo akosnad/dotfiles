@@ -7,9 +7,6 @@ git submodule update --init --recursive
 ### System
 $setup_dir/system.sh
 
-### Packages
-verify_packages "$setup_dir/packages-minimal"
-
 ### Zsh
 if ! egrep -q "^$USER\:.*zsh\$" /etc/passwd; then
     echo "Setting user shell to zsh"
@@ -31,9 +28,6 @@ sudo yarn -s global add neovim
 sudo pip -q install neovim
 nvim +"source $setup_dir/setup.vim"
 
-### Config file symlinks
-setup_symlinks "$setup_dir/links-minimal"
-
 ### Flavours
 if [ ! -d "$HOME/.local/share/flavours" ]; then
     flavours update all
@@ -48,5 +42,3 @@ ln -s $dotfiles/flavours/config-minimal.toml $flavour_conf
 if ! flavours current &>/dev/null; then
     flavours apply equilibrium-dark
 fi
-
-setup_done minimal

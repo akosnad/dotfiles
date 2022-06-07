@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-source "helpers.sh"
 
 ## Locale
 need_locale_gen=0
