@@ -13,15 +13,16 @@
   - powerarrow-dark theme from [lcpz/awesome-copycats](https://github.com/lcpz/awesome-copycats)
 - *...find more in the file tree*
 
-## Install
+## Install, usage
 - Clone to `$HOME/dotfiles`
   - *currently only this path is supported*
-- You then have two choices
-  - `setup.sh` - includes everything, full GUI experience
-  - `setup-minimal.sh` - console-only components, suitable for remote and server usage
-  - `setup-extra.sh` - everything, plus more graphical apps with customized look/behaviour
-- The scripts are repeatable, meaning you can run them again to update things.
-So, to update when the full version, simply: `cd ~/dotfiles; git pull; ./setup.sh`
+- Inside the dotfiles folder, run `setup.sh` - there you can choose a configuration to your liking:
+  - `minimal` - recommended for server/non-GUI usage, does not include GUI related configuration, only terminal applications + theming, etc.
+  - `full` - includes everything to run the desktop environment
+  - `extra` - includes the full config, plus things that are not necessary, but nice to have, eg. Discord theming
+- The script is repeatable, meaning you can run it again to update things.
+So, to update, simply: `cd ~/dotfiles; git pull; ./setup.sh`
+- If you want to change your preferred config, run `setup.sh -f`, and it will ask again
 
 ### TL;DL
 ```
