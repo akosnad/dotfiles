@@ -25,3 +25,5 @@ fi
 if [ -f "$HOME/dotfiles/awesome/.first-run" ]; then
     urxvt -e zsh -i -c "cd ~/dotfiles; ./setup.sh" &
 fi
+
+systemctl --use start pulseaudio
