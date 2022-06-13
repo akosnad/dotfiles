@@ -14,14 +14,7 @@ if ! [ -f /usr/bin/Xorg ]; then
 fi
 
 ### GTK
-if [ ! -d "$HOME/.themes/FlatColor" ]; then
-    git clone "https://github.com/jasperro/FlatColor" "$HOME/.themes/FlatColor"
-fi
-if ! egrep -q "^include \"../colors2\"$" "$HOME/.themes/FlatColor/gtk-2.0/gtkrc"; then
-    pushd "$HOME/.themes/FlatColor" >/dev/null
-    git apply "$dotfiles/gtk/flatcolor.patch"
-    popd >/dev/null
-fi
+source gtk.sh
 
 ### Udev rules
 pushd $dotfiles/udev &>/dev/null
@@ -65,17 +58,7 @@ include_text "#include \"$dotfiles/Xresources\"" "$HOME/.Xresources"
 xrdb -merge "$HOME/.Xresources"
 
 ### Flavours
-flavour_conf="$dotfiles/flavours/config.toml"
-rm -f "$flavour_conf"
-ln -s $dotfiles/flavours/config-full.toml $flavour_conf
-if [ -f $dotfiles/awesome/.first-run ]; then
-    rm $dotfiles/awesome/.first-run
-    if ! flavours current &>/dev/null; then
-        flavours apply equilibrium-dark
-    else
-        flavours apply $(flavours current)
-    fi
-fi
+source flavours.sh full
 
 ### Startup apps
 mkdir -p $HOME/.config/autostart

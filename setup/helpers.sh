@@ -17,16 +17,12 @@ parent_setup_name="$(get_current_setup_name)"
 
 packages_to_install=""
 links_to_link=""
-setup_dependencies=""
+setup_dependencies="$(grep -E "^setup_dependency" setup-$parent_setup_name.sh | awk '{print $2}')"
 if [ -f "packages-$parent_setup_name" ]; then
     packages_to_install="$(awk '$1=$1' ORS=' ' packages-$parent_setup_name)"
 fi
 if [ -f "links-$parent_setup_name" ]; then
     links_to_link="$(printf '%s\n%s' "$(cat links-$parent_setup_name)")"
-fi
-__dep="$(grep -E "^setup_dependency" setup-$parent_setup_name.sh | awk '{print $2}')"
-if [[ "$__dep" != "" ]]; then
-    setup_dependencies="$__dep"
 fi
 
 # arg 1: text to include
@@ -38,10 +34,14 @@ function include_text() {
 }
 
 function install_packages() {
-    yay -S --noconfirm --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu $packages_to_install |& { grep -vE "there is nothing to do|--\s*skipping" || true; }
+    if [[ "$packages_to_install" != "" ]]; then
+        yay -Sy --noconfirm --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu $packages_to_install |& { grep -vE "there is nothing to do|--\s*skipping" || true; }
+    fi
 }
 
 function setup_symlinks() {
+    if [[ "$links_to_link" == "" ]]; then return; fi
+
     for line in ${links_to_link[@]}; do
         source="$HOME/$(echo $line | sed "s/\:.*$//")"
         dest="$dotfiles/$(echo $line | sed "s/^.*\://")"
@@ -59,6 +59,14 @@ function setup_symlinks() {
         fi
     done
 }
+
+if [[ "$setup_dependencies" == "" ]]; then
+    # currrent config has no dependencies
+    source "$setup_dir/system.sh"
+    install_packages
+    setup_symlinks
+    echo "$parent_setup_name" > $dotfiles/.last-config
+fi
 
 __deps_set_up=0
 # arg 1: setup name
@@ -84,6 +92,7 @@ function setup_dependency() {
 
     if [[ "$(get_current_setup_name)" == "$parent_setup_name" ]]; then
         # reached end of dependencies, we are running in the parent setup now
+        source "$setup_dir/system.sh"
         install_packages
         setup_symlinks
 

@@ -4,9 +4,6 @@ source "helpers.sh"
 
 git submodule update --init --recursive
 
-### System
-$setup_dir/system.sh
-
 ### Zsh
 if ! egrep -q "^$USER\:.*zsh\$" /etc/passwd; then
     echo "Setting user shell to zsh"
@@ -29,16 +26,5 @@ sudo pip -q install neovim
 nvim +"source $setup_dir/setup.vim"
 
 ### Flavours
-if [ ! -d "$HOME/.local/share/flavours" ]; then
-    flavours update all
-fi
-flavour_conf="$dotfiles/flavours/config.toml"
-pushd "$dotfiles/flavours" >/dev/null
-./link_templates.sh
-popd >/dev/null
-if [ -f "$flavour_conf" ]; then rm "$flavour_conf"; fi
-ln -s $dotfiles/flavours/config-minimal.toml $flavour_conf
+source flavours.sh minimal
 
-if ! flavours current &>/dev/null; then
-    flavours apply equilibrium-dark
-fi

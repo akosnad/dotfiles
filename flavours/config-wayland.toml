@@ -1,0 +1,56 @@
+shell = "bash -c '{}'"
+
+[[item]]
+file = "~/.Xresources.d/colors"
+template = "xresources"
+rewrite = true
+hook = "bash ~/dotfiles/flavours/reload-wayfire.sh"
+
+[[item]]
+file = "~/.base16_theme"
+template = "shell"
+rewrite = true
+hook = "bash ~/dotfiles/flavours/reload-shell.sh"
+
+[[item]]
+file = "~/.fzf.colors"
+template = "fzf"
+rewrite = true
+
+[[item]]
+file = "~/.config/nvim/colorscheme.vim"
+template = "vim"
+rewrite = true
+
+[[item]]
+file = "~/.config/nvim/airline-colors.vim"
+template = "vim-airline-themes"
+rewrite = true
+
+[[item]]
+file = "~/.themes/FlatColor/colors2"
+template = "gtk-flatcolor"
+subtemplate = "gtk-2"
+rewrite = true
+
+[[item]]
+file = "~/.themes/FlatColor/colors3"
+template = "gtk-flatcolor"
+subtemplate = "gtk-3"
+rewrite = true
+hook = "bash ~/dotfiles/xsettings/reload.sh"
+
+[[item]]
+file = "~/.config/powerline/colors.json"
+template = "powerline"
+rewrite = true
+
+[[item]]
+file = "~/.config/beautifuldiscord/style.css"
+template = "beautifuldiscord"
+rewrite = true
+
+[[item]]
+file = "~/.config/rofi/theme.rasi"
+template = "rofi"
+rewrite = true

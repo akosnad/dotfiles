@@ -5,4 +5,5 @@ awesome/.first-run
 flavours/config.toml
 powerline/colors.json
 vim/vim-plug/plug.vim.old
+rofi/theme.rasi
 **/__pycache__/
