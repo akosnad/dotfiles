@@ -1,3 +1,4 @@
 .config/wayfire.ini:wayfire/wayfire.ini
+.config/wf-shell.ini:wayfire/wf-shell.ini
 .config/alacritty:alacritty
 .config/rofi:rofi
