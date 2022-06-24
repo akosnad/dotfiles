@@ -23,7 +23,9 @@ gnome-keyring
 feh
 unclutter
 qt5ct
+qt6ct
 qt5-styleplugins
+qt6gtk2
 gtk2
 flameshot
 redshift

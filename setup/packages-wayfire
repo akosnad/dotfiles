@@ -8,3 +8,6 @@ greetd-gtkgreet
 weston
 xorg-xwayland
 rofi-lbonn-wayland
+qt5ct
+qt6ct
+qt6gtk2
