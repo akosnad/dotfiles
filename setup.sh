@@ -25,14 +25,14 @@ if ! [ -f "$dotfiles/.last-config" ]; then
     done
 
     while true; do
-    read reply
-    if (( $reply<${#configs[@]} && $reply >=0 )); then
-        printf "Running %s config...\n" "${configs[$reply]}"
-        cd $setup_dir
-        ./setup-${configs[$reply]}.sh
-        break
-    fi
-    printf "Please enter a valid choice between 0 and %s: " "$((( ${#configs[@]} - 1 )))"
+        read reply
+        if (( $reply<${#configs[@]} && $reply >=0 )); then
+            printf "Running %s config...\n" "${configs[$reply]}"
+            cd $setup_dir
+            ./setup-${configs[$reply]}.sh
+            break
+        fi
+        printf "Please enter a valid choice between 0 and %s: " "$((( ${#configs[@]} - 1 )))"
     done
 else
     printf "Running %s config...\n" $(get_last_setup_name)

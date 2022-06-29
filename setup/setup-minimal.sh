@@ -2,8 +2,6 @@
 set -e
 source "helpers.sh"
 
-git submodule update --init --recursive
-
 ### Zsh
 if ! egrep -q "^$USER\:.*zsh\$" /etc/passwd; then
     echo "Setting user shell to zsh"
@@ -17,7 +15,6 @@ include_text "source $dotfiles/.profile" "$HOME/.profile"
 
 
 ### Neovim
-mkdir -p $HOME/.config/nvim
 include_text "so $dotfiles/vim/vimrc.vim" "$HOME/.config/nvim/init.vim"
 include_text "silent! so $HOME/.config/nvim/colorscheme.vim" "$HOME/.config/nvim/init.vim"
 include_text "silent! so $HOME/.config/nvim/airline-colors.vim" "$HOME/.config/nvim/init.vim"

@@ -10,10 +10,10 @@ fi
 setup_dir="$(dirname $(realpath $BASH_SOURCE))"
 dotfiles="$(realpath $setup_dir/..)"
 
-function get_current_setup_name() {
+function __get_current_setup_name() {
     caller 1 | awk '{print $3}' | sed 's/^.*setup\-//;s/.sh$//'
 }
-parent_setup_name="$(get_current_setup_name)"
+parent_setup_name="$(__get_current_setup_name)"
 
 packages_to_install=""
 links_to_link=""
@@ -25,21 +25,13 @@ if [ -f "links-$parent_setup_name" ]; then
     links_to_link="$(printf '%s\n%s' "$(cat links-$parent_setup_name)")"
 fi
 
-# arg 1: text to include
-# arg 2: file to check in or to create
-function include_text() {
-    if ! grep -q "$1" "$2" >/dev/null 2>&1; then
-        echo $1 >> $2
-    fi
-}
-
-function install_packages() {
+function __install_packages() {
     if [[ "$packages_to_install" != "" ]]; then
-        yay -Sy --noconfirm --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu $packages_to_install |& { grep -vE "there is nothing to do|--\s*skipping" || true; }
+        yay -S --noconfirm --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu $packages_to_install |& { grep -vE "there is nothing to do|--\s*skipping" || true; }
     fi
 }
 
-function setup_symlinks() {
+function __setup_symlinks() {
     if [[ "$links_to_link" == "" ]]; then return; fi
 
     for line in ${links_to_link[@]}; do
@@ -60,15 +52,34 @@ function setup_symlinks() {
     done
 }
 
+function __do_setup_steps() {
+    git submodule update --init --recursive
+    source "$setup_dir/system.sh"
+    __install_packages
+    __setup_symlinks
+}
+
 if [[ "$setup_dependencies" == "" ]]; then
     # currrent config has no dependencies
-    source "$setup_dir/system.sh"
-    install_packages
-    setup_symlinks
+    __do_setup_steps
     echo "$parent_setup_name" > $dotfiles/.last-config
 fi
-
 __deps_set_up=0
+
+##########
+##########
+
+# arg 1: text to include
+# arg 2: file to check in or to create
+function include_text() {
+    if ! [ -d "$(dirname $2)" ]; then
+        mkdir -p "$(dirname $2)"
+    fi
+    if ! grep -q "$1" "$2" >/dev/null 2>&1; then
+        echo $1 >> $2
+    fi
+}
+
 # arg 1: setup name
 function setup_dependency() {
     if (( $__deps_set_up == 1 )); then return; fi
@@ -90,11 +101,9 @@ function setup_dependency() {
         setup_dependency $dep
     fi
 
-    if [[ "$(get_current_setup_name)" == "$parent_setup_name" ]]; then
+    if [[ "$(__get_current_setup_name)" == "$parent_setup_name" ]]; then
         # reached end of dependencies, we are running in the parent setup now
-        source "$setup_dir/system.sh"
-        install_packages
-        setup_symlinks
+        __do_setup_steps
 
         __deps_set_up=1
         for c in ${setup_dependencies[@]}; do
