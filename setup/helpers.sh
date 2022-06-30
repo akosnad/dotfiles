@@ -27,7 +27,10 @@ fi
 
 function __install_packages() {
     if [[ "$packages_to_install" != "" ]]; then
-        yay -S --noconfirm --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu $packages_to_install |& { grep -vE "there is nothing to do|--\s*skipping" || true; }
+        (set -o pipefail && yay -S --noconfirm --quiet --needed --nocleanmenu --noeditmenu --nodiffmenu \
+            --overwrite "/usr/lib/python*/site-packages/**" \
+            $packages_to_install |& { grep -vE "there is nothing to do|--\s*skipping" || true; } \
+        )
     fi
 }
 
