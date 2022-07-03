@@ -54,3 +54,9 @@ rewrite = true
 file = "~/.config/rofi/theme.rasi"
 template = "rofi"
 rewrite = true
+
+[[item]]
+file = "~/.config/wayfire-win-decor"
+template = "wayfire-win-decor"
+rewrite = true
+hook = "bash ~/dotfiles/flavours/reload-wayfire-decor.sh"
