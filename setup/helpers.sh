@@ -15,6 +15,14 @@ function __get_current_setup_name() {
 }
 parent_setup_name="$(__get_current_setup_name)"
 
+pushd () {
+    command pushd "$@" &> /dev/null
+}
+
+popd () {
+    command popd "$@" &> /dev/null
+}
+
 packages_to_install=""
 links_to_link=""
 setup_dependencies="$(grep -E "^setup_dependency" setup-$parent_setup_name.sh | awk '{print $2}')"

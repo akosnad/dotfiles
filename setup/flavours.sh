@@ -2,9 +2,9 @@ if [ ! -d "$HOME/.local/share/flavours" ]; then
     flavours update all
 fi
 flavours_conf="$dotfiles/flavours/config.toml"
-pushd "$dotfiles/flavours" >/dev/null
+pushd "$dotfiles/flavours"
 ./link_templates.sh
-popd >/dev/null
+popd
 rm -f "$flavours_conf"
 ln -s $dotfiles/flavours/config-$1.toml $flavours_conf
 

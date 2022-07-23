@@ -17,22 +17,22 @@ fi
 source gtk.sh
 
 ### Udev rules
-pushd $dotfiles/udev &>/dev/null
+pushd $dotfiles/udev
 for f in $(find . -maxdepth 1 -type f); do
     if [ ! -f /etc/udev/rules.d/$f ]; then
         sudo cp $f /etc/udev/rules.d/.
     fi
 done
-popd &>/dev/null
+popd
 
 ### X11 config
-pushd $dotfiles/xorg &>/dev/null
+pushd $dotfiles/xorg
 for f in $(find . -maxdepth 1 -type f); do
     if [ ! -f /etc/X11/xorg.conf.d/$f ]; then
         sudo cp $f /etc/X11/xorg.conf.d/.
     fi
 done
-popd &>/dev/null
+popd
 
 ### X server related
 sudo systemctl enable lightdm
