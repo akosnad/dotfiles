@@ -43,6 +43,7 @@ Plug 'neoclide/coc-stylelint', {'do': function('UpdateCocPlug')}
 Plug 'voldikss/coc-cmake', {'do': function('UpdateCocPlug')}
 Plug 'weirongxu/coc-webview', {'do': function('UpdateCocPlug')}
 Plug 'weirongxu/coc-markdown-preview-enhanced', {'do': function('UpdateCocPlug')}
+Plug 'neoclide/coc-html', {'do': function('UpdateCocPlug')}
 
 call plug#end()
 filetype plugin indent on
