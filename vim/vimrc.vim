@@ -31,6 +31,7 @@ Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 Plug 'mhinz/vim-crates'
 Plug 'embear/vim-localvimrc'
 Plug 'honza/vim-snippets'
+Plug 'lervag/vimtex'
 
 Plug 'neoclide/coc-snippets', {'do': function('UpdateCocPlug')}
 Plug 'neoclide/coc-json', {'do': function('UpdateCocPlug')}
@@ -44,6 +45,7 @@ Plug 'voldikss/coc-cmake', {'do': function('UpdateCocPlug')}
 Plug 'weirongxu/coc-webview', {'do': function('UpdateCocPlug')}
 Plug 'weirongxu/coc-markdown-preview-enhanced', {'do': function('UpdateCocPlug')}
 Plug 'neoclide/coc-html', {'do': function('UpdateCocPlug')}
+Plug 'neoclide/coc-vimtex', {'do': function('UpdateCocPlug')}
 
 call plug#end()
 filetype plugin indent on
@@ -100,6 +102,8 @@ if !exists('*TrapSignal')
     endfunction
 endif
 autocmd Signal SIGUSR1 call TrapSignal()
+
+let g:vimtex_view_method = 'zathura'
 
 " source $HOME/dotfiles/vim/neomake.vim
 source $HOME/dotfiles/vim/binds.vim
