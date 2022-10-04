@@ -1,7 +1,7 @@
 if [ ! -d "$HOME/.themes/FlatColor" ]; then
     git clone "https://github.com/jasperro/FlatColor" "$HOME/.themes/FlatColor"
 fi
-if ! egrep -q "^include \"../colors2\"$" "$HOME/.themes/FlatColor/gtk-2.0/gtkrc"; then
+if ! grep -Eq "^include \"../colors2\"$" "$HOME/.themes/FlatColor/gtk-2.0/gtkrc"; then
     pushd "$HOME/.themes/FlatColor"
     git apply "$dotfiles/gtk/flatcolor.patch"
     popd

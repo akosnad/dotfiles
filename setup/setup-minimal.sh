@@ -3,7 +3,7 @@ set -e
 source "helpers.sh"
 
 ### Zsh
-if ! egrep -q "^$USER\:.*zsh\$" /etc/passwd; then
+if ! grep -Eq "^$USER:.*zsh\$" /etc/passwd; then
     echo "Setting user shell to zsh"
     sudo usermod -s /bin/zsh $USER
 fi
