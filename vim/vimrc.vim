@@ -36,7 +36,7 @@ Plug 'lervag/vimtex'
 Plug 'neoclide/coc-snippets', {'do': function('UpdateCocPlug')}
 Plug 'neoclide/coc-json', {'do': function('UpdateCocPlug')}
 Plug 'josa42/coc-lua', {'do': function('UpdateCocPlug')}
-Plug 'neoclide/coc-rls', {'do': function('UpdateCocPlug')}
+Plug 'fannheyward/coc-rust-analyzer', {'do': function('UpdateCocPlug')}
 Plug 'josa42/coc-sh', {'do': function('UpdateCocPlug')}
 Plug 'neoclide/coc-tsserver', {'do': function('UpdateCocPlug')}
 Plug 'kkiyama117/coc-toml', {'do': function('UpdateCocPlug')}
