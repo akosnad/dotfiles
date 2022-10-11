@@ -17,6 +17,9 @@ nnoremap <leader>Q :q!<CR>
 inoremap <leader>x <ESC>:x<CR>
 nnoremap <leader>x :x<CR>
 
+" Buffers
+nnoremap <silent><leader>, :b#<CR>
+
 " Tabs
 nnoremap <leader>t :tabnew<CR>:FZF<CR>
 nnoremap <leader><Space> gt<CR>
