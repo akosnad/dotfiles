@@ -35,7 +35,7 @@ done
 popd
 
 ### X server related
-sudo systemctl enable lightdm
+sudo systemctl enable -f lightdm
 systemctl --user enable pulseaudio
 if ! grep -q -E '^theme-name' /etc/lightdm/lightdm-gtk-greeter.conf; then
     sudo sh -c 'echo "theme-name=FlatColor" >> /etc/lightdm/lightdm-gtk-greeter.conf'
