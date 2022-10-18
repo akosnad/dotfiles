@@ -1,33 +1,23 @@
 {
     "languageserver": {
         "ccls" : {
-			"command": "ccls",
-			"filetypes": [
-				"c",
-				"cpp",
-				"objc",
-				"objcpp"
-			],
-			"rootPatterns": [
-				".ccls",
-				"compile_commands.json",
-				"Makefile"
-			],
-            "disableCompletion": false,
-            "disableDiagnostics": false,
-            "disableDynamicRegister": false,
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls"
-                },
-                "highlight": {
-                    "lsRanges": true
-                },
-                "clang": {
-                    "extraargs": "-std=c++20"
-                }
-            }
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                "Makefile"
+            ],
+            "enable": false
         }
     },
+    "clangd.fallbackFlags": ["-std=c++20"],
+    "clangd.compilationDatabaseCandidates": ["build"],
+    "semanticTokens.enable": true,
     "rust-analyzer.inlayHints.enable": false
 }

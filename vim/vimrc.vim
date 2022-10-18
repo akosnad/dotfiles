@@ -42,6 +42,7 @@ Plug 'neoclide/coc-tsserver', {'do': function('UpdateCocPlug')}
 Plug 'kkiyama117/coc-toml', {'do': function('UpdateCocPlug')}
 Plug 'neoclide/coc-stylelint', {'do': function('UpdateCocPlug')}
 Plug 'voldikss/coc-cmake', {'do': function('UpdateCocPlug')}
+Plug 'clangd/coc-clangd', {'do': function('UpdateCocPlug')}
 Plug 'weirongxu/coc-webview', {'do': function('UpdateCocPlug')}
 Plug 'weirongxu/coc-markdown-preview-enhanced', {'do': function('UpdateCocPlug')}
 Plug 'neoclide/coc-html', {'do': function('UpdateCocPlug')}

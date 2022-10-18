@@ -3,6 +3,8 @@ set updatetime=300
 set shortmess+=c
 set pyxversion=3
 
+let g:coc_default_semantic_highlight_groups = 1
+
 if has("patch-8.1.1564")
     set signcolumn=number
 else
