@@ -10,7 +10,7 @@ URxvt.boldItalicfont: xft:Terminus:style=Regular:pixelsize=14
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 92x24
-URxvt.internalBorder: 24
+URxvt.internalBorder: 12
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: true
 URxvt.saveline: 8192
