@@ -4,6 +4,7 @@ neovim
 ccls
 ranger
 fzf
+ctags
 flavours
 inetutils
 nodejs-lts-fermium
