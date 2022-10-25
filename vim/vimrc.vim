@@ -81,6 +81,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 
+let g:lsp_cxx_hl_use_text_props = 1
+" highlight LspCxxHlSymVariable ctermfg=Black guifg=Black
+" highlight LspCxxHlSymClassMethod ctermfg=Black guifg=Black
+
 augroup RestoreCursorShapeOnExit
     autocmd!
     autocmd VimLeave * set guicursor=a:hor20
