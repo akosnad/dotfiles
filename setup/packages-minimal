@@ -19,3 +19,4 @@ python-neovim-git
 bat
 cmake-language-server
 yarn
+ninja
