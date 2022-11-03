@@ -5,6 +5,7 @@ source $HOME/dotfiles/vim/vim-plug/plug.vim
 
 function UpdateCocPlug(info)
     if a:info.status != "unchanged"
+        echo "Updating" a:info.name
         !yarn install --frozen-lockfile
     endif
 endfunction
