@@ -1,4 +1,6 @@
 wayfire
+wayfire-plugins-extra
+wf-shell
 swayidle
 waylock
 alacritty
