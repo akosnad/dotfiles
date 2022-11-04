@@ -11,5 +11,5 @@ function cm(){
         if [ ! -d build ]; then mkdir build; fi
         cd build
     fi
-    cmake .. -DCMAKE_BUILD_TYPE=Debug -G Ninja -D "CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS} -fdiagnostics-color=always"
+    cmake .. -DCMAKE_BUILD_TYPE=Debug -G Ninja -D "CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS} -fdiagnostics-color=always" $*
 }
