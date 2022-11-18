@@ -9,7 +9,12 @@ set_title_precmd() {
 }
 
 set_title_preexec() {
-		TITLE="$(whoami)@$(hostname): $1"
+        if [ "$1" = "fg" ]; then
+            e=$(jobs | grep -oP '^\[\d+\]\s+\+\s+.*?\s+\K.*$')
+            TITLE="$(whoami)@$(hostname): $e"
+        else
+            TITLE="$(whoami)@$(hostname): $1"
+        fi
 		echo_title $TITLE
 }
 
