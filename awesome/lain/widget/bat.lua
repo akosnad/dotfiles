@@ -30,6 +30,7 @@ local function factory(args)
 
     local bat         = { widget = args.widget or wibox.widget.textbox() }
     local timeout     = args.timeout or 30
+    local notify_timeout = args.notify_timeout or 120
     local notify      = args.notify or "on"
     local full_notify = args.full_notify or notify
     local n_perc      = args.n_perc or { 5, 15 }
@@ -53,7 +54,7 @@ local function factory(args)
     bat_notification_critical_preset = {
         title   = "Battery exhausted",
         text    = "Shutdown imminent",
-        timeout = 60,
+        timeout = 10,
         fg      = "#000000",
         bg      = "#FFFFFF"
     }
@@ -61,7 +62,7 @@ local function factory(args)
     bat_notification_low_preset = {
         title   = "Battery low",
         text    = "Plug the cable!",
-        timeout = 60,
+        timeout = 10,
         fg      = "#202020",
         bg      = "#CDCDCD"
     }
@@ -69,7 +70,7 @@ local function factory(args)
     bat_notification_charged_preset = {
         title   = "Battery full",
         text    = "You can unplug the cable",
-        timeout = 60,
+        timeout = 10,
         fg      = "#202020",
         bg      = "#CDCDCD"
     }
@@ -185,7 +186,10 @@ local function factory(args)
         widget = bat.widget
         settings()
 
-        -- notifications for critical, low, and full levels
+    end
+
+    -- notifications for critical, low, and full levels
+    function bat.do_notify()
         if notify == "on" then
             if bat_now.status == "Discharging" then
                 if tonumber(bat_now.perc) <= n_perc[1] then
@@ -211,6 +215,7 @@ local function factory(args)
     end
 
     helpers.newtimer("batteries", timeout, bat.update)
+    helpers.newtimer("batteries_notify", notify_timeout, bat.do_notify)
 
     return bat
 end
