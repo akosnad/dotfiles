@@ -214,7 +214,8 @@ local net = lain.widget.net({
                           markup("#7AC82E", " " .. string.format("%06.1f", net_now.received))
                           .. " " ..
                           markup("#46A8C3", " " .. string.format("%06.1f", net_now.sent) .. " ")))
-    end
+    end,
+    notify = "off"
 })
 
 -- Separators
