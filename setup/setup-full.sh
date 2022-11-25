@@ -4,9 +4,9 @@ source "helpers.sh"
 
 setup_dependency minimal
 
-if ! [ -f /usr/bin/Xorg ]; then
+if ! yay -Qs xf86-video &>/dev/null; then
     yay -Ss xf86-video
-    printf "\n\nNo X server found, please install xorg-server, and a video driver if using full setup\n"
+    printf "\n\nNo Xorg video driver found, please install one corresponding to your hardware if using full setup!\n"
     printf "Otherwise run setup-minimal if you plan on running console-only.\n"
     printf "\nAvailable video driver packages are listed above\n"
     touch $dotfiles/awesome/.first-run
