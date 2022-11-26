@@ -34,21 +34,6 @@ Plug 'embear/vim-localvimrc'
 Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
 
-Plug 'neoclide/coc-snippets', {'do': function('UpdateCocPlug')}
-Plug 'neoclide/coc-json', {'do': function('UpdateCocPlug')}
-Plug 'josa42/coc-lua', {'do': function('UpdateCocPlug')}
-Plug 'fannheyward/coc-rust-analyzer', {'do': function('UpdateCocPlug')}
-Plug 'josa42/coc-sh', {'do': function('UpdateCocPlug')}
-Plug 'neoclide/coc-tsserver', {'do': function('UpdateCocPlug')}
-Plug 'kkiyama117/coc-toml', {'do': function('UpdateCocPlug')}
-Plug 'neoclide/coc-stylelint', {'do': function('UpdateCocPlug')}
-Plug 'voldikss/coc-cmake', {'do': function('UpdateCocPlug')}
-Plug 'clangd/coc-clangd', {'do': function('UpdateCocPlug')}
-Plug 'weirongxu/coc-webview', {'do': function('UpdateCocPlug')}
-Plug 'weirongxu/coc-markdown-preview-enhanced', {'do': function('UpdateCocPlug')}
-Plug 'neoclide/coc-html', {'do': function('UpdateCocPlug')}
-Plug 'neoclide/coc-vimtex', {'do': function('UpdateCocPlug')}
-Plug 'iamcco/coc-gitignore', {'do': function('UpdateCocPlug')}
 
 call plug#end()
 filetype plugin indent on
