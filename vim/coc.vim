@@ -17,8 +17,11 @@ let g:coc_global_extensions = [
             \ 'coc-webview',
             \ 'coc-markdown-preview-enhanced',
             \ 'coc-html',
+            \ 'coc-css',
             \ 'coc-vimtex',
             \ 'coc-gitignore',
+            \ 'coc-prettier',
+            \ 'coc-git',
             \ ]
 
 let g:coc_default_semantic_highlight_groups = 1

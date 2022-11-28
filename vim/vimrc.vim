@@ -21,8 +21,8 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-" Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-reload'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-reload'
 Plug 'jreybert/vimagit'
 Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim'
@@ -33,7 +33,6 @@ Plug 'mhinz/vim-crates'
 Plug 'embear/vim-localvimrc'
 Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
-
 
 call plug#end()
 filetype plugin indent on
@@ -97,6 +96,5 @@ autocmd Signal SIGUSR1 call TrapSignal()
 
 let g:vimtex_view_method = 'xdvi'
 
-" source $HOME/dotfiles/vim/neomake.vim
 source $HOME/dotfiles/vim/binds.vim
 source $HOME/dotfiles/vim/coc.vim
