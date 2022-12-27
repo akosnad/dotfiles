@@ -11,6 +11,29 @@ function get_last_setup_name() {
     cat $dotfiles/.last-config
 }
 
+function run_config() {
+    printf "Running %s config...\n" $1
+    cd $setup_dir
+    ./setup-"$1".sh
+}
+
+function prompt_setup_name() {
+    printf "Please select a configuration you would like to use:\n" 1>&2
+    printf "(You can change it later by adding the -f flag to this script)\n" 1>&2
+    for (( i=0; i<${#configs[@]}; i++ )); do
+        printf "%s:\t%s\n" "$i" "${configs[$i]}" 1>&2
+    done
+
+    while true; do
+        read reply
+        if (( $reply<${#configs[@]} && $reply >=0 )); then
+            echo ${configs[$reply]}
+            return
+        fi
+        printf "Please enter a valid choice between 0 and %s: " "$((( ${#configs[@]} - 1 )))" 1>&2
+    done
+}
+
 configs=($(get_configs))
 
 if [[ "$@" == *"-f" ]]; then
@@ -18,26 +41,9 @@ if [[ "$@" == *"-f" ]]; then
 fi
 
 if ! [ -f "$dotfiles/.last-config" ]; then
-    printf "Please select a configuration you would like to use:\n"
-    printf "(You can change it later by adding the -f flag to this script)\n"
-    for (( i=0; i<${#configs[@]}; i++ )); do
-        printf "%s:\t%s\n" "$i" "${configs[$i]}"
-    done
-
-    while true; do
-        read reply
-        if (( $reply<${#configs[@]} && $reply >=0 )); then
-            printf "Running %s config...\n" "${configs[$reply]}"
-            cd $setup_dir
-            ./setup-${configs[$reply]}.sh
-            break
-        fi
-        printf "Please enter a valid choice between 0 and %s: " "$((( ${#configs[@]} - 1 )))"
-    done
+    run_config $(prompt_setup_name)
 else
-    printf "Running %s config...\n" $(get_last_setup_name)
-    cd $setup_dir
-    ./setup-$(cat $dotfiles/.last-config).sh
+    run_config $(get_last_setup_name)
 fi
 
 printf "\n\nDone setting up %s config\n" "$(get_last_setup_name)"
