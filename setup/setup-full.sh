@@ -64,3 +64,10 @@ source flavours.sh full
 mkdir -p $HOME/.config/autostart
 dex -c /usr/bin/redshift-gtk -t $XDG_CONFIG_HOME/autostart
 dex -c /usr/bin/fusuma -t $XDG_CONFIG_HOME/autostart
+
+### Services
+pushd $dotfiles/services
+./link_services.sh
+popd
+systemctl --user enable powerline-daemon
+systemctl --user enable --now powerline-fix

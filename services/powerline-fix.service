@@ -1,0 +1,12 @@
+[Unit]
+Description=Powerline Agent Fix
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+StandardOutput=journal
+ExecStart=/usr/bin/true
+ExecStop=/usr/bin/killall -9 powerline-daemon
+
+[Install]
+WantedBy=default.target

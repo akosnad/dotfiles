@@ -10,3 +10,4 @@ for s in $(find . -maxdepth 1 -type f ! -name link_services.sh); do
         ln -s $ap $l
     fi
 done
+systemctl --user daemon-reload
