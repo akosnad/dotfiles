@@ -33,6 +33,7 @@ Plug 'mhinz/vim-crates'
 Plug 'embear/vim-localvimrc'
 Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
+Plug 'github/copilot.vim'
 
 call plug#end()
 filetype plugin indent on
