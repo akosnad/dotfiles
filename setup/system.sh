@@ -26,11 +26,6 @@ if [ $need_locale_gen -eq 1 ]; then
     sudo locale-gen
 fi
 
-### Yay aur helper
-if ! command -v yay >/dev/null; then
-    sudo pacman -Sy --needed --noconfirm yay base-devel
-fi
-
 ### Chaotic aur
 if ! sudo pacman-key -l FBA220DFC880C036 &>/dev/null; then
     sudo pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
@@ -50,6 +45,11 @@ if ! grep -q -E "^\[aurto\]" /etc/pacman.conf; then
     sudo sh -c 'echo "[aurto]" >> /etc/pacman.conf'
     sudo sh -c 'echo "SigLevel = Never" >> /etc/pacman.conf'
     sudo sh -c 'echo "Server = https://repo.xfzt.gq/arch" >> /etc/pacman.conf'
+fi
+
+### Yay aur helper
+if ! command -v yay >/dev/null; then
+    sudo pacman -Sy --needed --noconfirm yay base-devel
 fi
 
 ### Update system
