@@ -8,6 +8,7 @@ noremap <F3> :set list!<CR>
 " Quitting/saving
 inoremap <leader>w <Esc>:w<CR>
 nnoremap <leader>w :w<CR>
+nnoremap <leader>W :w !sudo tee % >/dev/null<CR>
 
 inoremap <leader>q <ESC>:q<CR>
 inoremap <leader>Q <ESC>:q!<CR>
