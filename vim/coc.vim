@@ -32,7 +32,14 @@ else
     set signcolumn=yes
 endif
 
-" Tab for trigger completion
+" Use <leader><tab> for copilot completion
+" this avoids conflict with coc suggestions
+let g:copilot_no_tab_map = v:true
+let g:copilot_assume_mapped = v:true
+let g:copilot_tab_fallback = ""
+imap <silent><expr><leader><tab> copilot#Accept()
+
+" Tab for coc.nvim completion
 inoremap <silent><expr> <TAB>
         \ coc#pum#visible() ? coc#_select_confirm() :
         \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -47,6 +54,9 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
+" Dismiss coc suggestions
+inoremap <silent><expr> <leader>, coc#pum#cancel()
 
 " C-space to trigger completion
 if has("nvim")
