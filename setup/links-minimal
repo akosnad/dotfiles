@@ -3,3 +3,4 @@
 .config/bat:bat
 .config/powerline:powerline
 .config/ranger:ranger
+.config/tmux:tmux
