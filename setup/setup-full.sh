@@ -27,11 +27,10 @@ popd
 
 ### X11 config
 pushd $dotfiles/xorg
-for f in $(find . -maxdepth 1 -type f); do
-    if [ ! -f /etc/X11/xorg.conf.d/$f ]; then
-        sudo cp $f /etc/X11/xorg.conf.d/.
-    fi
-done
+sudo cp 30-touchpad.conf /etc/X11/xorg.conf.d/.
+if yay -Qs xf86-video-intel &>/dev/null; then
+    sudo cp 20-intel.conf /etc/X11/xorg.conf.d/.
+fi
 popd
 
 ### X server related
