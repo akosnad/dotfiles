@@ -70,6 +70,8 @@ ZSH_CUSTOM="$HOME/dotfiles/zsh/custom"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git console-title fzf last-working-dir sudo)
 
+powerline-daemon -q
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -101,7 +103,6 @@ source $ZSH/oh-my-zsh.sh
 source $ZSH_CUSTOM/aliases.zsh
 source $ZSH_CUSTOM/exports.zsh
 
-powerline-daemon -q
 source /usr/share/powerline/bindings/zsh/powerline.zsh
 
 TRAPHUP() {
