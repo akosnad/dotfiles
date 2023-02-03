@@ -1,5 +1,7 @@
 if [ ! -d "$HOME/.local/share/flavours" ]; then
-    flavours update all
+    flavours update lists
+    flavours update schemes || true
+    flavours update templates
 fi
 flavours_conf="$dotfiles/flavours/config.toml"
 pushd "$dotfiles/flavours"
