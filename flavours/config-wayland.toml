@@ -60,3 +60,9 @@ file = "~/.config/wayfire-win-decor"
 template = "wayfire-win-decor"
 rewrite = true
 hook = "bash ~/dotfiles/flavours/reload-wayfire-decor.sh"
+
+[[item]]
+file = "~/dotfiles/dunst/colors"
+template = "dunst"
+rewrite = true
+hook = "bash ~/dotfiles/dunst/generate.sh"
