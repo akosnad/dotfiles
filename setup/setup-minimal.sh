@@ -16,8 +16,6 @@ include_text "source $dotfiles/.profile" "$HOME/.profile"
 
 ### Neovim
 include_text "so $dotfiles/vim/vimrc.vim" "$HOME/.config/nvim/init.vim"
-include_text "silent! so $HOME/.config/nvim/colorscheme.vim" "$HOME/.config/nvim/init.vim"
-include_text "silent! so $HOME/.config/nvim/airline-colors.vim" "$HOME/.config/nvim/init.vim"
 sudo yarn -s global add neovim
 nvim +"source $setup_dir/setup.vim"
 

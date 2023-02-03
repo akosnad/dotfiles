@@ -20,7 +20,6 @@ Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-reload'
 Plug 'jreybert/vimagit'
@@ -67,10 +66,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 
-let g:lsp_cxx_hl_use_text_props = 1
-" highlight LspCxxHlSymVariable ctermfg=Black guifg=Black
-" highlight LspCxxHlSymClassMethod ctermfg=Black guifg=Black
-
 augroup RestoreCursorShapeOnExit
     autocmd!
     autocmd VimLeave * set guicursor=a:hor20
@@ -96,6 +91,11 @@ endif
 autocmd Signal SIGUSR1 call TrapSignal()
 
 let g:vimtex_view_method = 'xdvi'
+
+silent! so $HOME/.config/nvim/colorscheme.vim
+silent! so $HOME/.config/nvim/airline-colors.vim
+
+hi! link @variable Normal
 
 source $HOME/dotfiles/vim/binds.vim
 source $HOME/dotfiles/vim/coc.vim
