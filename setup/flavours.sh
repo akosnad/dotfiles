@@ -1,3 +1,5 @@
+default_theme="espresso"
+
 if [ ! -d "$HOME/.local/share/flavours" ]; then
     flavours update lists
     flavours update schemes || true
@@ -13,14 +15,14 @@ ln -s $dotfiles/flavours/config-$1.toml $flavours_conf
 case $1 in
     "minimal")
         if ! flavours current &>/dev/null; then
-            flavours apply equilibrium-dark
+            flavours apply $default_theme
         fi
     ;;
     *)
         if [ -f $dotfiles/awesome/.first-run ]; then
             rm $dotfiles/awesome/.first-run
             if ! flavours current &>/dev/null; then
-                flavours apply equilibrium-dark
+                flavours apply $default_theme
             else
                 flavours apply $(flavours current)
             fi
