@@ -106,7 +106,8 @@ source $ZSH_CUSTOM/exports.zsh
 source /usr/share/powerline/bindings/zsh/powerline.zsh
 
 TRAPHUP() {
-    . ~/.zshrc
+#    . ~/.zshrc
+#    [ -f $HOME/.base16_theme ] && source $HOME/.base16_theme
 }
 
 

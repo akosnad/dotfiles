@@ -1,0 +1,52 @@
+shell = "bash -c '{}'"
+
+[[item]]
+file = "~/.config/nvim/colorscheme.vim"
+template = "vim"
+rewrite = true
+hook = "killall -USR1 nvim"
+
+[[item]]
+file = "~/.config/powerline/colors.json"
+template = "powerline"
+rewrite = true
+
+[[item]]
+file = "~/.config/beautifuldiscord/style.css"
+template = "beautifuldiscord"
+rewrite = true
+
+[[item]]
+file = "~/.config/rofi/theme.rasi"
+template = "rofi"
+rewrite = true
+
+[[item]]
+file = "~/dotfiles/dunst/colors"
+template = "dunst"
+rewrite = true
+hook = "bash ~/dotfiles/dunst/generate.sh"
+
+[[item]]
+file = "~/dotfiles/alacritty/colors.yml"
+template = "alacritty"
+rewrite = true
+
+[[item]]
+file = "~/.themes/FlatColor/colors2"
+template = "gtk-flatcolor"
+subtemplate = "gtk-2"
+rewrite = true
+
+[[item]]
+file = "~/.themes/FlatColor/colors3"
+template = "gtk-flatcolor"
+subtemplate = "gtk-3"
+rewrite = true
+hook = "bash ~/dotfiles/xsettings/reload.sh"
+
+[[item]]
+file = "~/.Xresources.d/colors"
+template = "xresources"
+rewrite = true
+hook = "bash ~/dotfiles/flavours/reload-hypr.sh"

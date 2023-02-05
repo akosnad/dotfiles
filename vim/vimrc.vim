@@ -83,9 +83,9 @@ let g:localvimrc_persistent = 1
 
 if !exists('*TrapSignal')
     function TrapSignal()
-        colorscheme default
-        source ~/.config/nvim/init.vim
+        source $HOME/.config/nvim/colorscheme.vim
         AirlineRefresh
+        redraw
     endfunction
 endif
 autocmd Signal SIGUSR1 call TrapSignal()
@@ -93,7 +93,7 @@ autocmd Signal SIGUSR1 call TrapSignal()
 let g:vimtex_view_method = 'xdvi'
 
 silent! so $HOME/.config/nvim/colorscheme.vim
-silent! so $HOME/.config/nvim/airline-colors.vim
+" silent! so $HOME/.config/nvim/airline-colors.vim
 
 hi! link @variable Normal
 

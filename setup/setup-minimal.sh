@@ -8,9 +8,9 @@ if ! grep -Eq "^$USER:.*zsh\$" /etc/passwd; then
     sudo usermod -s /bin/zsh $USER
 fi
 include_text ". $dotfiles/zsh/zshrc.sh" "$HOME/.zshrc"
-include_text "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" "$HOME/.zshrc"
-include_text "[ -f $HOME/.fzf.colors ] && source $HOME/.fzf.colors" "$HOME/.zshrc"
-include_text "[ -f $HOME/.base16_theme ] && source $HOME/.base16_theme" "$HOME/.zshrc"
+# include_text "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" "$HOME/.zshrc"
+# include_text "[ -f $HOME/.fzf.colors ] && source $HOME/.fzf.colors" "$HOME/.zshrc"
+# include_text "[ -f $HOME/.base16_theme ] && source $HOME/.base16_theme" "$HOME/.zshrc"
 include_text "source $dotfiles/.profile" "$HOME/.profile"
 
 

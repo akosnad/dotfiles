@@ -4,7 +4,7 @@ shell = "bash -c '{}'"
 file = "~/.base16_theme"
 template = "shell"
 rewrite = true
-hook = "bash ~/dotfiles/flavours/reload-shell.sh"
+hook = "killall -HUP zsh"
 
 [[item]]
 file = "~/.fzf.colors"
@@ -15,6 +15,7 @@ rewrite = true
 file = "~/.config/nvim/colorscheme.vim"
 template = "vim"
 rewrite = true
+hook = "killall -USR1 nvim"
 
 [[item]]
 file = "~/.config/nvim/airline-colors.vim"

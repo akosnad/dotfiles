@@ -1,6 +1,7 @@
 hyprland-git
+xdg-desktop-portal-hyprland-git
 swayidle
-waylock
+swaylock-effects
 alacritty
 cage
 greetd
@@ -14,3 +15,6 @@ qt6gtk2
 gammastep
 light
 dunst
+polkit-kde-agent
+qt5-wayland
+qt6-wayland

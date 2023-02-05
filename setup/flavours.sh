@@ -1,4 +1,4 @@
-default_theme="espresso"
+default_theme="darkmoss"
 
 if [ ! -d "$HOME/.local/share/flavours" ]; then
     flavours update lists
