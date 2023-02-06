@@ -5,6 +5,7 @@ neovim
 ccls
 ranger
 fzf
+fd
 ctags
 flavours
 inetutils

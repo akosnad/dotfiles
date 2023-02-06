@@ -22,3 +22,5 @@ export TEXMFCACHE="$TEXMFSYSVAR;$TEXMFVAR"
 
 export PATH="$PATH:/home/$USER/.local/bin"
 # alias tlmgr='$TEXMFDIST/scripts/texlive/tlmgr.pl --usermode'
+
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix'
