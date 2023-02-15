@@ -27,9 +27,9 @@ sudo sh -c 'echo "Hyprland" > /etc/greetd/environments'
 source gtk.sh
 
 ### Electron apps + chrome flags
-include_text "\-\-enable-features=UseOzonePlatform" "$HOME/.config/electron-flags.conf"
-include_text "\-\-ozone-platform=wayland" "$HOME/.config/electron-flags.conf"
-include_text "\-\-ozone-platform-hint=auto" "$HOME/.config/chrome-flags.conf"
+include_text '--enable-features=UseOzonePlatform' "$HOME/.config/electron-flags.conf"
+include_text '--ozone-platform=wayland' "$HOME/.config/electron-flags.conf"
+include_text '--ozone-platform-hint=auto' "$HOME/.config/chrome-flags.conf"
 
 ### Services
 pushd $dotfiles/services

@@ -86,7 +86,8 @@ function include_text() {
     if ! [ -d "$(dirname $2)" ]; then
         mkdir -p "$(dirname $2)"
     fi
-    if ! grep -q "$1" "$2" >/dev/null 2>&1; then
+    filter=$(echo $1 | sed 's/\-/\\\-/g')
+    if ! grep -q "$filter" "$2" >/dev/null 2>&1; then
         echo $1 >> $2
     fi
 }
