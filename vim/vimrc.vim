@@ -33,6 +33,7 @@ Plug 'embear/vim-localvimrc'
 Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
 Plug 'github/copilot.vim'
+Plug 'elkowar/yuck.vim'
 
 call plug#end()
 filetype plugin indent on

@@ -1,0 +1,114 @@
+(defwidget bar []
+  (centerbox :orientation "h"
+    :class "bar"
+    :space-evenly false
+    (workspaces)
+    (centerstuff)
+    (sidestuff)
+    )
+  )
+
+(defwidget workspaces []
+  (box :space-evenly false
+       :orientation "h"
+       :halign "start"
+    (for workspace in workspaces
+      (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (box :class "workspace-entry ${workspace.windows > 0 ? "occupied" : "empty"} ${active_workspace == workspace.id ? "current" : "inactive"}"
+          (label :text "${workspace.id}")
+          )
+        )
+      )
+    (workspace_fix)
+    )
+  )
+
+(defwidget centerstuff []
+  (box :class "centerstuff"
+       :space-evenly false
+       :geometry (
+                  :x "0px"
+            :anchor "center left"
+                  )
+    (box
+      (label :text "${window}")
+      )
+;    (music)
+    )
+  )
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (metric :label "vol"
+            :value volume
+            :onchange "amixer sset Master {}%")
+    (metric :label "ram"
+            :value {EWW_RAM.used_mem_perc}
+            :onchange "")
+    (metric :label "disk"
+            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+            :onchange "")
+    (metric :label "batt"
+            :value {EWW_BATTERY["BAT1"].percentage}
+            :onchange "")
+    time)
+  )
+
+(defwidget music []
+  (box :class "music"
+       :orientation "h"
+       :space-evenly false
+       :halign "center"
+    {music != "" ? "🎵${music}" : ""}))
+
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)
+    )
+  )
+
+(defwidget gap []
+  (box :class "gap"))
+
+(defwidget workspace_fix []
+  (box :class "fix ${active_workspace}"))
+
+
+
+(deflisten music :initial ""
+  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
+(deflisten workspaces :initial "[]"
+  "scripts/get-workspaces")
+
+(deflisten active_workspace :initial "1"
+  "scripts/get-active-workspace")
+
+(deflisten window :initial ""
+  "scripts/get-window-title")
+
+(defpoll volume :interval "1s"
+  "scripts/getvol")
+
+(defpoll time :interval "10s"
+  "date '+%b %d. %H:%M'")
+
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "100%"
+                      :height "10px"
+                      :anchor "top center")
+  :reserve (struts :side "top" :distance "10%")
+  :exclusive true
+  (bar))
