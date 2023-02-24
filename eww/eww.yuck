@@ -51,6 +51,7 @@
     (metric :label "batt"
             :value {EWW_BATTERY["BAT1"].percentage}
             :onchange "")
+    (label :text "${keyboard_layout}" :class "kb-layout" )
     time)
   )
 
@@ -94,6 +95,9 @@
 
 (deflisten window :initial ""
   "scripts/get-window-title")
+
+(deflisten keyboard_layout :initial ""
+  "scripts/get-keyboard-layout")
 
 (defpoll volume :interval "1s"
   "scripts/getvol")

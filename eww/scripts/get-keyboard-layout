@@ -1,0 +1,13 @@
+#!/bin/sh
+
+list="$(hyprctl devices | grep 'active keymap:' | awk '{print $3}')"
+initial="en"
+for m in $list; do
+    if [ "$m" != "English" ]; then
+        initial="$(echo $m | grep -Eo '^..' | tr '[:upper:]' '[:lower:]')"
+        break
+    fi
+done
+echo $initial
+
+socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | stdbuf -o0 grep '^activelayout>>' | stdbuf -o0 awk -F '>>|,' '{print $3}' | stdbuf -o0 grep -Eo '^..' | stdbuf -o0 tr '[:upper:]' '[:lower:]'
