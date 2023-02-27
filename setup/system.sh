@@ -41,12 +41,22 @@ if ! grep -q -E "^\[chaotic-aur\]" /etc/pacman.conf; then
 fi
 
 ### Own aur build server
+
+# remove old config
+sudo sed -ie '/^\[aurto\]$/,+2d' /etc/pacman.conf
+
 if ! grep -q -E "^Include = /etc/pacman.d/aurto$" /etc/pacman.conf; then
-    if ! grep -q -E "^\[aurto\]" /etc/pacman.conf; then
-        sudo sh -c 'echo "[aurto]" >> /etc/pacman.conf'
-        sudo sh -c 'echo "SigLevel = Never" >> /etc/pacman.conf'
-        sudo sh -c 'echo "Server = https://repo.xfzt.gq/arch" >> /etc/pacman.conf'
-    fi
+    sudo sh -c 'echo "Include = /etc/pacman.d/aurto" >> /etc/pacman.conf'
+fi
+
+if ! [ -f /etc/pacman.d/aurto ]; then
+    sudo bash -c "cat <<- \"EOF\" > /etc/pacman.d/aurto
+[aurto]
+SigLevel = Never
+Server = https://repo.fzth.cf/arch
+EOF
+"
+
 fi
 
 ### Yay aur helper
