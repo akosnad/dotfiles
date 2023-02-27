@@ -18,6 +18,13 @@ case $1 in
             flavours apply $default_theme
         fi
     ;;
+    "hypr")
+        if ! flavours current &>/dev/null; then
+            flavours apply $default_theme
+        else
+            flavours apply $(flavours current)
+        fi
+    ;;
     *)
         if [ -f $dotfiles/awesome/.first-run ]; then
             rm $dotfiles/awesome/.first-run
