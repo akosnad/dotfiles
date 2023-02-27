@@ -1,0 +1,4 @@
+output * bg #000000 solid_color
+exec 'gtkgreet -l -s FlatColor; swaymsg exit'
+
+include /etc/sway/config.d/*

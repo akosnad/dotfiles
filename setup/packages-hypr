@@ -3,8 +3,8 @@ xdg-desktop-portal-hyprland-git
 swayidle
 swaylock-effects
 alacritty
-cage
 greetd
+sway
 greetd-gtkgreet
 weston
 xorg-xwayland
