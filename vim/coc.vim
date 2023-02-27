@@ -22,6 +22,7 @@ let g:coc_global_extensions = [
             \ 'coc-gitignore',
             \ 'coc-prettier',
             \ 'coc-git',
+            \ 'coc-marketplace',
             \ ]
 
 let g:coc_default_semantic_highlight_groups = 1
