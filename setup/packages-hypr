@@ -19,4 +19,5 @@ polkit-kde-agent
 qt5-wayland
 qt6-wayland
 socat
-eww-wayland
+eww-wayland-git
+gtk-layer-shell

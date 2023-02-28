@@ -1,7 +1,6 @@
 (defwidget bar []
   (centerbox :orientation "h"
     :class "bar"
-    :space-evenly false
     (workspaces)
     (centerstuff)
     (sidestuff)
@@ -14,7 +13,7 @@
        :halign "start"
     (for workspace in workspaces
       (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
-        (box :class "workspace-entry ${workspace.windows > 0 ? "occupied" : "empty"} ${active_workspace == workspace.id ? "current" : "inactive"}"
+        (box :class "warning workspace-entry ${workspace.windows > 0 ? "occupied" : "empty"} ${active_workspace == workspace.id ? "current" : "inactive"}"
           (label :text "${workspace.id}")
           )
         )
@@ -26,10 +25,6 @@
 (defwidget centerstuff []
   (box :class "centerstuff"
        :space-evenly false
-       :geometry (
-                  :x "0px"
-            :anchor "center left"
-                  )
     (box
       (label :text "${window}")
       )
@@ -41,18 +36,23 @@
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
     (metric :label "vol"
             :value volume
+            :active true
             :onchange "amixer sset Master {}%")
     (metric :label "ram"
+            :active true
             :value {EWW_RAM.used_mem_perc}
             :onchange "")
     (metric :label "disk"
+            :active true
             :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
             :onchange "")
     (metric :label "batt"
-            :value {EWW_BATTERY["BAT1"].percentage}
+            :active true
+            :value {EWW_BATTERY.total_avg}
             :onchange "")
     (label :text "${keyboard_layout}" :class "kb-layout" )
-    time)
+    (label :text "${time}" :class "time")
+    )
   )
 
 (defwidget music []
@@ -63,24 +63,25 @@
     {music != "" ? "🎵${music}" : ""}))
 
 
-(defwidget metric [label value onchange]
+(defwidget metric [label value onchange active]
   (box :orientation "h"
        :class "metric"
        :space-evenly false
     (box :class "label" label)
-    (scale :min 0
-           :max 101
-           :active {onchange != ""}
-           :value value
-           :onchange onchange)
-    )
+      (scale :min 0
+             :max 101
+             :active {onchange != ""}
+             :value value
+             :onchange onchange)
+      )
   )
 
 (defwidget gap []
   (box :class "gap"))
 
 (defwidget workspace_fix []
-  (box :class "fix ${active_workspace}"))
+  (box :class "fix ${active_workspace}"
+       :visible false))
 
 
 
