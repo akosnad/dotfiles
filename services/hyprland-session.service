@@ -1,0 +1,11 @@
+[Unit]
+Description=Hyprland WM session
+PartOf=hyprland-session.target
+Wants=hyprland-session.target
+
+# started by hyprland after startup
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/true
+Restart=on-failure
