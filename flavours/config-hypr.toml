@@ -17,17 +17,6 @@ template = "beautifuldiscord"
 rewrite = true
 
 [[item]]
-file = "~/.config/rofi/theme.rasi"
-template = "rofi"
-rewrite = true
-
-[[item]]
-file = "~/dotfiles/dunst/colors"
-template = "dunst"
-rewrite = true
-hook = "bash ~/dotfiles/dunst/generate.sh"
-
-[[item]]
 file = "~/dotfiles/alacritty/colors.yml"
 template = "alacritty"
 rewrite = true

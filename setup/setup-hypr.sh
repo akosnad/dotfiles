@@ -40,8 +40,3 @@ systemctl --user enable --now gammastep
 
 ### Flavours
 source flavours.sh hypr
-
-### Dunst
-pushd $dotfiles/dunst
-./generate.sh
-popd

@@ -1,5 +1,6 @@
 .urxvt/ext:urxvt
 .config/hypr:hypr
+.config/swaync:swaync
 .config/alacritty:alacritty
 .config/wofi:wofi
 .config/gtk-3.0/settings.ini:gtk/settings.ini
