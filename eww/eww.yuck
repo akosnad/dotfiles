@@ -9,8 +9,6 @@
 
 (defwidget workspaces []
   (box :space-evenly false
-       :orientation "h"
-       :halign "start"
     (for workspace in workspaces
       (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
         (box :class "warning workspace-entry ${workspace.windows > 0 ? "occupied" : "empty"} ${active_workspace == workspace.id ? "current" : "inactive"}"
@@ -24,7 +22,6 @@
 
 (defwidget centerstuff []
   (box :class "centerstuff"
-       :space-evenly false
     (box
       (label :text "${window}")
       )

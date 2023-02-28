@@ -1,8 +1,8 @@
 /*
-* {
-  all: unset; //Unsets everything so you can style everything from scratch
-}
-*/
+ * {
+ all: unset; //Unsets everything so you can style everything from scratch
+ }
+ */
 
 @import url("../../.themes/FlatColor/colors3");
 
@@ -41,7 +41,7 @@
 }
 
 .sidestuff .kb-layout {
-  padding-right: 20px;
+  padding-right: 1em;
 }
 
 .stuff {
