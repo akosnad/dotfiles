@@ -1,0 +1,6 @@
+show=drun
+normal_window=true
+allow_images=true
+image_size=24
+insensitive=true
+stylesheet=style.css

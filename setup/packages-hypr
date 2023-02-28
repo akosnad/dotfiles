@@ -8,7 +8,7 @@ sway
 greetd-gtkgreet
 weston
 xorg-xwayland
-rofi-lbonn-wayland
+wofi
 qt5ct
 qt6ct
 qt6gtk2

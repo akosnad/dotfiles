@@ -1,7 +1,7 @@
 .urxvt/ext:urxvt
 .config/hypr:hypr
 .config/alacritty:alacritty
-.config/rofi:rofi
+.config/wofi:wofi
 .config/gtk-3.0/settings.ini:gtk/settings.ini
 .config/gtk-4.0/settings.ini:gtk/settings.ini
 .gtkrc-2.0:gtk/gtkrc-2.0
