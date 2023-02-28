@@ -6,4 +6,6 @@ flavours/config.toml
 powerline/colors.json
 vim/vim-plug/plug.vim.old
 rofi/theme.rasi
+alacritty/colors.yml
+dunst/colors
 **/__pycache__/
