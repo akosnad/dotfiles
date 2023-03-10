@@ -1,2 +1,2 @@
 #!/bin/bash
-amixer sget Master | grep 'Left:\|Mono:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1
+amixer sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1
