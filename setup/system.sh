@@ -53,7 +53,7 @@ if ! [ -f /etc/pacman.d/aurto ]; then
     sudo bash -c "cat <<- \"EOF\" > /etc/pacman.d/aurto
 [aurto]
 SigLevel = Never
-Server = https://repo.fzth.cf/arch
+Server = https://repo.fzt.one/arch
 EOF
 "
 
