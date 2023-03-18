@@ -57,6 +57,8 @@ Server = https://repo.fzt.one/arch
 EOF
 "
 
+else
+    sudo sed -ie 's/repo.fzth.cf/repo.fzt.one/' /etc/pacman.d/aurto
 fi
 
 ### Yay aur helper
