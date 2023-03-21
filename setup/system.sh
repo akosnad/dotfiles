@@ -67,5 +67,14 @@ if ! command -v yay >/dev/null; then
 fi
 
 ### Update system
-yay -Syu
-
+read -p "Update system? [Y/n] " reply
+if [[ $reply =~ ^[Yy]$ ]] || [[ $reply == "" ]]; then
+    yay -Sy
+    if [[ $(yay -Qu archlinux-keyring) ]]; then
+        # update keyring first
+        yay -S --noconfirm archlinux-keyring
+        yay -Su --noconfirm
+    else
+        yay -Su --noconfirm
+    fi
+fi
