@@ -19,7 +19,7 @@ polkit-kde-agent
 qt5-wayland
 qt6-wayland
 socat
-eww-wayland-git
+eww-wayland-unsigned-git
 gtk-layer-shell
 grimblast-git
 wl-clipboard
