@@ -1,0 +1,26 @@
+#!/bin/bash
+
+function get_info() {
+    battery="$1"
+
+    state="$(upower -i $battery | grep state | awk '{print $2}')"
+    percentage="$(upower -i $battery | grep percentage | awk '{print $2}')"
+    time_to_empty="$(upower -i $battery | grep time | grep empty | awk '{print $4,$5}')"
+    time_to_full="$(upower -i $battery | grep time | grep full | awk '{print $4,$5}')"
+    if [[ "$state" == "discharging" ]]; then
+        echo "${percentage}- $time_to_empty"
+    elif [[ "$state" == "charging" ]]; then
+        echo "${percentage}+ $time_to_full"
+    else
+        echo "${percentage}"
+    fi
+}
+
+upower -e | grep -E "battery|BAT" | while read -r battery; do
+    get_info $battery
+done
+
+# listen to upower events that are sent when the battery state changes
+upower -m | stdbuf -o0 grep -E "battery|BAT" | stdbuf -o0 grep -oE "(/\w+)+/battery_BAT[0-9]+$" | while read -r battery; do
+    get_info $battery
+done

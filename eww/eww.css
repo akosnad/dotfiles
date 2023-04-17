@@ -47,3 +47,7 @@
 .stuff {
   all: unset;
 }
+
+.gap {
+  padding-left: 1em;
+}

@@ -31,6 +31,7 @@
 
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (gap)
     (metric :label "vol"
             :value volume
             :active true
@@ -43,10 +44,7 @@
             :active true
             :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
             :onchange "")
-    (metric :label "batt"
-            :active true
-            :value {EWW_BATTERY.total_avg}
-            :onchange "")
+    (batt)
     (label :text "${keyboard_layout}" :class "kb-layout" )
     (label :text "${time}" :class "time")
     )
@@ -59,6 +57,25 @@
        :halign "center"
     {music != "" ? "🎵${music}" : ""}))
 
+(defwidget batt []
+  (eventbox :onhover "eww update batt=true"
+            :onhoverlost "eww update batt=false"
+    (box :space-evenly false
+      (metric :label "batt"
+              :active true
+              :value {EWW_BATTERY.total_avg}
+              :onchange "")
+      (revealer :transition "slideleft"
+                :reveal batt
+        (box :class "batt-info"
+          (label :text "${battery_info}")
+          )
+      )
+      (gap)
+    )
+  )
+  )
+(defvar batt false)
 
 (defwidget metric [label value onchange active]
   (box :orientation "h"
@@ -96,6 +113,9 @@
 
 (deflisten keyboard_layout :initial ""
   "scripts/get-keyboard-layout")
+
+(deflisten battery_info :initial ""
+  "scripts/get-batt-info")
 
 (defpoll volume :interval "1s"
   "scripts/getvol")
