@@ -1,3 +1,6 @@
+(include "./helpers.yuck")
+(include "./widgets.yuck")
+
 (defwidget bar []
   (centerbox :orientation "h"
     :class "bar"
@@ -32,75 +35,14 @@
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
     (gap)
-    (metric :label "vol"
-            :value volume
-            :active true
-            :onchange "amixer sset Master {}%")
-    (metric :label "ram"
-            :active true
-            :value {EWW_RAM.used_mem_perc}
-            :onchange "")
-    (metric :label "disk"
-            :active true
-            :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-            :onchange "")
+    (volume)
+    (ram)
+    (disk)
     (batt)
     (label :text "${keyboard_layout}" :class "kb-layout" )
     (label :text "${time}" :class "time")
     )
   )
-
-(defwidget music []
-  (box :class "music"
-       :orientation "h"
-       :space-evenly false
-       :halign "center"
-    {music != "" ? "🎵${music}" : ""}))
-
-(defwidget batt []
-  (eventbox :onhover "eww update batt=true"
-            :onhoverlost "eww update batt=false"
-    (box :space-evenly false
-      (metric :label "batt"
-              :active true
-              :value {EWW_BATTERY.total_avg}
-              :onchange "")
-      (revealer :transition "slideleft"
-                :reveal batt
-        (box :class "batt-info"
-          (label :text "${battery_info}")
-          )
-      )
-      (gap)
-    )
-  )
-  )
-(defvar batt false)
-
-(defwidget metric [label value onchange active]
-  (box :orientation "h"
-       :class "metric"
-       :space-evenly false
-    (box :class "label" label)
-      (scale :min 0
-             :max 101
-             :active {onchange != ""}
-             :value value
-             :onchange onchange)
-      )
-  )
-
-(defwidget gap []
-  (box :class "gap"))
-
-(defwidget workspace_fix []
-  (box :class "fix ${active_workspace}"
-       :visible false))
-
-
-
-(deflisten music :initial ""
-  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
 (deflisten workspaces :initial "[]"
   "scripts/get-workspaces")
@@ -113,12 +55,6 @@
 
 (deflisten keyboard_layout :initial ""
   "scripts/get-keyboard-layout")
-
-(deflisten battery_info :initial ""
-  "scripts/get-batt-info")
-
-(defpoll volume :interval "1s"
-  "scripts/getvol")
 
 (defpoll time :interval "10s"
   "date '+%b %d. %H:%M'")

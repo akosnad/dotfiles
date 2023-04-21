@@ -1,0 +1,12 @@
+#!/bin/bash
+
+out="$(free -m | grep -E '^Mem:')"
+used="$(echo $out | awk '{print $3}')"
+free="$(echo $out | awk '{print $4}')"
+shared="$(echo $out | awk '{print $5}')"
+cache="$(echo $out | awk '{print $6}')"
+available="$(echo $out | awk '{print $7}')"
+perc=$(echo $out | awk '{print ($3/$2)*100}')
+
+printf 'Use%%\tUsed\tAvail\tBuf/cache\n'
+printf '%.0f%%\t%dM\t%dM\t%dM' "$perc" "$used" "$available" "$cache"
