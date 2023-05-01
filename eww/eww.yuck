@@ -36,6 +36,7 @@
   (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
     (gap)
     (volume)
+    (cpu)
     (ram)
     (disk)
     (batt)

@@ -20,6 +20,7 @@
 (deflisten battery_info :initial ""
   "scripts/get-batt-info")
 
+
 (defwidget music []
   (box :class "music"
        :orientation "h"
@@ -28,6 +29,7 @@
     {music != "" ? "🎵${music}" : ""}))
 (deflisten music :initial ""
   "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
 
 (defwidget disk []
   (eventbox :onhover "eww update disk_info_visible=true"
@@ -50,6 +52,27 @@
 (defvar disk_info_visible false)
 (defpoll disk_info :initial "" :interval "2s" :run-while disk_info_visible
   "scripts/get-disk-info")
+
+(defwidget cpu []
+  (eventbox :onhover "eww update cpu_info_visible=true"
+            :onhoverlost "eww update cpu_info_visible=false"
+    (box :space-evenly false
+      (metric :label "cpu"
+              :active true
+              :value {EWW_CPU.avg}
+              :onchange "")
+      (revealer :transition "slideleft"
+                :reveal cpu_info_visible
+        (box :class "cpu-info"
+          (label :text "${round(EWW_CPU.avg, 0)}%")
+          )
+        )
+      (gap)
+      )
+    )
+  )
+(defvar cpu_info_visible false)
+
 
 (defwidget ram []
   (eventbox :onhover "eww update ram_info_visible=true"
