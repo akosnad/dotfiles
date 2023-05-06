@@ -107,8 +107,9 @@
               :onchange "amixer sset Master {}% && eww update volume={}")
       (revealer :transition "slideleft"
                 :reveal volume_info_visible
-        (box :class "volume-info"
-          (label :text "${volume}%")
+        (eventbox :onclick "playerctl play-pause"
+          :class "volume-info"
+          (label :text "${volume}%${player_status == 'Playing' ? ' >' : player_status == 'Paused' ? ' ||' : ''}${now_playing != '' ? ' ' + now_playing : ''}")
           )
         )
       (gap)
@@ -118,3 +119,7 @@
 (defvar volume_info_visible false)
 (defpoll volume :interval "1s"
   "scripts/getvol")
+(deflisten now_playing :initial ""
+  "playerctl -F metadata --format '{{ artist }} - {{ title }} {{playing}}' || true")
+(deflisten player_status :initial ""
+  "playerctl -F metadata --format '{{status}}' || true")
