@@ -12,5 +12,6 @@
   "semanticTokens.enable": true,
   "inlayHint.enable": false,
   "rust-analyzer.checkOnSave.command": "clippy",
-  "coc.preferences.formatOnSave": true
+  "coc.preferences.formatOnSave": true,
+  "snippets.ultisnips.pythonPrompt": false
 }
