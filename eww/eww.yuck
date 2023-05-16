@@ -26,7 +26,10 @@
 (defwidget centerstuff []
   (box :class "centerstuff"
     (box
-      (label :text "${window}" :limit-width 50)
+      (label :text "${window}"
+             :limit-width 50
+             :tooltip "${window}"
+        )
       )
     )
   )
