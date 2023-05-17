@@ -1,0 +1,10 @@
+output * bg #000000 solid_color
+default_border none
+default_floating_border none
+
+bindsym Mod1+escape exec '/etc/waydroid/stop.sh'
+bindsym Mod1+return exec 'waydroid show-full-ui'
+
+exec '/etc/waydroid/start.sh'
+
+include /etc/sway/config.d/*
