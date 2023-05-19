@@ -4,6 +4,7 @@ default_floating_border none
 
 bindsym Mod1+escape exec '/etc/waydroid/stop.sh'
 bindsym Mod1+return exec 'waydroid show-full-ui'
+bindsym Mod1+S exec 'systemctl suspend'
 
 exec '/etc/waydroid/start.sh'
 
