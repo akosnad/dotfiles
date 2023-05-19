@@ -35,7 +35,7 @@ fi
 
 function __install_packages() {
     if [[ "$packages_to_install" != "" ]]; then
-        (yes | LC_ALL="en_US.UTF-8" yay -S --needed \
+        (yes | LC_ALL="en_US.UTF-8" yay -S --needed --noconfirm \
             --overwrite "/usr/lib/python*" \
             --overwrite "/usr/include/python*" \
             $packages_to_install ) |& ( grep -vE 'there is nothing to do|--\s*skipping|^Sync Explicit' || true; )
