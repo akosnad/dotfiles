@@ -64,7 +64,7 @@
       (revealer :transition "slideleft"
                 :reveal cpu_info_visible
         (box :class "cpu-info"
-          (label :text "${round(EWW_CPU.avg, 0)}%")
+          (label :text "${round(EWW_CPU.avg, 0)}%${EWW_TEMPS.CORETEMP_PACKAGE_ID_0 != "" ? "  ${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}°C" : ""}")
           )
         )
       (gap)

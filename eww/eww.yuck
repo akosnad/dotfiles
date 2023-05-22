@@ -14,6 +14,7 @@
   (box :space-evenly false
     (for workspace in workspaces
       (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+                :onscroll "scripts/switch-workspace {}"
         (box :class "warning workspace-entry ${workspace.windows > 0 ? "occupied" : "empty"} ${active_workspace == workspace.id ? "current" : "inactive"}"
           (label :text "${workspace.id}")
           )

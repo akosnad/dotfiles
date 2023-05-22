@@ -1,0 +1,2 @@
+direction="$([[ $1 == 'up' ]] && echo '+1' || echo '-1')"
+hyprctl dispatch workspace "m${direction}"
