@@ -82,13 +82,22 @@ __deps_set_up=0
 
 # arg 1: text to include
 # arg 2: file to check in or to create
+# erg 3: (optional) elevate permissions
 function include_text() {
     if ! [ -d "$(dirname $2)" ]; then
-        mkdir -p "$(dirname $2)"
+        if [ "$3" != '' ]; then
+            sudo mkdir -p "$(dirname $2)"
+        else
+            mkdir -p "$(dirname $2)"
+        fi
     fi
     filter=$(echo $1 | sed 's/\-/\\\-/g')
     if ! grep -q "$filter" "$2" >/dev/null 2>&1; then
-        echo $1 >> $2
+        if [ "$3" != '' ]; then
+            sudo sh -c "echo $1 >> $2"
+        else
+            echo $1 >> $2
+        fi
     fi
 }
 

@@ -21,7 +21,7 @@ for f in $(find . -maxdepth 1 -type f); do
     sudo cp $f /etc/greetd/.
 done
 popd
-sudo sh -c 'echo "Hyprland" > /etc/greetd/environments'
+include_text "Hyprland" "/etc/greetd/environments" 1
 
 ### GTK
 source gtk.sh
