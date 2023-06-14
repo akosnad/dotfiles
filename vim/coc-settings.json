@@ -11,7 +11,7 @@
   "clangd.compilationDatabaseCandidates": ["build", "**/compile_commands.json"],
   "semanticTokens.enable": true,
   "inlayHint.enable": false,
-  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.check.command": "clippy",
   "coc.preferences.formatOnSave": true,
   "snippets.ultisnips.pythonPrompt": false
 }
