@@ -1,0 +1,8 @@
+[Unit]
+Description=Hyprland Monitor Layout manager
+
+[Service]
+ExecStart=%h/dotfiles/hypr/monitor-layout.sh
+
+[Install]
+WantedBy=hyprland-session.target
