@@ -42,24 +42,27 @@ fi
 
 ### Own aur build server
 
-# remove old config
+# add personal signing key
+if ! sudo pacman-key -l E2256EAE7390AF2C &>/dev/null; then
+    sudo pacman-key --recv-key E2256EAE7390AF2C --keyserver keyserver.ubuntu.com
+    sudo pacman-key --lsign-key E2256EAE7390AF2C
+fi
+
+# remove old repo entry
 sudo sed -ie '/^\[aurto\]$/,+2d' /etc/pacman.conf
 
+# add new repo entry
 if ! grep -q -E "^Include = /etc/pacman.d/aurto$" /etc/pacman.conf; then
     sudo sh -c 'echo "Include = /etc/pacman.d/aurto" >> /etc/pacman.conf'
 fi
 
-if ! [ -f /etc/pacman.d/aurto ]; then
-    sudo bash -c "cat <<- \"EOF\" > /etc/pacman.d/aurto
+# add repo file
+sudo bash -c "cat <<- \"EOF\" > /etc/pacman.d/aurto
 [aurto]
-SigLevel = Never
+SigLevel = Optional TrustedOnly
 Server = https://repo.fzt.one/arch
 EOF
 "
-
-else
-    sudo sed -ie 's/repo.fzth.cf/repo.fzt.one/' /etc/pacman.d/aurto
-fi
 
 ### Yay aur helper
 if ! command -v yay >/dev/null; then
@@ -73,8 +76,6 @@ if [[ $reply =~ ^[Yy]$ ]] || [[ $reply == "" ]]; then
     if [[ $(yay -Qu archlinux-keyring) ]]; then
         # update keyring first
         yay -S --noconfirm archlinux-keyring
-        yay -Su --noconfirm
-    else
-        yay -Su --noconfirm
     fi
+    yay -Su --noconfirm
 fi
