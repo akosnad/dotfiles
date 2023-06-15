@@ -48,18 +48,27 @@ if ! sudo pacman-key -l E2256EAE7390AF2C &>/dev/null; then
     sudo pacman-key --lsign-key E2256EAE7390AF2C
 fi
 
+# fzt-repo-keyring
+if ! sudo pacman -Qi fzt-repo-keyring &>/dev/null; then
+    sudo pacman --needed --noconfirm -U 'https://repo.fzt.one/arch/fzt-repo-keyring-20230615-1-any.pkg.tar.zst'
+fi
+
 # remove old repo entry
 sudo sed -ie '/^\[aurto\]$/,+2d' /etc/pacman.conf
+sudo rm -f /etc/pacman.d/aurto
+if grep -q -E "^Include = /etc/pacman.d/aurto$" /etc/pacman.conf; then
+    sudo sed -ie '/^Include = \/etc\/pacman.d\/aurto$/d' /etc/pacman.conf
+fi
 
 # add new repo entry
-if ! grep -q -E "^Include = /etc/pacman.d/aurto$" /etc/pacman.conf; then
-    sudo sh -c 'echo "Include = /etc/pacman.d/aurto" >> /etc/pacman.conf'
+if ! grep -q -E "^Include = /etc/pacman.d/fzt-repo$" /etc/pacman.conf; then
+    sudo sh -c 'echo "Include = /etc/pacman.d/fzt-repo" >> /etc/pacman.conf'
 fi
 
 # add repo file
-sudo bash -c "cat <<- \"EOF\" > /etc/pacman.d/aurto
-[aurto]
-SigLevel = Optional TrustedOnly
+sudo bash -c "cat <<- \"EOF\" > /etc/pacman.d/fzt-repo
+[fzt-repo]
+SigLevel = Required TrustedOnly
 Server = https://repo.fzt.one/arch
 EOF
 "
@@ -73,9 +82,9 @@ fi
 read -p "Update system? [Y/n] " reply
 if [[ $reply =~ ^[Yy]$ ]] || [[ $reply == "" ]]; then
     yay -Sy
-    if [[ $(yay -Qu archlinux-keyring) ]]; then
+    if [[ $(yay -Qu archlinux-keyring fzt-repo-keyring) ]]; then
         # update keyring first
-        yay -S --noconfirm archlinux-keyring
+        yay -S --noconfirm archlinux-keyring fzt-repo-keyring
     fi
     yay -Su --noconfirm
 fi
