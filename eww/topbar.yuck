@@ -40,6 +40,7 @@
     (ram)
     (disk)
     (batt)
+    (systray)
     (label :text "${keyboard_layout}" :class "kb-layout" )
     (label :text "${time}" :class "time")
     )
