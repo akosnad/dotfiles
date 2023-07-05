@@ -84,7 +84,7 @@ if [[ $reply =~ ^[Yy]$ ]] || [[ $reply == "" ]]; then
     yay -Sy
     if [[ $(yay -Qu archlinux-keyring fzt-repo-keyring) ]]; then
         # update keyring first
-        yay -S --noconfirm archlinux-keyring fzt-repo-keyring
+        yay -S --noconfirm --needed archlinux-keyring fzt-repo-keyring
     fi
     yay -Su --noconfirm
 fi
