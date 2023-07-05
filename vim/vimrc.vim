@@ -34,6 +34,7 @@ Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
 Plug 'github/copilot.vim'
 Plug 'elkowar/yuck.vim'
+Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 filetype plugin indent on
