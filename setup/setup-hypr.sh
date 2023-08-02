@@ -37,6 +37,7 @@ pushd $dotfiles/services
 popd
 systemctl --user enable --now geoclue-agent
 systemctl --user enable --now gammastep
+systemctl --user enable --now hyprland-monitor-layout
 
 ### Flavours
 source flavours.sh hypr

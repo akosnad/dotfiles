@@ -1,0 +1,74 @@
+(defwidget bar []
+  (centerbox :orientation "h"
+    :class "bar"
+    (workspaces)
+    (centerstuff)
+    (sidestuff)
+    )
+  )
+
+(defwidget workspaces []
+  (box :space-evenly false
+    (for workspace in workspaces
+      (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+                :onscroll "scripts/switch-workspace {}"
+        (box :class "warning workspace-entry ${workspace.windows > 0 ? "occupied" : "empty"} ${active_workspace == workspace.id ? "current" : "inactive"}"
+          (label :text "${workspace.id}")
+          )
+        )
+      )
+    (workspace_fix)
+    )
+  )
+
+(defwidget centerstuff []
+  (box :class "centerstuff"
+    (box
+      (label :text "${window}"
+             :limit-width 50
+             :tooltip "${window}"
+        )
+      )
+    )
+  )
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (gap)
+    (volume)
+    (cpu)
+    (ram)
+    (disk)
+    (batt)
+    (systray)
+    (label :text "${keyboard_layout}" :class "kb-layout" )
+    (label :text "${time}" :class "time")
+    )
+  )
+
+(deflisten workspaces :initial "[]"
+  "scripts/get-workspaces")
+
+(deflisten active_workspace :initial "1"
+  "scripts/get-active-workspace")
+
+(deflisten window :initial ""
+  "scripts/get-window-title")
+
+(deflisten keyboard_layout :initial ""
+  "scripts/get-keyboard-layout")
+
+(defpoll time :interval "10s"
+  "date '+%b %d. %H:%M'")
+
+(defwindow topbar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "100%"
+                      :height "10px"
+                      :anchor "top center")
+  :reserve (struts :side "top" :distance "10%")
+  :exclusive true
+  (bar))

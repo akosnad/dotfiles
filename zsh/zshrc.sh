@@ -72,6 +72,8 @@ plugins=(git console-title fzf last-working-dir sudo)
 
 powerline-daemon -q
 
+zstyle ':omz:update' mode disabled
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -105,10 +107,10 @@ source $ZSH_CUSTOM/exports.zsh
 
 source /usr/share/powerline/bindings/zsh/powerline.zsh
 
-TRAPHUP() {
+#TRAPHUP() {
 #    . ~/.zshrc
 #    [ -f $HOME/.base16_theme ] && source $HOME/.base16_theme
-}
+#}
 
 
 alias reload_zsh="killall -HUP zsh"

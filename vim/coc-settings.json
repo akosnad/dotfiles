@@ -5,13 +5,19 @@
       "filetypes": ["c", "cpp", "objc", "objcpp"],
       "rootPatterns": [".ccls", "compile_commands.json", "Makefile"],
       "enable": false
+    },
+    "terraform": {
+      "command": "terraform-lsp",
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
     }
   },
   "clangd.fallbackFlags": ["-std=c++20"],
   "clangd.compilationDatabaseCandidates": ["build", "**/compile_commands.json"],
   "semanticTokens.enable": true,
   "inlayHint.enable": false,
-  "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.check.command": "clippy",
   "coc.preferences.formatOnSave": true,
   "snippets.ultisnips.pythonPrompt": false
 }

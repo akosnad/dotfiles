@@ -27,9 +27,9 @@ if [ $need_locale_gen -eq 1 ]; then
 fi
 
 ### Chaotic aur
-if ! sudo pacman-key -l FBA220DFC880C036 &>/dev/null; then
-    sudo pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
-    sudo pacman-key --lsign-key FBA220DFC880C036
+if ! sudo pacman-key -l 3056513887B78AEB &>/dev/null; then
+    sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+    sudo pacman-key --lsign-key 3056513887B78AEB
 fi
 if ! sudo pacman -Qi chaotic-keyring chaotic-mirrorlist &>/dev/null; then
     sudo pacman --needed --noconfirm -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
@@ -42,24 +42,36 @@ fi
 
 ### Own aur build server
 
-# remove old config
-sudo sed -ie '/^\[aurto\]$/,+2d' /etc/pacman.conf
-
-if ! grep -q -E "^Include = /etc/pacman.d/aurto$" /etc/pacman.conf; then
-    sudo sh -c 'echo "Include = /etc/pacman.d/aurto" >> /etc/pacman.conf'
+# add personal signing key
+if ! sudo pacman-key -l E2256EAE7390AF2C &>/dev/null; then
+    sudo pacman-key --recv-key E2256EAE7390AF2C --keyserver keyserver.ubuntu.com
+    sudo pacman-key --lsign-key E2256EAE7390AF2C
 fi
 
-if ! [ -f /etc/pacman.d/aurto ]; then
-    sudo bash -c "cat <<- \"EOF\" > /etc/pacman.d/aurto
-[aurto]
-SigLevel = Never
+# fzt-repo-keyring
+if ! sudo pacman -Qi fzt-repo-keyring &>/dev/null; then
+    sudo pacman --needed --noconfirm -U 'https://repo.fzt.one/arch/fzt-repo-keyring-20230615-1-any.pkg.tar.zst'
+fi
+
+# remove old repo entry
+sudo sed -ie '/^\[aurto\]$/,+2d' /etc/pacman.conf
+sudo rm -f /etc/pacman.d/aurto
+if grep -q -E "^Include = /etc/pacman.d/aurto$" /etc/pacman.conf; then
+    sudo sed -ie '/^Include = \/etc\/pacman.d\/aurto$/d' /etc/pacman.conf
+fi
+
+# add new repo entry
+if ! grep -q -E "^Include = /etc/pacman.d/fzt-repo$" /etc/pacman.conf; then
+    sudo sh -c 'echo "Include = /etc/pacman.d/fzt-repo" >> /etc/pacman.conf'
+fi
+
+# add repo file
+sudo bash -c "cat <<- \"EOF\" > /etc/pacman.d/fzt-repo
+[fzt-repo]
+SigLevel = Required TrustedOnly
 Server = https://repo.fzt.one/arch
 EOF
 "
-
-else
-    sudo sed -ie 's/repo.fzth.cf/repo.fzt.one/' /etc/pacman.d/aurto
-fi
 
 ### Yay aur helper
 if ! command -v yay >/dev/null; then
@@ -70,11 +82,9 @@ fi
 read -p "Update system? [Y/n] " reply
 if [[ $reply =~ ^[Yy]$ ]] || [[ $reply == "" ]]; then
     yay -Sy
-    if [[ $(yay -Qu archlinux-keyring) ]]; then
+    if [[ $(yay -Qu archlinux-keyring fzt-repo-keyring) ]]; then
         # update keyring first
-        yay -S --noconfirm archlinux-keyring
-        yay -Su --noconfirm
-    else
-        yay -Su --noconfirm
+        yay -S --noconfirm --needed archlinux-keyring fzt-repo-keyring
     fi
+    yay -Su --noconfirm
 fi
