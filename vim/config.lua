@@ -1,5 +1,5 @@
-require("plugins")
 require("binds")
+require("init-plugins")
 vim.cmd([[
 	filetype plugin indent on
 	syntax on

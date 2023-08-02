@@ -19,10 +19,9 @@ include_text "source $dotfiles/.profile" "$HOME/.profile"
 # remove old config
 [ -f "$HOME/.config/nvim/init.vim" ] && rm "$HOME/.config/nvim/init.vim"
 
-include_text "package.path = \"$dotfiles/vim/?.lua;\" .. package.path" "$HOME/.config/nvim/init.lua"
 include_text "require(\"config\")" "$HOME/.config/nvim/init.lua"
 sudo yarn -s global add neovim
-nvim -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+nvim "+Lazy! sync" +qa
 
 ### Flavours
 source flavours.sh minimal

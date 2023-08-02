@@ -1,5 +1,5 @@
-local module = {
-    packer = {
+return {
+    {
         'neoclide/coc.nvim',
         branch = 'release',
         config = function()
@@ -80,5 +80,3 @@ local module = {
         end
     }
 }
-
-return module

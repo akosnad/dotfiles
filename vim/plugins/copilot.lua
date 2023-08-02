@@ -1,5 +1,5 @@
-local module = {
-    packer = {
+return {
+    {
         'github/copilot.vim',
         branch = 'release',
         config = function()
@@ -13,5 +13,3 @@ local module = {
         end
     }
 }
-
-return module
