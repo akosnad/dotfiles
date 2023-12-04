@@ -2,6 +2,7 @@ return {
     {
         'neoclide/coc.nvim',
         branch = 'release',
+        event = 'BufEnter',
         config = function()
             vim.g.coc_global_extensions = {
                 'coc-snippets',
@@ -39,12 +40,13 @@ return {
                 return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
             end
 
-            local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
+            local opts = { silent = true, noremap = true, expr = true, replace_keycodes = true }
 
+            -- Tab completion
             vim.keymap.set("i", "<Tab>",
                 function()
                     if vim.fn['coc#pum#visible']() == 1 then
-                        return vim.fn['coc#pum#next'](1)
+                        return vim.fn['coc#_select_confirm']()
                     end
                     if vim.fn['coc#expandableOrJumpable']() == 1 then
                         return "<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])<CR>"
@@ -52,31 +54,31 @@ return {
                     if check_back_space() then
                         return vim.fn['coc#refresh']()
                     end
-                    return "<Tab>"
+                    return '<Tab>'
                 end
                 , opts)
+            vim.g.coc_snippet_next = "<Tab>"
 
-            vim.keymap.set("i", "<S-Tab>", function()
-                if vim.fn['coc#pum#visible']() == 1 then
-                    return vim.fn['coc#pum#prev'](1)
-                end
-                return "<S-Tab>"
-            end, opts)
-
-            vim.keymap.set("i", "<CR>", function()
-                if vim.fn['coc#pum#visible']() == 1 then
-                    return vim.fn['coc#pum#confirm']();
-                end
-                return "\r"
-            end, opts)
-
+            -- space to show documentation
             vim.keymap.set('n', '<space>', function()
                 if vim.fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
                     vim.fn.execute('h ' .. vim.fn.expand('<cword>'))
                 else
-                    vim.fn['coc#doHover']()
+                    vim.fn.CocActionAsync('doHover')
                 end
-            end, { silent = true, noremap = true })
+            end, { silent = true, noremap = true, expr = true, script = true })
+
+            vim.keymap.set('n', 'gd', '<Plug>(coc-definition)', { silent = true, noremap = true })
+            vim.keymap.set('n', 'gy', '<Plug>(coc-type-definition)', { silent = true, noremap = true })
+            vim.keymap.set('n', 'gi', '<Plug>(coc-implementation)', { silent = true, noremap = true })
+            vim.keymap.set('n', 'gr', '<Plug>(coc-references)', { silent = true, noremap = true })
+            vim.keymap.set('n', '<leader>a', '<Plug>(coc-codeaction-selected)w', { silent = true, noremap = true })
+            vim.keymap.set('n', '<leader>l', function()
+                vim.fn.execute('CocFzfList')
+            end, { silent = true, noremap = true, script = true })
+            vim.keymap.set('n', '<leader><space>', function()
+                vim.fn.execute('CocFzfList symbols')
+            end, { silent = true, noremap = true, script = true })
         end
-    }
+    },
 }

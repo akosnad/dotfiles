@@ -16,6 +16,15 @@ vim.cmd([[
 	set termguicolors
 	set noshowmode
 	set listchars=tab:→\ ,nbsp:+,space:·
+
+    if !exists('*TrapSignal')
+        function TrapSignal()
+            source $HOME/.config/nvim/colorscheme.vim
+            AirlineRefresh
+            redraw
+        endfunction
+    endif
+    autocmd Signal SIGUSR1 call TrapSignal()
 ]])
 
 vim.cmd("source $HOME/.config/nvim/colorscheme.vim")

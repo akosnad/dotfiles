@@ -1,3 +1,3 @@
 return {
-    { 'hashivim/vim-terraform' }
+    { 'hashivim/vim-terraform', ft = { 'terraform', 'tf' } }
 }
