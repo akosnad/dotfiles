@@ -21,7 +21,7 @@ include_text "source $dotfiles/.profile" "$HOME/.profile"
 
 include_text "require(\"config\")" "$HOME/.config/nvim/init.lua"
 sudo yarn -s global add neovim
-nvim "+Lazy! sync" +qa
+nvim +"lua require('lazy').sync({wait=true})" +qa
 
 ### Flavours
 source flavours.sh minimal
