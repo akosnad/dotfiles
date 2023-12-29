@@ -7,4 +7,5 @@ powerline/colors.json
 vim/vim-plug/plug.vim.old
 rofi/theme.rasi
 alacritty/colors.yml
+alacritty/colors.toml
 **/__pycache__/

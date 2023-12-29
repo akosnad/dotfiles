@@ -1,0 +1,23 @@
+import = ["/home/akos/dotfiles/alacritty/colors.toml"]
+
+[font]
+size = 11.0
+
+[font.bold]
+family = "Terminus"
+style = "Bold"
+
+[font.bold_italic]
+family = "Terminus"
+style = "Bold Italic"
+
+[font.italic]
+family = "Terminus"
+style = "Italic"
+
+[font.normal]
+family = "Terminus"
+
+[window.padding]
+x = 8
+y = 8

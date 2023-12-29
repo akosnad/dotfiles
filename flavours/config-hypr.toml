@@ -17,8 +17,8 @@ template = "beautifuldiscord"
 rewrite = true
 
 [[item]]
-file = "~/dotfiles/alacritty/colors.yml"
-template = "alacritty"
+file = "~/dotfiles/alacritty/colors.toml"
+template = "alacritty-toml"
 rewrite = true
 
 [[item]]
