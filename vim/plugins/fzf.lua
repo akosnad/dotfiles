@@ -9,14 +9,15 @@ return {
     {
         'junegunn/fzf.vim',
         lazy = true,
-        cmd = "FZF",
+        cmd = { "FZF", "Ag" },
         keys = { '<leader>F' },
         dependencies = {
             'junegunn/fzf',
         },
         config = function()
-            vim.keymap.set('n', '<leader>F', ':FZF<CR>', { silent = true, noremap = true })
-        end,
+            vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
+            vim.keymap.set('n', '<leader>F', '<cmd>FZF<cr>', { silent = true, noremap = true })
+        end
     },
     {
         'antoinemadec/coc-fzf',
